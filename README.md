@@ -1,2 +1,3 @@
-# Aico
-AI MCP Agents platform
+```
+deno task start
+```

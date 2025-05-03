@@ -1,5 +1,6 @@
 {
-    "cSpell.words": [
-        "Aico"
-    ]
+  "deno.enablePaths": [
+    "./"
+  ],
+  "editor.inlayHints.enabled": "off"
 }
