@@ -102,7 +102,7 @@
     <div class="logo">Ai<span>co</span></div>
     <nav>
       <!-- Можна додати навігацію -->
-      <button class="login-button">Увійти</button>
+      <button class="login-button" onclick='loginNavigate()'>Увійти</button>
     </nav>
   </header>
 
@@ -134,5 +134,11 @@
   <footer>
     © 2025 AIco. Всі права захищено.
   </footer>
+  <script>
+    function loginNavigate() {
+      console.log("Navigating to login page...");
+      window.location.href = "/auth";
+    }
+  </script>
 </body>
 </html>

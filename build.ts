@@ -7,7 +7,7 @@ import * as esbuild from 'esbuild'
 // })
 
 const ctx = await esbuild.context({
-  entryPoints: ['clientsrc/app.tsx'],
+  entryPoints: ['clientsrc/app.tsx', 'cabinet/login.tsx'],
   bundle: true,
   outdir: 'static/scripts',
   tsconfigRaw: `{
