@@ -1121,7 +1121,7 @@
     };
   };
 
-  // cabinet/login.tsx
+  // auth/login.tsx
   var providers = [
     {
       name: "GitHub",
@@ -1160,7 +1160,8 @@
     }
   ];
   var handleSignIn = (provider) => {
-    alert(`Sign in with ${provider}`);
+    console.log(`Sign in with ${provider}`);
+    window.location.href = "/cabinet";
   };
   function Login() {
     return /* @__PURE__ */ jsxDEV("div", { style: {

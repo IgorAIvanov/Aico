@@ -59,7 +59,8 @@ const providers = [
 ];
 
 const handleSignIn = (provider: string) => {
-  alert(`Sign in with ${provider}`);
+  console.log(`Sign in with ${provider}`);
+  window.location.href = "/cabinet";
   // Здесь можно реализовать реальную авторизацию
 };
 
