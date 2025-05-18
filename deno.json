@@ -1,6 +1,6 @@
 {
   "tasks": {
-    "dev-server": "deno run --allow-net --allow-read --watch main.tsx",
+    "dev-server": "deno run --env-file=local.env --allow-net --allow-read --allow-env --watch main.tsx",
     "dev-client": "deno run --allow-run --allow-read --allow-write --allow-env --no-check build.ts",
     "dev":  {
       "dependencies": ["dev-client", "dev-server"]

@@ -3,7 +3,7 @@ import { serveStatic } from 'hono/deno';
 import auth from './route/auth.tsx';
 import cabinet  from './route/cabinet.tsx';
 
-
+console.log(Deno.env.get('APP_MODE'))
 const app = new Hono()
 
 
