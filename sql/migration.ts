@@ -1,30 +1,19 @@
 
-import { createClient } from "supabase";
-
-const SUPABASE_URL = Deno.env.get("SUPABASE_URL");
-const SUPABASE_KEY = Deno.env.get("SUPABASE_KEY");
-
-
-
-export const supabaseClient = createClient(SUPABASE_URL, SUPABASE_KEY, {
-  db: {
-    schema: "public",
-  },
-  auth: {
-    persistSession: true,
-  },
-});
+import {supabase} from '../db/dbclient.ts';
 
 export async function getSupabaseClient() {
-    const { data, error } = await supabaseClient
-    .from('Test_User')
+    const { data, error } = await supabase
+    .from('employees')
     .select()
 
     if (error) {
     console.error("Error fetching characters:", error);
     }
     else {
-    console.log("Characters:", data);
+        data.forEach((item) => {
+            console.log("id:", item.id);
+        });
+    console.log("Data in table:", data);
     }
 }
         
