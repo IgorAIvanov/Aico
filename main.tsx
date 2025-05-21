@@ -11,7 +11,7 @@ await getSupabaseClient();
 const app = new Hono()
 
 app.use('*', serveStatic({ root: './static' }));
-app.use('/shoelace/*', serveStatic({ root: './node_modules/@shoelace-style' }));
+//app.use('/shoelace/*', serveStatic({ root: './node_modules/@shoelace-style' }));
 
 app.get('/', (c) => {
   return c.html(Deno.readTextFileSync('./static/landing.html'))

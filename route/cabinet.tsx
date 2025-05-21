@@ -10,15 +10,15 @@ app.get('/', (c) => {
       <head>
         <meta charSet="utf-8" />
         <meta content="width=device-width, initial-scale=1" name="viewport" />
-        <link rel="stylesheet" href="/shoelace/dist/themes/light.css" />
+        <link rel="stylesheet" href="scripts/shoelace/dist/themes/light.css" />
         
         <script type="module" src="/scripts/cabinet/layout.js"></script>  
         <title>Aico AI provider</title>
       </head>
       <body> 
         <script type="module">
-          import { setBasePath } from '/shoelace/dist/utilities/base-path.js';
-          setBasePath('/shoelace/dist');
+          import { setBasePath } from 'scripts/shoelace/dist/utilities/base-path.js';
+          setBasePath('scripts/shoelace/dist');
       </script>       
         <div id="root"></div>
       </body>
