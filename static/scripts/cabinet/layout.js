@@ -1121,6 +1121,11 @@
     };
   };
 
+  // cabinet/welcome.tsx
+  function Wlcome() {
+    return /* @__PURE__ */ jsxDEV("div", { children: /* @__PURE__ */ jsxDEV("h1", { align: "center", children: "Welcome robot people!" }) });
+  }
+
   // node_modules/.deno/@lit+reactive-element@2.0.4/node_modules/@lit/reactive-element/css-tag.js
   var t = globalThis;
   var e = t.ShadowRoot && (void 0 === t.ShadyCSS || t.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype;
@@ -3680,7 +3685,17 @@
 
   // cabinet/mcp.tsx
   function Mcp() {
-    return /* @__PURE__ */ jsxDEV("div", { children: "This is mcp content" });
+    return /* @__PURE__ */ jsxDEV("div", { children: /* @__PURE__ */ jsxDEV("h1", { align: "center", children: " This is mcp content " }) });
+  }
+
+  // cabinet/bots.tsx
+  function Bots() {
+    return /* @__PURE__ */ jsxDEV("div", { children: /* @__PURE__ */ jsxDEV("h1", { align: "center", children: "Bots page" }) });
+  }
+
+  // cabinet/settings.tsx
+  function Settings() {
+    return /* @__PURE__ */ jsxDEV("div", { children: /* @__PURE__ */ jsxDEV("h1", { align: "center", children: "Settings page" }) });
   }
 
   // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.7DUCI5S4.js
@@ -8402,7 +8417,7 @@
   function Layout() {
     return /* @__PURE__ */ jsxDEV("div", { style: { display: "flex" }, children: [
       /* @__PURE__ */ jsxDEV("div", { children: /* @__PURE__ */ jsxDEV("sl-menu", { label: "Menu", style: { width: "220px", height: "100vh" }, children: [
-        /* @__PURE__ */ jsxDEV("sl-menu-item", { value: "1", children: /* @__PURE__ */ jsxDEV("sl-icon", { slot: "prefix", name: "house-door" }) }),
+        /* @__PURE__ */ jsxDEV("sl-menu-item", { value: "Welcome", onClick: handleMenuEvent, children: /* @__PURE__ */ jsxDEV("sl-icon", { slot: "prefix", name: "house-door" }) }),
         /* @__PURE__ */ jsxDEV("sl-divider", {}),
         /* @__PURE__ */ jsxDEV("sl-menu-item", { value: "Functions", onClick: handleMenuEvent, children: [
           /* @__PURE__ */ jsxDEV("sl-icon", { slot: "prefix", name: "hammer" }),
@@ -8412,17 +8427,17 @@
           /* @__PURE__ */ jsxDEV("sl-icon", { slot: "prefix", name: "files" }),
           "MCP \u0441\u0435\u0440\u0432\u0435\u0440\u044B"
         ] }),
-        /* @__PURE__ */ jsxDEV("sl-menu-item", { value: "4", children: [
+        /* @__PURE__ */ jsxDEV("sl-menu-item", { value: "Bots", onClick: handleMenuEvent, children: [
           /* @__PURE__ */ jsxDEV("sl-icon", { slot: "prefix", name: "robot" }),
           "\u0411\u043E\u0442\u044B"
         ] }),
         /* @__PURE__ */ jsxDEV("sl-divider", {}),
-        /* @__PURE__ */ jsxDEV("sl-menu-item", { value: "5", children: [
+        /* @__PURE__ */ jsxDEV("sl-menu-item", { value: "Settings", onClick: handleMenuEvent, children: [
           /* @__PURE__ */ jsxDEV("sl-icon", { slot: "prefix", name: "gear" }),
           "\u041D\u0430\u043B\u0430\u0448\u0442\u0443\u0432\u0430\u043D\u043D\u044F"
         ] })
       ] }) }),
-      /* @__PURE__ */ jsxDEV("div", { id: "content", style: { flex: 1, padding: "2rem" } })
+      /* @__PURE__ */ jsxDEV("div", { id: "content", style: { flex: 1, padding: "2rem" }, children: /* @__PURE__ */ jsxDEV(Wlcome, {}) })
     ] });
   }
   function handleMenuEvent() {
@@ -8433,6 +8448,12 @@
       render(/* @__PURE__ */ jsxDEV(Functions, {}), content);
     } else if (value === "Mcp") {
       render(/* @__PURE__ */ jsxDEV(Mcp, {}), content);
+    } else if (value === "Bots") {
+      render(/* @__PURE__ */ jsxDEV(Bots, {}), content);
+    } else if (value === "Settings") {
+      render(/* @__PURE__ */ jsxDEV(Settings, {}), content);
+    } else if (value === "Welcome") {
+      render(/* @__PURE__ */ jsxDEV(Wlcome, {}), content);
     }
   }
   var root = document.getElementById("root");

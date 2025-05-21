@@ -2,7 +2,7 @@
 export default function Mcp() {
   return (
     <div>
-        This is mcp content
+        <h1 align="center"> This is mcp content </h1>
     </div>
   )
 }
