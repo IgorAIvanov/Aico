@@ -8441,7 +8441,6 @@
     ] });
   }
   function handleMenuEvent() {
-    console.log("Menu item selected", this);
     const content = document.getElementById("content");
     const value = this.value;
     if (value === "Functions") {

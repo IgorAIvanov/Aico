@@ -53,24 +53,20 @@ export default function Layout() {
 }
 
  function handleMenuEvent () {
-  //this.loading = true;
-  console.log("Menu item selected", this);
   const content = document.getElementById("content");
   const value = this.value;
-  if (value === "Functions") {
-    render(<Functions />, content);
-  } else if (value === "Mcp") {
-    render(<Mcp />, content);
-  }
-  else if (value === "Bots") {
-    render(<Bots />, content);
-  } else if (value === "Settings") {
-    render(<Settings />, content);
-  } else if (value === "Welcome") {
-    render(<Welcome />, content);
-  }
-
-  //render(this.value, content);
+    if (value === "Functions") {
+      render(<Functions />, content);
+    } else if (value === "Mcp") {
+      render(<Mcp />, content);
+    }
+    else if (value === "Bots") {
+      render(<Bots />, content);
+    } else if (value === "Settings") {
+      render(<Settings />, content);
+    } else if (value === "Welcome") {
+      render(<Welcome />, content);
+    }
  }
 
 const root = document.getElementById("root");
