@@ -3,7 +3,7 @@ import {supabase} from '../db/dbclient.ts';
 
 export async function getSupabaseClient() {
     const { data, error } = await supabase
-    .from('employees')
+    .from('users')
     .select()
 
     if (error) {
