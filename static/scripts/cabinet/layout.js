@@ -5,6 +5,48 @@
       __defProp(target, name, { get: all[name], enumerable: true });
   };
 
+  // node_modules/.deno/hono@4.7.9/node_modules/hono/dist/utils/html.js
+  var HtmlEscapedCallbackPhase = {
+    Stringify: 1,
+    BeforeStream: 2,
+    Stream: 3
+  };
+  var raw = (value, callbacks) => {
+    const escapedString = new String(value);
+    escapedString.isEscaped = true;
+    escapedString.callbacks = callbacks;
+    return escapedString;
+  };
+  var resolveCallback = async (str, phase, preserveCallbacks, context, buffer) => {
+    if (typeof str === "object" && !(str instanceof String)) {
+      if (!(str instanceof Promise)) {
+        str = str.toString();
+      }
+      if (str instanceof Promise) {
+        str = await str;
+      }
+    }
+    const callbacks = str.callbacks;
+    if (!callbacks?.length) {
+      return Promise.resolve(str);
+    }
+    if (buffer) {
+      buffer[0] += str;
+    } else {
+      buffer = [str];
+    }
+    const resStr = Promise.all(callbacks.map((c6) => c6({ phase, buffer, context }))).then(
+      (res) => Promise.all(
+        res.filter(Boolean).map((str2) => resolveCallback(str2, phase, false, context, buffer))
+      ).then(() => buffer[0])
+    );
+    if (preserveCallbacks) {
+      return raw(await resStr, callbacks);
+    } else {
+      return resStr;
+    }
+  };
+
   // node_modules/.deno/hono@4.7.9/node_modules/hono/dist/jsx/constants.js
   var DOM_RENDERER = Symbol("RENDERER");
   var DOM_ERROR_HANDLER = Symbol("ERROR_HANDLER");
@@ -716,6 +758,29 @@
       }
     ];
   };
+  var useEffectCommon = (index, effect, deps) => {
+    const buildData = buildDataStack.at(-1);
+    if (!buildData) {
+      return;
+    }
+    const [, node] = buildData;
+    const effectDepsArray = node[DOM_STASH][1][STASH_EFFECT] ||= [];
+    const hookIndex = node[DOM_STASH][0]++;
+    const [prevDeps, , prevCleanup] = effectDepsArray[hookIndex] ||= [];
+    if (isDepsChanged(prevDeps, deps)) {
+      if (prevCleanup) {
+        prevCleanup();
+      }
+      const runner = () => {
+        data[index] = void 0;
+        data[2] = effect();
+      };
+      const data = [deps, void 0, void 0, void 0, void 0];
+      data[index] = runner;
+      effectDepsArray[hookIndex] = data;
+    }
+  };
+  var useEffect = (effect, deps) => useEffectCommon(3, effect, deps);
   var useCallback = (callback, deps) => {
     const buildData = buildDataStack.at(-1);
     if (!buildData) {
@@ -1119,6 +1184,34 @@
       key,
       ref: props.ref
     };
+  };
+  var Fragment = (props) => jsxDEV("", props, void 0);
+
+  // node_modules/.deno/hono@4.7.9/node_modules/hono/dist/jsx/dom/components.js
+  var ErrorBoundary = ({ children, fallback: fallback2, fallbackRender, onError }) => {
+    const res = Fragment({ children });
+    res[DOM_ERROR_HANDLER] = (err) => {
+      if (err instanceof Promise) {
+        throw err;
+      }
+      onError?.(err);
+      return fallbackRender?.(err) || fallback2;
+    };
+    return res;
+  };
+  var Suspense = ({
+    children,
+    fallback: fallback2
+  }) => {
+    const res = Fragment({ children });
+    res[DOM_ERROR_HANDLER] = (err, retry) => {
+      if (!(err instanceof Promise)) {
+        throw err;
+      }
+      err.finally(retry);
+      return fallback2;
+    };
+    return res;
   };
 
   // cabinet/welcome.tsx
@@ -3654,8 +3747,238 @@
   // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.XA43ZQPC.js
   SlInput.define("sl-input");
 
+  // node_modules/.deno/hono@4.7.9/node_modules/hono/dist/jsx/components.js
+  var errorBoundaryCounter = 0;
+  var childrenToString = async (children) => {
+    try {
+      return children.flat().map((c6) => c6 == null || typeof c6 === "boolean" ? "" : c6.toString());
+    } catch (e11) {
+      if (e11 instanceof Promise) {
+        await e11;
+        return childrenToString(children);
+      } else {
+        throw e11;
+      }
+    }
+  };
+  var ErrorBoundary2 = async ({ children, fallback: fallback2, fallbackRender, onError }) => {
+    if (!children) {
+      return raw("");
+    }
+    if (!Array.isArray(children)) {
+      children = [children];
+    }
+    let fallbackStr;
+    const fallbackRes = (error) => {
+      onError?.(error);
+      return (fallbackStr || fallbackRender?.(error) || "").toString();
+    };
+    let resArray = [];
+    try {
+      resArray = children.map(
+        (c6) => c6 == null || typeof c6 === "boolean" ? "" : c6.toString()
+      );
+    } catch (e11) {
+      fallbackStr = await fallback2?.toString();
+      if (e11 instanceof Promise) {
+        resArray = [
+          e11.then(() => childrenToString(children)).catch((e22) => fallbackRes(e22))
+        ];
+      } else {
+        resArray = [fallbackRes(e11)];
+      }
+    }
+    if (resArray.some((res) => res instanceof Promise)) {
+      fallbackStr ||= await fallback2?.toString();
+      const index = errorBoundaryCounter++;
+      const replaceRe = RegExp(`(<template id="E:${index}"></template>.*?)(.*?)(<!--E:${index}-->)`);
+      const caught = false;
+      const catchCallback = ({ error: error2, buffer }) => {
+        if (caught) {
+          return "";
+        }
+        const fallbackResString = fallbackRes(error2);
+        if (buffer) {
+          buffer[0] = buffer[0].replace(replaceRe, fallbackResString);
+        }
+        return buffer ? "" : `<template data-hono-target="E:${index}">${fallbackResString}</template><script>
+((d,c,n) => {
+c=d.currentScript.previousSibling
+d=d.getElementById('E:${index}')
+if(!d)return
+do{n=d.nextSibling;n.remove()}while(n.nodeType!=8||n.nodeValue!='E:${index}')
+d.replaceWith(c.content)
+})(document)
+<\/script>`;
+      };
+      let error;
+      const promiseAll = Promise.all(resArray).catch((e11) => error = e11);
+      return raw(`<template id="E:${index}"></template><!--E:${index}-->`, [
+        ({ phase, buffer, context }) => {
+          if (phase === HtmlEscapedCallbackPhase.BeforeStream) {
+            return;
+          }
+          return promiseAll.then(async (htmlArray) => {
+            if (error) {
+              throw error;
+            }
+            htmlArray = htmlArray.flat();
+            const content = htmlArray.join("");
+            let html = buffer ? "" : `<template data-hono-target="E:${index}">${content}</template><script>
+((d,c) => {
+c=d.currentScript.previousSibling
+d=d.getElementById('E:${index}')
+if(!d)return
+d.parentElement.insertBefore(c.content,d.nextSibling)
+})(document)
+<\/script>`;
+            if (htmlArray.every((html2) => !html2.callbacks?.length)) {
+              if (buffer) {
+                buffer[0] = buffer[0].replace(replaceRe, content);
+              }
+              return html;
+            }
+            if (buffer) {
+              buffer[0] = buffer[0].replace(
+                replaceRe,
+                (_all, pre, _2, post) => `${pre}${content}${post}`
+              );
+            }
+            const callbacks = htmlArray.map((html2) => html2.callbacks || []).flat();
+            if (phase === HtmlEscapedCallbackPhase.Stream) {
+              html = await resolveCallback(
+                html,
+                HtmlEscapedCallbackPhase.BeforeStream,
+                true,
+                context
+              );
+            }
+            let resolvedCount = 0;
+            const promises = callbacks.map(
+              (c6) => (...args) => c6(...args)?.then((content2) => {
+                resolvedCount++;
+                if (buffer) {
+                  if (resolvedCount === callbacks.length) {
+                    buffer[0] = buffer[0].replace(replaceRe, (_all, _pre, content3) => content3);
+                  }
+                  buffer[0] += content2;
+                  return raw("", content2.callbacks);
+                }
+                return raw(
+                  content2 + (resolvedCount !== callbacks.length ? "" : `<script>
+((d,c,n) => {
+d=d.getElementById('E:${index}')
+if(!d)return
+n=d.nextSibling
+while(n.nodeType!=8||n.nodeValue!='E:${index}'){n=n.nextSibling}
+n.remove()
+d.remove()
+})(document)
+<\/script>`),
+                  content2.callbacks
+                );
+              }).catch((error2) => catchCallback({ error: error2, buffer }))
+            );
+            return raw(html, promises);
+          }).catch((error2) => catchCallback({ error: error2, buffer }));
+        }
+      ]);
+    } else {
+      return raw(resArray.join(""));
+    }
+  };
+  ErrorBoundary2[DOM_RENDERER] = ErrorBoundary;
+
+  // node_modules/.deno/hono@4.7.9/node_modules/hono/dist/jsx/streaming.js
+  var suspenseCounter = 0;
+  var Suspense2 = async ({
+    children,
+    fallback: fallback2
+  }) => {
+    if (!children) {
+      return fallback2.toString();
+    }
+    if (!Array.isArray(children)) {
+      children = [children];
+    }
+    let resArray = [];
+    const stackNode = { [DOM_STASH]: [0, []] };
+    const popNodeStack = (value) => {
+      buildDataStack.pop();
+      return value;
+    };
+    try {
+      stackNode[DOM_STASH][0] = 0;
+      buildDataStack.push([[], stackNode]);
+      resArray = children.map(
+        (c6) => c6 == null || typeof c6 === "boolean" ? "" : c6.toString()
+      );
+    } catch (e11) {
+      if (e11 instanceof Promise) {
+        resArray = [
+          e11.then(() => {
+            stackNode[DOM_STASH][0] = 0;
+            buildDataStack.push([[], stackNode]);
+            return childrenToString(children).then(popNodeStack);
+          })
+        ];
+      } else {
+        throw e11;
+      }
+    } finally {
+      popNodeStack();
+    }
+    if (resArray.some((res) => res instanceof Promise)) {
+      const index = suspenseCounter++;
+      const fallbackStr = await fallback2.toString();
+      return raw(`<template id="H:${index}"></template>${fallbackStr}<!--/$-->`, [
+        ...fallbackStr.callbacks || [],
+        ({ phase, buffer, context }) => {
+          if (phase === HtmlEscapedCallbackPhase.BeforeStream) {
+            return;
+          }
+          return Promise.all(resArray).then(async (htmlArray) => {
+            htmlArray = htmlArray.flat();
+            const content = htmlArray.join("");
+            if (buffer) {
+              buffer[0] = buffer[0].replace(
+                new RegExp(`<template id="H:${index}"></template>.*?<!--/\\$-->`),
+                content
+              );
+            }
+            let html = buffer ? "" : `<template data-hono-target="H:${index}">${content}</template><script>
+((d,c,n) => {
+c=d.currentScript.previousSibling
+d=d.getElementById('H:${index}')
+if(!d)return
+do{n=d.nextSibling;n.remove()}while(n.nodeType!=8||n.nodeValue!='/$')
+d.replaceWith(c.content)
+})(document)
+<\/script>`;
+            const callbacks = htmlArray.map((html2) => html2.callbacks || []).flat();
+            if (!callbacks.length) {
+              return html;
+            }
+            if (phase === HtmlEscapedCallbackPhase.Stream) {
+              html = await resolveCallback(html, HtmlEscapedCallbackPhase.BeforeStream, true, context);
+            }
+            return raw(html, callbacks);
+          });
+        }
+      ]);
+    } else {
+      return raw(resArray.join(""));
+    }
+  };
+  Suspense2[DOM_RENDERER] = Suspense;
+  var textEncoder = new TextEncoder();
+
   // cabinet/functions.tsx
   function Functions() {
+    const [functions, setFunctions] = useState([]);
+    useEffect(() => {
+      fetch("http://localhost:8000/api/services/functions").then((response) => response.json()).then((data) => setFunctions(data)).catch((error) => console.error("Error fetching functions:", error));
+    }, []);
     return /* @__PURE__ */ jsxDEV("div", { children: [
       /* @__PURE__ */ jsxDEV("h1", { align: "center", children: "This is functions content" }),
       /* @__PURE__ */ jsxDEV("table", { children: [
@@ -3665,20 +3988,11 @@
           /* @__PURE__ */ jsxDEV("th", { children: "description" }),
           /* @__PURE__ */ jsxDEV("th", { children: "created_at" })
         ] }) }),
-        /* @__PURE__ */ jsxDEV("tbody", { children: [
-          /* @__PURE__ */ jsxDEV("tr", { children: [
-            /* @__PURE__ */ jsxDEV("td", { children: "1" }),
-            /* @__PURE__ */ jsxDEV("td", { children: /* @__PURE__ */ jsxDEV("sl-input", {}) }),
-            /* @__PURE__ */ jsxDEV("td", { children: "This is function 1" }),
-            /* @__PURE__ */ jsxDEV("td", { children: "2023-10-01" })
-          ] }),
-          /* @__PURE__ */ jsxDEV("tr", { children: [
-            /* @__PURE__ */ jsxDEV("td", { children: "2" }),
-            /* @__PURE__ */ jsxDEV("td", { children: "Function 2" }),
-            /* @__PURE__ */ jsxDEV("td", { children: "This is function 2" }),
-            /* @__PURE__ */ jsxDEV("td", { children: "2023-10-02" })
-          ] })
-        ] })
+        /* @__PURE__ */ jsxDEV("tbody", { children: functions.map((func) => /* @__PURE__ */ jsxDEV("tr", { children: [
+          /* @__PURE__ */ jsxDEV("td", { children: func.id }),
+          /* @__PURE__ */ jsxDEV("td", { children: func.name }),
+          /* @__PURE__ */ jsxDEV("td", { children: func.description })
+        ] }, func.id)) })
       ] })
     ] });
   }

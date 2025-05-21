@@ -2,6 +2,7 @@ import { Hono } from 'hono';
 import { serveStatic } from 'hono/deno';
 import auth from './route/auth.tsx';
 import cabinet  from './route/cabinet.tsx';
+import api from './route/api.ts';
 import {getSupabaseClient} from './sql/migration.ts';
 
 
@@ -20,5 +21,6 @@ app.get('/', (c) => {
 
 app.route('/auth', auth)
 app.route('/cabinet', cabinet)
+app.route('/api', api)
 
 Deno.serve(app.fetch)
