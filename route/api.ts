@@ -19,7 +19,7 @@ async function getData(){
 }
 
 app.get('/services/functions',async  (c) => {
-  console.log('Fetching functions');
+  //console.log('Fetching functions');
   getData();
   return c.json(
    await getData()
