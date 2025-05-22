@@ -3977,7 +3977,7 @@ d.replaceWith(c.content)
   function Functions() {
     const [functions, setFunctions] = useState([]);
     useEffect(() => {
-      fetch("http://localhost:8000/api/services/functions").then((response) => response.json()).then((data) => setFunctions(data)).catch((error) => console.error("Error fetching functions:", error));
+      fetch("/api/services/functions").then((response) => response.json()).then((data) => setFunctions(data)).catch((error) => console.error("Error fetching functions:", error));
     }, []);
     return /* @__PURE__ */ jsxDEV("div", { children: [
       /* @__PURE__ */ jsxDEV("h1", { align: "center", children: "This is functions content" }),

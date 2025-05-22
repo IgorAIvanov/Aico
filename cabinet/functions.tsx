@@ -6,7 +6,7 @@ export default function Functions() {
    const [functions, setFunctions] = useState([]);
 
    useEffect(() => {
-     fetch("http://localhost:8000/api/services/functions")
+     fetch("/api/services/functions")
        .then((response) => response.json())
        .then((data) => setFunctions(data))
        .catch((error) => console.error("Error fetching functions:", error));
