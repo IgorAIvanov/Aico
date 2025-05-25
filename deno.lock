@@ -11,7 +11,8 @@
     "npm:@supabase/storage-js@2.7.1": "2.7.1",
     "npm:@types/node@*": "22.15.15",
     "npm:esbuild@~0.25.4": "0.25.4",
-    "npm:hono@^4.7.9": "4.7.9"
+    "npm:hono@^4.7.9": "4.7.9",
+    "npm:lit@^3.3.0": "3.3.0"
   },
   "jsr": {
     "@supabase/supabase-js@2.49.4": {
@@ -186,6 +187,12 @@
         "@lit-labs/ssr-dom-shim"
       ]
     },
+    "@lit/reactive-element@2.1.0": {
+      "integrity": "sha512-L2qyoZSQClcBmq0qajBVbhYEcG6iK0XfLn66ifLe/RfC0/ihpc+pl0Wdn8bJ8o+hj38cG0fGXRgSS20MuXn7qA==",
+      "dependencies": [
+        "@lit-labs/ssr-dom-shim"
+      ]
+    },
     "@shoelace-style/animations@1.2.0": {
       "integrity": "sha512-avvo1xxkLbv2dgtabdewBbqcJfV0e0zCwFqkPMnHFGbJbBHorRFfMAHh1NG9ymmXn0jW95ibUVH03E1NYXD6Gw=="
     },
@@ -201,7 +208,7 @@
         "@shoelace-style/animations",
         "@shoelace-style/localize",
         "composed-offset-position",
-        "lit",
+        "lit@3.2.1",
         "qr-creator"
       ]
     },
@@ -316,8 +323,16 @@
       "integrity": "sha512-HO9Tkkh34QkTeUmEdNYhMT8hzLid7YlMlATSi1q4q17HE5d9mrrEHJ/o8O2D0cMi182zK1F3v7x0PWFjrhXFew==",
       "dependencies": [
         "@lit-labs/ssr-dom-shim",
-        "@lit/reactive-element",
-        "lit-html"
+        "@lit/reactive-element@2.0.4",
+        "lit-html@3.2.1"
+      ]
+    },
+    "lit-element@4.2.0": {
+      "integrity": "sha512-MGrXJVAI5x+Bfth/pU9Kst1iWID6GHDLEzFEnyULB/sFiRLgkd8NPK/PeeXxktA3T6EIIaq8U3KcbTU5XFcP2Q==",
+      "dependencies": [
+        "@lit-labs/ssr-dom-shim",
+        "@lit/reactive-element@2.1.0",
+        "lit-html@3.3.0"
       ]
     },
     "lit-html@3.2.1": {
@@ -326,12 +341,26 @@
         "@types/trusted-types"
       ]
     },
+    "lit-html@3.3.0": {
+      "integrity": "sha512-RHoswrFAxY2d8Cf2mm4OZ1DgzCoBKUKSPvA1fhtSELxUERq2aQQ2h05pO9j81gS1o7RIRJ+CePLogfyahwmynw==",
+      "dependencies": [
+        "@types/trusted-types"
+      ]
+    },
     "lit@3.2.1": {
       "integrity": "sha512-1BBa1E/z0O9ye5fZprPtdqnc0BFzxIxTTOO/tQFmyC/hj1O3jL4TfmLBw0WEwjAokdLwpclkvGgDJwTIh0/22w==",
       "dependencies": [
-        "@lit/reactive-element",
-        "lit-element",
-        "lit-html"
+        "@lit/reactive-element@2.0.4",
+        "lit-element@4.1.1",
+        "lit-html@3.2.1"
+      ]
+    },
+    "lit@3.3.0": {
+      "integrity": "sha512-DGVsqsOIHBww2DqnuZzW7QsuCdahp50ojuDaBPC7jUDRpYoH0z7kHBBYZewRzer75FwtrkmkKk7iOAwSaWdBmw==",
+      "dependencies": [
+        "@lit/reactive-element@2.1.0",
+        "lit-element@4.2.0",
+        "lit-html@3.3.0"
       ]
     },
     "qr-creator@1.0.0": {
@@ -380,7 +409,8 @@
       "jsr:@supabase/supabase-js@^2.49.4",
       "npm:@shoelace-style/shoelace@^2.20.1",
       "npm:esbuild@~0.25.4",
-      "npm:hono@^4.7.9"
+      "npm:hono@^4.7.9",
+      "npm:lit@^3.3.0"
     ]
   }
 }

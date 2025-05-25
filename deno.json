@@ -10,13 +10,17 @@
       "/": "./",
     "./": "./",
     "@shoelace-style/shoelace": "npm:@shoelace-style/shoelace@^2.20.1",
+      "lit": "npm:lit@^3.3.0",
     "supabase": "jsr:@supabase/supabase-js@^2.49.4",
     "esbuild": "npm:esbuild@^0.25.4",
     "hono": "npm:hono@^4.7.9"
   },
    "compilerOptions": {
      "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx"
+    "jsxImportSource": "hono/jsx",
+    "lib": ["deno.ns", "dom", "es2024" ,"dom.iterable", "dom.asynciterable"],
+    "experimentalDecorators": true,
+   
   },
   "deploy": {
     "project": "225bfd23-f7d8-4ec5-a4f8-536b06351e0c",
