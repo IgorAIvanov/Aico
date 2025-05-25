@@ -8746,7 +8746,7 @@
         { id: 0, name: "", icon: "", teg: "" },
         // Пустий елемент для розділення
         { id: 2, name: "\u0424\u0443\u043D\u043A\u0446\u0456\u0457", icon: "hammer", teg: "<functions-view></functions-view>" },
-        { id: 3, name: "MCP \u0441\u0435\u0440\u0432\u0435\u0440\u044B", icon: "files", teg: "<mcp-page></mcp-page>" },
+        { id: 3, name: "MCP \u0441\u0435\u0440\u0432\u0435\u0440\u044B", icon: "layers", teg: "<mcp-page></mcp-page>" },
         { id: 4, name: "\u0411\u043E\u0442\u044B", icon: "robot", teg: "<bots-view></bots-view>" },
         { id: 5, name: "\u041D\u0430\u043B\u0430\u0448\u0442\u0443\u0432\u0430\u043D\u043D\u044F", icon: "gear", teg: "<setting-view></setting-view>" }
       ];

@@ -54,7 +54,7 @@ export class CabinetLayout extends LitElement {
     { id: 1, name: 'Головна', icon: 'house-door', teg: '<welcome-view></welcome-view>' },
     { id: 0, name: '', icon: '', teg: '' }, // Пустий елемент для розділення
     { id: 2, name: 'Функції', icon: 'hammer', teg: '<functions-view></functions-view>' },
-    { id: 3, name: 'MCP серверы', icon: 'files', teg: '<mcp-page></mcp-page>' },
+    { id: 3, name: 'MCP серверы', icon: 'layers', teg: '<mcp-page></mcp-page>' },
     { id: 4, name: 'Боты', icon: 'robot', teg: '<bots-view></bots-view>' },
     { id: 5, name: 'Налаштування', icon: 'gear', teg: '<setting-view></setting-view>' }
   ];
