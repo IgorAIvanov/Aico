@@ -6211,11 +6211,11 @@
         <table>
           <thead>
             <tr>
-              <th>id</th>
-              <th>name</th>
-              <th>description</th>
-              <th>token</th>
-              <th>  </th>
+              <th>Id</th>
+              <th>Назва</th>
+              <th>Опис</th>
+              <th>Token</th>
+              <th>Copying</th>
             </tr>
           </thead>
           <tbody>
