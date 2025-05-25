@@ -645,134 +645,6 @@
     return n4({ ...r14, state: true, attribute: false });
   }
 
-  // cabinet/functions.ts
-  var FunctionsView = class extends i4 {
-    constructor() {
-      super(...arguments);
-      this.functions = [];
-    }
-    static {
-      this.styles = i`
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1rem;
-    }
-    th, td {
-      border: 1px solid #ccc;
-      padding: 8px;
-      text-align: left;
-    }
-    th {
-      background: #f5f5f5;
-    }
-  `;
-    }
-    connectedCallback() {
-      super.connectedCallback();
-      this.fetchFunctions();
-    }
-    async fetchFunctions() {
-      try {
-        const response = await fetch("/api/services/functions");
-        const data = await response.json();
-        this.functions = data;
-      } catch (error) {
-        console.error("Error fetching functions:", error);
-      }
-    }
-    render() {
-      return x`
-      <div>
-        <h1 style="text-align:center">This is functions content</h1>
-        <table>
-          <thead>
-            <tr>
-              <th>id</th>
-              <th>name</th>
-              <th>description</th>
-              <th>created_at</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${this.functions.map(
-        (func) => x`
-                <tr>
-                  <td>${func.id}</td>
-                  <td>${func.name}</td>
-                  <td>${func.description}</td>
-                  <td>${func.created_at ?? ""}</td>
-                </tr>
-              `
-      )}
-          </tbody>
-        </table>
-      </div>
-    `;
-    }
-  };
-  __decorateClass([
-    r5()
-  ], FunctionsView.prototype, "functions", 2);
-  customElements.define("functions-view", FunctionsView);
-
-  // cabinet/bots.ts
-  var BotsView = class extends i4 {
-    static {
-      this.styles = i`
-    h1 {
-      text-align: center;
-    }
-  `;
-    }
-    render() {
-      return x`
-      <div>
-        <h1>Bots page</h1>
-      </div>
-    `;
-    }
-  };
-  customElements.define("bots-view", BotsView);
-
-  // cabinet/welcome.ts
-  var WelcomeView = class extends i4 {
-    static {
-      this.styles = i`
-    h1 {
-      text-align: center;
-    }
-  `;
-    }
-    render() {
-      return x`
-      <div>
-          <h1>Welcome robot people!</h1>
-      </div>
-    `;
-    }
-  };
-  customElements.define("welcome-view", WelcomeView);
-
-  // cabinet/settings.ts
-  var SettingView = class extends i4 {
-    static {
-      this.styles = i`
-    h1 {
-      text-align: center;
-    }
-  `;
-    }
-    render() {
-      return x`
-      <div>
-          <h1 align="center">Settings page</h1>
-      </div>
-    `;
-    }
-  };
-  customElements.define("setting-view", SettingView);
-
   // node_modules/.deno/@lit+reactive-element@2.0.4/node_modules/@lit/reactive-element/css-tag.js
   var t4 = globalThis;
   var e7 = t4.ShadowRoot && (void 0 === t4.ShadyCSS || t4.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype;
@@ -3421,1294 +3293,8 @@
   // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.JCXLDPQF.js
   SlButton.define("sl-button");
 
-  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.GGT72J62.js
-  var input_styles_default = i6`
-  :host {
-    display: block;
-  }
-
-  .input {
-    flex: 1 1 auto;
-    display: inline-flex;
-    align-items: stretch;
-    justify-content: start;
-    position: relative;
-    width: 100%;
-    font-family: var(--sl-input-font-family);
-    font-weight: var(--sl-input-font-weight);
-    letter-spacing: var(--sl-input-letter-spacing);
-    vertical-align: middle;
-    overflow: hidden;
-    cursor: text;
-    transition:
-      var(--sl-transition-fast) color,
-      var(--sl-transition-fast) border,
-      var(--sl-transition-fast) box-shadow,
-      var(--sl-transition-fast) background-color;
-  }
-
-  /* Standard inputs */
-  .input--standard {
-    background-color: var(--sl-input-background-color);
-    border: solid var(--sl-input-border-width) var(--sl-input-border-color);
-  }
-
-  .input--standard:hover:not(.input--disabled) {
-    background-color: var(--sl-input-background-color-hover);
-    border-color: var(--sl-input-border-color-hover);
-  }
-
-  .input--standard.input--focused:not(.input--disabled) {
-    background-color: var(--sl-input-background-color-focus);
-    border-color: var(--sl-input-border-color-focus);
-    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-input-focus-ring-color);
-  }
-
-  .input--standard.input--focused:not(.input--disabled) .input__control {
-    color: var(--sl-input-color-focus);
-  }
-
-  .input--standard.input--disabled {
-    background-color: var(--sl-input-background-color-disabled);
-    border-color: var(--sl-input-border-color-disabled);
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-
-  .input--standard.input--disabled .input__control {
-    color: var(--sl-input-color-disabled);
-  }
-
-  .input--standard.input--disabled .input__control::placeholder {
-    color: var(--sl-input-placeholder-color-disabled);
-  }
-
-  /* Filled inputs */
-  .input--filled {
-    border: none;
-    background-color: var(--sl-input-filled-background-color);
-    color: var(--sl-input-color);
-  }
-
-  .input--filled:hover:not(.input--disabled) {
-    background-color: var(--sl-input-filled-background-color-hover);
-  }
-
-  .input--filled.input--focused:not(.input--disabled) {
-    background-color: var(--sl-input-filled-background-color-focus);
-    outline: var(--sl-focus-ring);
-    outline-offset: var(--sl-focus-ring-offset);
-  }
-
-  .input--filled.input--disabled {
-    background-color: var(--sl-input-filled-background-color-disabled);
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-
-  .input__control {
-    flex: 1 1 auto;
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    min-width: 0;
-    height: 100%;
-    color: var(--sl-input-color);
-    border: none;
-    background: inherit;
-    box-shadow: none;
-    padding: 0;
-    margin: 0;
-    cursor: inherit;
-    -webkit-appearance: none;
-  }
-
-  .input__control::-webkit-search-decoration,
-  .input__control::-webkit-search-cancel-button,
-  .input__control::-webkit-search-results-button,
-  .input__control::-webkit-search-results-decoration {
-    -webkit-appearance: none;
-  }
-
-  .input__control:-webkit-autofill,
-  .input__control:-webkit-autofill:hover,
-  .input__control:-webkit-autofill:focus,
-  .input__control:-webkit-autofill:active {
-    box-shadow: 0 0 0 var(--sl-input-height-large) var(--sl-input-background-color-hover) inset !important;
-    -webkit-text-fill-color: var(--sl-color-primary-500);
-    caret-color: var(--sl-input-color);
-  }
-
-  .input--filled .input__control:-webkit-autofill,
-  .input--filled .input__control:-webkit-autofill:hover,
-  .input--filled .input__control:-webkit-autofill:focus,
-  .input--filled .input__control:-webkit-autofill:active {
-    box-shadow: 0 0 0 var(--sl-input-height-large) var(--sl-input-filled-background-color) inset !important;
-  }
-
-  .input__control::placeholder {
-    color: var(--sl-input-placeholder-color);
-    user-select: none;
-    -webkit-user-select: none;
-  }
-
-  .input:hover:not(.input--disabled) .input__control {
-    color: var(--sl-input-color-hover);
-  }
-
-  .input__control:focus {
-    outline: none;
-  }
-
-  .input__prefix,
-  .input__suffix {
-    display: inline-flex;
-    flex: 0 0 auto;
-    align-items: center;
-    cursor: default;
-  }
-
-  .input__prefix ::slotted(sl-icon),
-  .input__suffix ::slotted(sl-icon) {
-    color: var(--sl-input-icon-color);
-  }
-
-  /*
-   * Size modifiers
-   */
-
-  .input--small {
-    border-radius: var(--sl-input-border-radius-small);
-    font-size: var(--sl-input-font-size-small);
-    height: var(--sl-input-height-small);
-  }
-
-  .input--small .input__control {
-    height: calc(var(--sl-input-height-small) - var(--sl-input-border-width) * 2);
-    padding: 0 var(--sl-input-spacing-small);
-  }
-
-  .input--small .input__clear,
-  .input--small .input__password-toggle {
-    width: calc(1em + var(--sl-input-spacing-small) * 2);
-  }
-
-  .input--small .input__prefix ::slotted(*) {
-    margin-inline-start: var(--sl-input-spacing-small);
-  }
-
-  .input--small .input__suffix ::slotted(*) {
-    margin-inline-end: var(--sl-input-spacing-small);
-  }
-
-  .input--medium {
-    border-radius: var(--sl-input-border-radius-medium);
-    font-size: var(--sl-input-font-size-medium);
-    height: var(--sl-input-height-medium);
-  }
-
-  .input--medium .input__control {
-    height: calc(var(--sl-input-height-medium) - var(--sl-input-border-width) * 2);
-    padding: 0 var(--sl-input-spacing-medium);
-  }
-
-  .input--medium .input__clear,
-  .input--medium .input__password-toggle {
-    width: calc(1em + var(--sl-input-spacing-medium) * 2);
-  }
-
-  .input--medium .input__prefix ::slotted(*) {
-    margin-inline-start: var(--sl-input-spacing-medium);
-  }
-
-  .input--medium .input__suffix ::slotted(*) {
-    margin-inline-end: var(--sl-input-spacing-medium);
-  }
-
-  .input--large {
-    border-radius: var(--sl-input-border-radius-large);
-    font-size: var(--sl-input-font-size-large);
-    height: var(--sl-input-height-large);
-  }
-
-  .input--large .input__control {
-    height: calc(var(--sl-input-height-large) - var(--sl-input-border-width) * 2);
-    padding: 0 var(--sl-input-spacing-large);
-  }
-
-  .input--large .input__clear,
-  .input--large .input__password-toggle {
-    width: calc(1em + var(--sl-input-spacing-large) * 2);
-  }
-
-  .input--large .input__prefix ::slotted(*) {
-    margin-inline-start: var(--sl-input-spacing-large);
-  }
-
-  .input--large .input__suffix ::slotted(*) {
-    margin-inline-end: var(--sl-input-spacing-large);
-  }
-
-  /*
-   * Pill modifier
-   */
-
-  .input--pill.input--small {
-    border-radius: var(--sl-input-height-small);
-  }
-
-  .input--pill.input--medium {
-    border-radius: var(--sl-input-height-medium);
-  }
-
-  .input--pill.input--large {
-    border-radius: var(--sl-input-height-large);
-  }
-
-  /*
-   * Clearable + Password Toggle
-   */
-
-  .input__clear,
-  .input__password-toggle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: inherit;
-    color: var(--sl-input-icon-color);
-    border: none;
-    background: none;
-    padding: 0;
-    transition: var(--sl-transition-fast) color;
-    cursor: pointer;
-  }
-
-  .input__clear:hover,
-  .input__password-toggle:hover {
-    color: var(--sl-input-icon-color-hover);
-  }
-
-  .input__clear:focus,
-  .input__password-toggle:focus {
-    outline: none;
-  }
-
-  /* Don't show the browser's password toggle in Edge */
-  ::-ms-reveal {
-    display: none;
-  }
-
-  /* Hide the built-in number spinner */
-  .input--no-spin-buttons input[type='number']::-webkit-outer-spin-button,
-  .input--no-spin-buttons input[type='number']::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    display: none;
-  }
-
-  .input--no-spin-buttons input[type='number'] {
-    -moz-appearance: textfield;
-  }
-`;
-
-  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.GI7VDIWX.js
-  var defaultValue = (propertyName = "value") => (proto, key) => {
-    const ctor = proto.constructor;
-    const attributeChangedCallback = ctor.prototype.attributeChangedCallback;
-    ctor.prototype.attributeChangedCallback = function(name, old, value) {
-      var _a;
-      const options = ctor.getPropertyOptions(propertyName);
-      const attributeName = typeof options.attribute === "string" ? options.attribute : propertyName;
-      if (name === attributeName) {
-        const converter = options.converter || u3;
-        const fromAttribute = typeof converter === "function" ? converter : (_a = converter == null ? void 0 : converter.fromAttribute) != null ? _a : u3.fromAttribute;
-        const newValue = fromAttribute(value, options.type);
-        if (this[propertyName] !== newValue) {
-          this[key] = newValue;
-        }
-      }
-      attributeChangedCallback.call(this, name, old, value);
-    };
-  };
-
-  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.SI4ACBFK.js
-  var form_control_styles_default = i6`
-  .form-control .form-control__label {
-    display: none;
-  }
-
-  .form-control .form-control__help-text {
-    display: none;
-  }
-
-  /* Label */
-  .form-control--has-label .form-control__label {
-    display: inline-block;
-    color: var(--sl-input-label-color);
-    margin-bottom: var(--sl-spacing-3x-small);
-  }
-
-  .form-control--has-label.form-control--small .form-control__label {
-    font-size: var(--sl-input-label-font-size-small);
-  }
-
-  .form-control--has-label.form-control--medium .form-control__label {
-    font-size: var(--sl-input-label-font-size-medium);
-  }
-
-  .form-control--has-label.form-control--large .form-control__label {
-    font-size: var(--sl-input-label-font-size-large);
-  }
-
-  :host([required]) .form-control--has-label .form-control__label::after {
-    content: var(--sl-input-required-content);
-    margin-inline-start: var(--sl-input-required-content-offset);
-    color: var(--sl-input-required-content-color);
-  }
-
-  /* Help text */
-  .form-control--has-help-text .form-control__help-text {
-    display: block;
-    color: var(--sl-input-help-text-color);
-    margin-top: var(--sl-spacing-3x-small);
-  }
-
-  .form-control--has-help-text.form-control--small .form-control__help-text {
-    font-size: var(--sl-input-help-text-font-size-small);
-  }
-
-  .form-control--has-help-text.form-control--medium .form-control__help-text {
-    font-size: var(--sl-input-help-text-font-size-medium);
-  }
-
-  .form-control--has-help-text.form-control--large .form-control__help-text {
-    font-size: var(--sl-input-help-text-font-size-large);
-  }
-
-  .form-control--has-help-text.form-control--radio-group .form-control__help-text {
-    margin-top: var(--sl-spacing-2x-small);
-  }
-`;
-
-  // node_modules/.deno/lit-html@3.2.1/node_modules/lit-html/directives/live.js
-  var l6 = e13(class extends i10 {
-    constructor(r14) {
-      if (super(r14), r14.type !== t7.PROPERTY && r14.type !== t7.ATTRIBUTE && r14.type !== t7.BOOLEAN_ATTRIBUTE) throw Error("The `live` directive is not allowed on child or event bindings");
-      if (!f5(r14)) throw Error("`live` bindings can only contain a single expression");
-    }
-    render(r14) {
-      return r14;
-    }
-    update(i13, [t8]) {
-      if (t8 === T2 || t8 === E2) return t8;
-      const o15 = i13.element, l7 = i13.name;
-      if (i13.type === t7.PROPERTY) {
-        if (t8 === o15[l7]) return T2;
-      } else if (i13.type === t7.BOOLEAN_ATTRIBUTE) {
-        if (!!t8 === o15.hasAttribute(l7)) return T2;
-      } else if (i13.type === t7.ATTRIBUTE && o15.getAttribute(l7) === t8 + "") return T2;
-      return m3(i13), t8;
-    }
-  });
-
-  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.VM65NPGC.js
-  var SlInput = class extends ShoelaceElement {
-    constructor() {
-      super(...arguments);
-      this.formControlController = new FormControlController(this, {
-        assumeInteractionOn: ["sl-blur", "sl-input"]
-      });
-      this.hasSlotController = new HasSlotController(this, "help-text", "label");
-      this.localize = new LocalizeController2(this);
-      this.hasFocus = false;
-      this.title = "";
-      this.__numberInput = Object.assign(document.createElement("input"), { type: "number" });
-      this.__dateInput = Object.assign(document.createElement("input"), { type: "date" });
-      this.type = "text";
-      this.name = "";
-      this.value = "";
-      this.defaultValue = "";
-      this.size = "medium";
-      this.filled = false;
-      this.pill = false;
-      this.label = "";
-      this.helpText = "";
-      this.clearable = false;
-      this.disabled = false;
-      this.placeholder = "";
-      this.readonly = false;
-      this.passwordToggle = false;
-      this.passwordVisible = false;
-      this.noSpinButtons = false;
-      this.form = "";
-      this.required = false;
-      this.spellcheck = true;
-    }
-    //
-    // NOTE: We use an in-memory input for these getters/setters instead of the one in the template because the properties
-    // can be set before the component is rendered.
-    //
-    /**
-     * Gets or sets the current value as a `Date` object. Returns `null` if the value can't be converted. This will use the native `<input type="{{type}}">` implementation and may result in an error.
-     */
-    get valueAsDate() {
-      var _a;
-      this.__dateInput.type = this.type;
-      this.__dateInput.value = this.value;
-      return ((_a = this.input) == null ? void 0 : _a.valueAsDate) || this.__dateInput.valueAsDate;
-    }
-    set valueAsDate(newValue) {
-      this.__dateInput.type = this.type;
-      this.__dateInput.valueAsDate = newValue;
-      this.value = this.__dateInput.value;
-    }
-    /** Gets or sets the current value as a number. Returns `NaN` if the value can't be converted. */
-    get valueAsNumber() {
-      var _a;
-      this.__numberInput.value = this.value;
-      return ((_a = this.input) == null ? void 0 : _a.valueAsNumber) || this.__numberInput.valueAsNumber;
-    }
-    set valueAsNumber(newValue) {
-      this.__numberInput.valueAsNumber = newValue;
-      this.value = this.__numberInput.value;
-    }
-    /** Gets the validity state object */
-    get validity() {
-      return this.input.validity;
-    }
-    /** Gets the validation message */
-    get validationMessage() {
-      return this.input.validationMessage;
-    }
-    firstUpdated() {
-      this.formControlController.updateValidity();
-    }
-    handleBlur() {
-      this.hasFocus = false;
-      this.emit("sl-blur");
-    }
-    handleChange() {
-      this.value = this.input.value;
-      this.emit("sl-change");
-    }
-    handleClearClick(event) {
-      event.preventDefault();
-      if (this.value !== "") {
-        this.value = "";
-        this.emit("sl-clear");
-        this.emit("sl-input");
-        this.emit("sl-change");
-      }
-      this.input.focus();
-    }
-    handleFocus() {
-      this.hasFocus = true;
-      this.emit("sl-focus");
-    }
-    handleInput() {
-      this.value = this.input.value;
-      this.formControlController.updateValidity();
-      this.emit("sl-input");
-    }
-    handleInvalid(event) {
-      this.formControlController.setValidity(false);
-      this.formControlController.emitInvalidEvent(event);
-    }
-    handleKeyDown(event) {
-      const hasModifier = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
-      if (event.key === "Enter" && !hasModifier) {
-        setTimeout(() => {
-          if (!event.defaultPrevented && !event.isComposing) {
-            this.formControlController.submit();
-          }
-        });
-      }
-    }
-    handlePasswordToggle() {
-      this.passwordVisible = !this.passwordVisible;
-    }
-    handleDisabledChange() {
-      this.formControlController.setValidity(this.disabled);
-    }
-    handleStepChange() {
-      this.input.step = String(this.step);
-      this.formControlController.updateValidity();
-    }
-    async handleValueChange() {
-      await this.updateComplete;
-      this.formControlController.updateValidity();
-    }
-    /** Sets focus on the input. */
-    focus(options) {
-      this.input.focus(options);
-    }
-    /** Removes focus from the input. */
-    blur() {
-      this.input.blur();
-    }
-    /** Selects all the text in the input. */
-    select() {
-      this.input.select();
-    }
-    /** Sets the start and end positions of the text selection (0-based). */
-    setSelectionRange(selectionStart, selectionEnd, selectionDirection = "none") {
-      this.input.setSelectionRange(selectionStart, selectionEnd, selectionDirection);
-    }
-    /** Replaces a range of text with a new string. */
-    setRangeText(replacement, start, end, selectMode = "preserve") {
-      const selectionStart = start != null ? start : this.input.selectionStart;
-      const selectionEnd = end != null ? end : this.input.selectionEnd;
-      this.input.setRangeText(replacement, selectionStart, selectionEnd, selectMode);
-      if (this.value !== this.input.value) {
-        this.value = this.input.value;
-      }
-    }
-    /** Displays the browser picker for an input element (only works if the browser supports it for the input type). */
-    showPicker() {
-      if ("showPicker" in HTMLInputElement.prototype) {
-        this.input.showPicker();
-      }
-    }
-    /** Increments the value of a numeric input type by the value of the step attribute. */
-    stepUp() {
-      this.input.stepUp();
-      if (this.value !== this.input.value) {
-        this.value = this.input.value;
-      }
-    }
-    /** Decrements the value of a numeric input type by the value of the step attribute. */
-    stepDown() {
-      this.input.stepDown();
-      if (this.value !== this.input.value) {
-        this.value = this.input.value;
-      }
-    }
-    /** Checks for validity but does not show a validation message. Returns `true` when valid and `false` when invalid. */
-    checkValidity() {
-      return this.input.checkValidity();
-    }
-    /** Gets the associated form, if one exists. */
-    getForm() {
-      return this.formControlController.getForm();
-    }
-    /** Checks for validity and shows the browser's validation message if the control is invalid. */
-    reportValidity() {
-      return this.input.reportValidity();
-    }
-    /** Sets a custom validation message. Pass an empty string to restore validity. */
-    setCustomValidity(message) {
-      this.input.setCustomValidity(message);
-      this.formControlController.updateValidity();
-    }
-    render() {
-      const hasLabelSlot = this.hasSlotController.test("label");
-      const hasHelpTextSlot = this.hasSlotController.test("help-text");
-      const hasLabel = this.label ? true : !!hasLabelSlot;
-      const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
-      const hasClearIcon = this.clearable && !this.disabled && !this.readonly;
-      const isClearIconVisible = hasClearIcon && (typeof this.value === "number" || this.value.length > 0);
-      return x2`
-      <div
-        part="form-control"
-        class=${e14({
-        "form-control": true,
-        "form-control--small": this.size === "small",
-        "form-control--medium": this.size === "medium",
-        "form-control--large": this.size === "large",
-        "form-control--has-label": hasLabel,
-        "form-control--has-help-text": hasHelpText
-      })}
-      >
-        <label
-          part="form-control-label"
-          class="form-control__label"
-          for="input"
-          aria-hidden=${hasLabel ? "false" : "true"}
-        >
-          <slot name="label">${this.label}</slot>
-        </label>
-
-        <div part="form-control-input" class="form-control-input">
-          <div
-            part="base"
-            class=${e14({
-        input: true,
-        // Sizes
-        "input--small": this.size === "small",
-        "input--medium": this.size === "medium",
-        "input--large": this.size === "large",
-        // States
-        "input--pill": this.pill,
-        "input--standard": !this.filled,
-        "input--filled": this.filled,
-        "input--disabled": this.disabled,
-        "input--focused": this.hasFocus,
-        "input--empty": !this.value,
-        "input--no-spin-buttons": this.noSpinButtons
-      })}
-          >
-            <span part="prefix" class="input__prefix">
-              <slot name="prefix"></slot>
-            </span>
-
-            <input
-              part="input"
-              id="input"
-              class="input__control"
-              type=${this.type === "password" && this.passwordVisible ? "text" : this.type}
-              title=${this.title}
-              name=${o12(this.name)}
-              ?disabled=${this.disabled}
-              ?readonly=${this.readonly}
-              ?required=${this.required}
-              placeholder=${o12(this.placeholder)}
-              minlength=${o12(this.minlength)}
-              maxlength=${o12(this.maxlength)}
-              min=${o12(this.min)}
-              max=${o12(this.max)}
-              step=${o12(this.step)}
-              .value=${l6(this.value)}
-              autocapitalize=${o12(this.autocapitalize)}
-              autocomplete=${o12(this.autocomplete)}
-              autocorrect=${o12(this.autocorrect)}
-              ?autofocus=${this.autofocus}
-              spellcheck=${this.spellcheck}
-              pattern=${o12(this.pattern)}
-              enterkeyhint=${o12(this.enterkeyhint)}
-              inputmode=${o12(this.inputmode)}
-              aria-describedby="help-text"
-              @change=${this.handleChange}
-              @input=${this.handleInput}
-              @invalid=${this.handleInvalid}
-              @keydown=${this.handleKeyDown}
-              @focus=${this.handleFocus}
-              @blur=${this.handleBlur}
-            />
-
-            ${isClearIconVisible ? x2`
-                  <button
-                    part="clear-button"
-                    class="input__clear"
-                    type="button"
-                    aria-label=${this.localize.term("clearEntry")}
-                    @click=${this.handleClearClick}
-                    tabindex="-1"
-                  >
-                    <slot name="clear-icon">
-                      <sl-icon name="x-circle-fill" library="system"></sl-icon>
-                    </slot>
-                  </button>
-                ` : ""}
-            ${this.passwordToggle && !this.disabled ? x2`
-                  <button
-                    part="password-toggle-button"
-                    class="input__password-toggle"
-                    type="button"
-                    aria-label=${this.localize.term(this.passwordVisible ? "hidePassword" : "showPassword")}
-                    @click=${this.handlePasswordToggle}
-                    tabindex="-1"
-                  >
-                    ${this.passwordVisible ? x2`
-                          <slot name="show-password-icon">
-                            <sl-icon name="eye-slash" library="system"></sl-icon>
-                          </slot>
-                        ` : x2`
-                          <slot name="hide-password-icon">
-                            <sl-icon name="eye" library="system"></sl-icon>
-                          </slot>
-                        `}
-                  </button>
-                ` : ""}
-
-            <span part="suffix" class="input__suffix">
-              <slot name="suffix"></slot>
-            </span>
-          </div>
-        </div>
-
-        <div
-          part="form-control-help-text"
-          id="help-text"
-          class="form-control__help-text"
-          aria-hidden=${hasHelpText ? "false" : "true"}
-        >
-          <slot name="help-text">${this.helpText}</slot>
-        </div>
-      </div>
-    `;
-    }
-  };
-  SlInput.styles = [component_styles_default, form_control_styles_default, input_styles_default];
-  SlInput.dependencies = { "sl-icon": SlIcon };
-  __decorateClass2([
-    e11(".input__control")
-  ], SlInput.prototype, "input", 2);
-  __decorateClass2([
-    r11()
-  ], SlInput.prototype, "hasFocus", 2);
-  __decorateClass2([
-    n8()
-  ], SlInput.prototype, "title", 2);
-  __decorateClass2([
-    n8({ reflect: true })
-  ], SlInput.prototype, "type", 2);
-  __decorateClass2([
-    n8()
-  ], SlInput.prototype, "name", 2);
-  __decorateClass2([
-    n8()
-  ], SlInput.prototype, "value", 2);
-  __decorateClass2([
-    defaultValue()
-  ], SlInput.prototype, "defaultValue", 2);
-  __decorateClass2([
-    n8({ reflect: true })
-  ], SlInput.prototype, "size", 2);
-  __decorateClass2([
-    n8({ type: Boolean, reflect: true })
-  ], SlInput.prototype, "filled", 2);
-  __decorateClass2([
-    n8({ type: Boolean, reflect: true })
-  ], SlInput.prototype, "pill", 2);
-  __decorateClass2([
-    n8()
-  ], SlInput.prototype, "label", 2);
-  __decorateClass2([
-    n8({ attribute: "help-text" })
-  ], SlInput.prototype, "helpText", 2);
-  __decorateClass2([
-    n8({ type: Boolean })
-  ], SlInput.prototype, "clearable", 2);
-  __decorateClass2([
-    n8({ type: Boolean, reflect: true })
-  ], SlInput.prototype, "disabled", 2);
-  __decorateClass2([
-    n8()
-  ], SlInput.prototype, "placeholder", 2);
-  __decorateClass2([
-    n8({ type: Boolean, reflect: true })
-  ], SlInput.prototype, "readonly", 2);
-  __decorateClass2([
-    n8({ attribute: "password-toggle", type: Boolean })
-  ], SlInput.prototype, "passwordToggle", 2);
-  __decorateClass2([
-    n8({ attribute: "password-visible", type: Boolean })
-  ], SlInput.prototype, "passwordVisible", 2);
-  __decorateClass2([
-    n8({ attribute: "no-spin-buttons", type: Boolean })
-  ], SlInput.prototype, "noSpinButtons", 2);
-  __decorateClass2([
-    n8({ reflect: true })
-  ], SlInput.prototype, "form", 2);
-  __decorateClass2([
-    n8({ type: Boolean, reflect: true })
-  ], SlInput.prototype, "required", 2);
-  __decorateClass2([
-    n8()
-  ], SlInput.prototype, "pattern", 2);
-  __decorateClass2([
-    n8({ type: Number })
-  ], SlInput.prototype, "minlength", 2);
-  __decorateClass2([
-    n8({ type: Number })
-  ], SlInput.prototype, "maxlength", 2);
-  __decorateClass2([
-    n8()
-  ], SlInput.prototype, "min", 2);
-  __decorateClass2([
-    n8()
-  ], SlInput.prototype, "max", 2);
-  __decorateClass2([
-    n8()
-  ], SlInput.prototype, "step", 2);
-  __decorateClass2([
-    n8()
-  ], SlInput.prototype, "autocapitalize", 2);
-  __decorateClass2([
-    n8()
-  ], SlInput.prototype, "autocorrect", 2);
-  __decorateClass2([
-    n8()
-  ], SlInput.prototype, "autocomplete", 2);
-  __decorateClass2([
-    n8({ type: Boolean })
-  ], SlInput.prototype, "autofocus", 2);
-  __decorateClass2([
-    n8()
-  ], SlInput.prototype, "enterkeyhint", 2);
-  __decorateClass2([
-    n8({
-      type: Boolean,
-      converter: {
-        // Allow "true|false" attribute values but keep the property boolean
-        fromAttribute: (value) => !value || value === "false" ? false : true,
-        toAttribute: (value) => value ? "true" : "false"
-      }
-    })
-  ], SlInput.prototype, "spellcheck", 2);
-  __decorateClass2([
-    n8()
-  ], SlInput.prototype, "inputmode", 2);
-  __decorateClass2([
-    watch("disabled", { waitUntilFirstUpdate: true })
-  ], SlInput.prototype, "handleDisabledChange", 1);
-  __decorateClass2([
-    watch("step", { waitUntilFirstUpdate: true })
-  ], SlInput.prototype, "handleStepChange", 1);
-  __decorateClass2([
-    watch("value", { waitUntilFirstUpdate: true })
-  ], SlInput.prototype, "handleValueChange", 1);
-
-  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.XA43ZQPC.js
-  SlInput.define("sl-input");
-
-  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.BRQKZQRB.js
-  var drawer_styles_default = i6`
-  :host {
-    --size: 25rem;
-    --header-spacing: var(--sl-spacing-large);
-    --body-spacing: var(--sl-spacing-large);
-    --footer-spacing: var(--sl-spacing-large);
-
-    display: contents;
-  }
-
-  .drawer {
-    top: 0;
-    inset-inline-start: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    overflow: hidden;
-  }
-
-  .drawer--contained {
-    position: absolute;
-    z-index: initial;
-  }
-
-  .drawer--fixed {
-    position: fixed;
-    z-index: var(--sl-z-index-drawer);
-  }
-
-  .drawer__panel {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    z-index: 2;
-    max-width: 100%;
-    max-height: 100%;
-    background-color: var(--sl-panel-background-color);
-    box-shadow: var(--sl-shadow-x-large);
-    overflow: auto;
-    pointer-events: all;
-  }
-
-  .drawer__panel:focus {
-    outline: none;
-  }
-
-  .drawer--top .drawer__panel {
-    top: 0;
-    inset-inline-end: auto;
-    bottom: auto;
-    inset-inline-start: 0;
-    width: 100%;
-    height: var(--size);
-  }
-
-  .drawer--end .drawer__panel {
-    top: 0;
-    inset-inline-end: 0;
-    bottom: auto;
-    inset-inline-start: auto;
-    width: var(--size);
-    height: 100%;
-  }
-
-  .drawer--bottom .drawer__panel {
-    top: auto;
-    inset-inline-end: auto;
-    bottom: 0;
-    inset-inline-start: 0;
-    width: 100%;
-    height: var(--size);
-  }
-
-  .drawer--start .drawer__panel {
-    top: 0;
-    inset-inline-end: auto;
-    bottom: auto;
-    inset-inline-start: 0;
-    width: var(--size);
-    height: 100%;
-  }
-
-  .drawer__header {
-    display: flex;
-  }
-
-  .drawer__title {
-    flex: 1 1 auto;
-    font: inherit;
-    font-size: var(--sl-font-size-large);
-    line-height: var(--sl-line-height-dense);
-    padding: var(--header-spacing);
-    margin: 0;
-  }
-
-  .drawer__header-actions {
-    flex-shrink: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: end;
-    gap: var(--sl-spacing-2x-small);
-    padding: 0 var(--header-spacing);
-  }
-
-  .drawer__header-actions sl-icon-button,
-  .drawer__header-actions ::slotted(sl-icon-button) {
-    flex: 0 0 auto;
-    display: flex;
-    align-items: center;
-    font-size: var(--sl-font-size-medium);
-  }
-
-  .drawer__body {
-    flex: 1 1 auto;
-    display: block;
-    padding: var(--body-spacing);
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .drawer__footer {
-    text-align: right;
-    padding: var(--footer-spacing);
-  }
-
-  .drawer__footer ::slotted(sl-button:not(:last-of-type)) {
-    margin-inline-end: var(--sl-spacing-x-small);
-  }
-
-  .drawer:not(.drawer--has-footer) .drawer__footer {
-    display: none;
-  }
-
-  .drawer__overlay {
-    display: block;
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: var(--sl-overlay-background-color);
-    pointer-events: all;
-  }
-
-  .drawer--contained .drawer__overlay {
-    display: none;
-  }
-
-  @media (forced-colors: active) {
-    .drawer__panel {
-      border: solid 1px var(--sl-color-neutral-0);
-    }
-  }
-`;
-
-  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.VESXC477.js
-  function* activeElements(activeElement = document.activeElement) {
-    if (activeElement === null || activeElement === void 0) return;
-    yield activeElement;
-    if ("shadowRoot" in activeElement && activeElement.shadowRoot && activeElement.shadowRoot.mode !== "closed") {
-      yield* __yieldStar(activeElements(activeElement.shadowRoot.activeElement));
-    }
-  }
-  function getDeepestActiveElement() {
-    return [...activeElements()].pop();
-  }
-  var computedStyleMap = /* @__PURE__ */ new WeakMap();
-  function getCachedComputedStyle(el) {
-    let computedStyle = computedStyleMap.get(el);
-    if (!computedStyle) {
-      computedStyle = window.getComputedStyle(el, null);
-      computedStyleMap.set(el, computedStyle);
-    }
-    return computedStyle;
-  }
-  function isVisible(el) {
-    if (typeof el.checkVisibility === "function") {
-      return el.checkVisibility({ checkOpacity: false, checkVisibilityCSS: true });
-    }
-    const computedStyle = getCachedComputedStyle(el);
-    return computedStyle.visibility !== "hidden" && computedStyle.display !== "none";
-  }
-  function isOverflowingAndTabbable(el) {
-    const computedStyle = getCachedComputedStyle(el);
-    const { overflowY, overflowX } = computedStyle;
-    if (overflowY === "scroll" || overflowX === "scroll") {
-      return true;
-    }
-    if (overflowY !== "auto" || overflowX !== "auto") {
-      return false;
-    }
-    const isOverflowingY = el.scrollHeight > el.clientHeight;
-    if (isOverflowingY && overflowY === "auto") {
-      return true;
-    }
-    const isOverflowingX = el.scrollWidth > el.clientWidth;
-    if (isOverflowingX && overflowX === "auto") {
-      return true;
-    }
-    return false;
-  }
-  function isTabbable(el) {
-    const tag = el.tagName.toLowerCase();
-    const tabindex = Number(el.getAttribute("tabindex"));
-    const hasTabindex = el.hasAttribute("tabindex");
-    if (hasTabindex && (isNaN(tabindex) || tabindex <= -1)) {
-      return false;
-    }
-    if (el.hasAttribute("disabled")) {
-      return false;
-    }
-    if (el.closest("[inert]")) {
-      return false;
-    }
-    if (tag === "input" && el.getAttribute("type") === "radio") {
-      const rootNode = el.getRootNode();
-      const findRadios = `input[type='radio'][name="${el.getAttribute("name")}"]`;
-      const firstChecked = rootNode.querySelector(`${findRadios}:checked`);
-      if (firstChecked) {
-        return firstChecked === el;
-      }
-      const firstRadio = rootNode.querySelector(findRadios);
-      return firstRadio === el;
-    }
-    if (!isVisible(el)) {
-      return false;
-    }
-    if ((tag === "audio" || tag === "video") && el.hasAttribute("controls")) {
-      return true;
-    }
-    if (el.hasAttribute("tabindex")) {
-      return true;
-    }
-    if (el.hasAttribute("contenteditable") && el.getAttribute("contenteditable") !== "false") {
-      return true;
-    }
-    const isNativelyTabbable = [
-      "button",
-      "input",
-      "select",
-      "textarea",
-      "a",
-      "audio",
-      "video",
-      "summary",
-      "iframe"
-    ].includes(tag);
-    if (isNativelyTabbable) {
-      return true;
-    }
-    return isOverflowingAndTabbable(el);
-  }
-  function getSlottedChildrenOutsideRootElement(slotElement, root2) {
-    var _a;
-    return ((_a = slotElement.getRootNode({ composed: true })) == null ? void 0 : _a.host) !== root2;
-  }
-  function getTabbableElements(root2) {
-    const walkedEls = /* @__PURE__ */ new WeakMap();
-    const tabbableElements = [];
-    function walk(el) {
-      if (el instanceof Element) {
-        if (el.hasAttribute("inert") || el.closest("[inert]")) {
-          return;
-        }
-        if (walkedEls.has(el)) {
-          return;
-        }
-        walkedEls.set(el, true);
-        if (!tabbableElements.includes(el) && isTabbable(el)) {
-          tabbableElements.push(el);
-        }
-        if (el instanceof HTMLSlotElement && getSlottedChildrenOutsideRootElement(el, root2)) {
-          el.assignedElements({ flatten: true }).forEach((assignedEl) => {
-            walk(assignedEl);
-          });
-        }
-        if (el.shadowRoot !== null && el.shadowRoot.mode === "open") {
-          walk(el.shadowRoot);
-        }
-      }
-      for (const e17 of el.children) {
-        walk(e17);
-      }
-    }
-    walk(root2);
-    return tabbableElements.sort((a6, b5) => {
-      const aTabindex = Number(a6.getAttribute("tabindex")) || 0;
-      const bTabindex = Number(b5.getAttribute("tabindex")) || 0;
-      return bTabindex - aTabindex;
-    });
-  }
-
-  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.EMN3H5QW.js
-  var activeModals = [];
-  var Modal = class {
-    constructor(element) {
-      this.tabDirection = "forward";
-      this.handleFocusIn = () => {
-        if (!this.isActive()) return;
-        this.checkFocus();
-      };
-      this.handleKeyDown = (event) => {
-        var _a;
-        if (event.key !== "Tab" || this.isExternalActivated) return;
-        if (!this.isActive()) return;
-        const currentActiveElement = getDeepestActiveElement();
-        this.previousFocus = currentActiveElement;
-        if (this.previousFocus && this.possiblyHasTabbableChildren(this.previousFocus)) {
-          return;
-        }
-        if (event.shiftKey) {
-          this.tabDirection = "backward";
-        } else {
-          this.tabDirection = "forward";
-        }
-        const tabbableElements = getTabbableElements(this.element);
-        let currentFocusIndex = tabbableElements.findIndex((el) => el === currentActiveElement);
-        this.previousFocus = this.currentFocus;
-        const addition = this.tabDirection === "forward" ? 1 : -1;
-        while (true) {
-          if (currentFocusIndex + addition >= tabbableElements.length) {
-            currentFocusIndex = 0;
-          } else if (currentFocusIndex + addition < 0) {
-            currentFocusIndex = tabbableElements.length - 1;
-          } else {
-            currentFocusIndex += addition;
-          }
-          this.previousFocus = this.currentFocus;
-          const nextFocus = (
-            /** @type {HTMLElement} */
-            tabbableElements[currentFocusIndex]
-          );
-          if (this.tabDirection === "backward") {
-            if (this.previousFocus && this.possiblyHasTabbableChildren(this.previousFocus)) {
-              return;
-            }
-          }
-          if (nextFocus && this.possiblyHasTabbableChildren(nextFocus)) {
-            return;
-          }
-          event.preventDefault();
-          this.currentFocus = nextFocus;
-          (_a = this.currentFocus) == null ? void 0 : _a.focus({ preventScroll: false });
-          const allActiveElements = [...activeElements()];
-          if (allActiveElements.includes(this.currentFocus) || !allActiveElements.includes(this.previousFocus)) {
-            break;
-          }
-        }
-        setTimeout(() => this.checkFocus());
-      };
-      this.handleKeyUp = () => {
-        this.tabDirection = "forward";
-      };
-      this.element = element;
-      this.elementsWithTabbableControls = ["iframe"];
-    }
-    /** Activates focus trapping. */
-    activate() {
-      activeModals.push(this.element);
-      document.addEventListener("focusin", this.handleFocusIn);
-      document.addEventListener("keydown", this.handleKeyDown);
-      document.addEventListener("keyup", this.handleKeyUp);
-    }
-    /** Deactivates focus trapping. */
-    deactivate() {
-      activeModals = activeModals.filter((modal) => modal !== this.element);
-      this.currentFocus = null;
-      document.removeEventListener("focusin", this.handleFocusIn);
-      document.removeEventListener("keydown", this.handleKeyDown);
-      document.removeEventListener("keyup", this.handleKeyUp);
-    }
-    /** Determines if this modal element is currently active or not. */
-    isActive() {
-      return activeModals[activeModals.length - 1] === this.element;
-    }
-    /** Activates external modal behavior and temporarily disables focus trapping. */
-    activateExternal() {
-      this.isExternalActivated = true;
-    }
-    /** Deactivates external modal behavior and re-enables focus trapping. */
-    deactivateExternal() {
-      this.isExternalActivated = false;
-    }
-    checkFocus() {
-      if (this.isActive() && !this.isExternalActivated) {
-        const tabbableElements = getTabbableElements(this.element);
-        if (!this.element.matches(":focus-within")) {
-          const start = tabbableElements[0];
-          const end = tabbableElements[tabbableElements.length - 1];
-          const target = this.tabDirection === "forward" ? start : end;
-          if (typeof (target == null ? void 0 : target.focus) === "function") {
-            this.currentFocus = target;
-            target.focus({ preventScroll: false });
-          }
-        }
-      }
-    }
-    possiblyHasTabbableChildren(element) {
-      return this.elementsWithTabbableControls.includes(element.tagName.toLowerCase()) || element.hasAttribute("controls");
-    }
-  };
-
-  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.RWUUFNUL.js
-  var locks = /* @__PURE__ */ new Set();
-  function getScrollbarWidth() {
-    const documentWidth = document.documentElement.clientWidth;
-    return Math.abs(window.innerWidth - documentWidth);
-  }
-  function getExistingBodyPadding() {
-    const padding = Number(getComputedStyle(document.body).paddingRight.replace(/px/, ""));
-    if (isNaN(padding) || !padding) {
-      return 0;
-    }
-    return padding;
-  }
-  function lockBodyScrolling(lockingEl) {
-    locks.add(lockingEl);
-    if (!document.documentElement.classList.contains("sl-scroll-lock")) {
-      const scrollbarWidth = getScrollbarWidth() + getExistingBodyPadding();
-      let scrollbarGutterProperty = getComputedStyle(document.documentElement).scrollbarGutter;
-      if (!scrollbarGutterProperty || scrollbarGutterProperty === "auto") {
-        scrollbarGutterProperty = "stable";
-      }
-      if (scrollbarWidth < 2) {
-        scrollbarGutterProperty = "";
-      }
-      document.documentElement.style.setProperty("--sl-scroll-lock-gutter", scrollbarGutterProperty);
-      document.documentElement.classList.add("sl-scroll-lock");
-      document.documentElement.style.setProperty("--sl-scroll-lock-size", `${scrollbarWidth}px`);
-    }
-  }
-  function unlockBodyScrolling(lockingEl) {
-    locks.delete(lockingEl);
-    if (locks.size === 0) {
-      document.documentElement.classList.remove("sl-scroll-lock");
-      document.documentElement.style.removeProperty("--sl-scroll-lock-size");
-    }
-  }
-
-  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.LD4M4QGE.js
-  var blurActiveElement = (elm) => {
-    var _a;
-    const { activeElement } = document;
-    if (activeElement && elm.contains(activeElement)) {
-      (_a = document.activeElement) == null ? void 0 : _a.blur();
-    }
-  };
+  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.ZGGPD2XJ.js
+  SlIcon.define("sl-icon");
 
   // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.6I2T3DLI.js
   var icon_button_styles_default = i6`
@@ -4863,1033 +3449,63 @@
     n8({ type: Boolean, reflect: true })
   ], SlIconButton.prototype, "disabled", 2);
 
-  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.K7JGTRV7.js
-  var defaultAnimationRegistry = /* @__PURE__ */ new Map();
-  var customAnimationRegistry = /* @__PURE__ */ new WeakMap();
-  function ensureAnimation(animation) {
-    return animation != null ? animation : { keyframes: [], options: { duration: 0 } };
-  }
-  function getLogicalAnimation(animation, dir) {
-    if (dir.toLowerCase() === "rtl") {
-      return {
-        keyframes: animation.rtlKeyframes || animation.keyframes,
-        options: animation.options
-      };
-    }
-    return animation;
-  }
-  function setDefaultAnimation(animationName, animation) {
-    defaultAnimationRegistry.set(animationName, ensureAnimation(animation));
-  }
-  function getAnimation(el, animationName, options) {
-    const customAnimation = customAnimationRegistry.get(el);
-    if (customAnimation == null ? void 0 : customAnimation[animationName]) {
-      return getLogicalAnimation(customAnimation[animationName], options.dir);
-    }
-    const defaultAnimation = defaultAnimationRegistry.get(animationName);
-    if (defaultAnimation) {
-      return getLogicalAnimation(defaultAnimation, options.dir);
-    }
-    return {
-      keyframes: [],
-      options: { duration: 0 }
-    };
-  }
+  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.EZCUSG7Q.js
+  SlIconButton.define("sl-icon-button");
 
-  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.B4BZKR24.js
-  function waitForEvent(el, eventName) {
-    return new Promise((resolve) => {
-      function done(event) {
-        if (event.target === el) {
-          el.removeEventListener(eventName, done);
-          resolve();
-        }
-      }
-      el.addEventListener(eventName, done);
-    });
-  }
-
-  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.AJ3ENQ5C.js
-  function animateTo(el, keyframes, options) {
-    return new Promise((resolve) => {
-      if ((options == null ? void 0 : options.duration) === Infinity) {
-        throw new Error("Promise-based animations must be finite.");
-      }
-      const animation = el.animate(keyframes, __spreadProps(__spreadValues({}, options), {
-        duration: prefersReducedMotion() ? 0 : options.duration
-      }));
-      animation.addEventListener("cancel", resolve, { once: true });
-      animation.addEventListener("finish", resolve, { once: true });
-    });
-  }
-  function prefersReducedMotion() {
-    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
-    return query.matches;
-  }
-  function stopAnimations(el) {
-    return Promise.all(
-      el.getAnimations().map((animation) => {
-        return new Promise((resolve) => {
-          animation.cancel();
-          requestAnimationFrame(resolve);
-        });
-      })
-    );
-  }
-
-  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.C5MXLBOG.js
-  function uppercaseFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
-  var SlDrawer = class extends ShoelaceElement {
-    constructor() {
-      super(...arguments);
-      this.hasSlotController = new HasSlotController(this, "footer");
-      this.localize = new LocalizeController2(this);
-      this.modal = new Modal(this);
-      this.open = false;
-      this.label = "";
-      this.placement = "end";
-      this.contained = false;
-      this.noHeader = false;
-      this.handleDocumentKeyDown = (event) => {
-        if (this.contained) {
-          return;
-        }
-        if (event.key === "Escape" && this.modal.isActive() && this.open) {
-          event.stopImmediatePropagation();
-          this.requestClose("keyboard");
-        }
-      };
-    }
-    firstUpdated() {
-      this.drawer.hidden = !this.open;
-      if (this.open) {
-        this.addOpenListeners();
-        if (!this.contained) {
-          this.modal.activate();
-          lockBodyScrolling(this);
-        }
-      }
-    }
-    disconnectedCallback() {
-      super.disconnectedCallback();
-      unlockBodyScrolling(this);
-      this.removeOpenListeners();
-    }
-    requestClose(source) {
-      const slRequestClose = this.emit("sl-request-close", {
-        cancelable: true,
-        detail: { source }
-      });
-      if (slRequestClose.defaultPrevented) {
-        const animation = getAnimation(this, "drawer.denyClose", { dir: this.localize.dir() });
-        animateTo(this.panel, animation.keyframes, animation.options);
-        return;
-      }
-      this.hide();
-    }
-    addOpenListeners() {
-      var _a;
-      if ("CloseWatcher" in window) {
-        (_a = this.closeWatcher) == null ? void 0 : _a.destroy();
-        if (!this.contained) {
-          this.closeWatcher = new CloseWatcher();
-          this.closeWatcher.onclose = () => this.requestClose("keyboard");
-        }
-      } else {
-        document.addEventListener("keydown", this.handleDocumentKeyDown);
-      }
-    }
-    removeOpenListeners() {
-      var _a;
-      document.removeEventListener("keydown", this.handleDocumentKeyDown);
-      (_a = this.closeWatcher) == null ? void 0 : _a.destroy();
-    }
-    async handleOpenChange() {
-      if (this.open) {
-        this.emit("sl-show");
-        this.addOpenListeners();
-        this.originalTrigger = document.activeElement;
-        if (!this.contained) {
-          this.modal.activate();
-          lockBodyScrolling(this);
-        }
-        const autoFocusTarget = this.querySelector("[autofocus]");
-        if (autoFocusTarget) {
-          autoFocusTarget.removeAttribute("autofocus");
-        }
-        await Promise.all([stopAnimations(this.drawer), stopAnimations(this.overlay)]);
-        this.drawer.hidden = false;
-        requestAnimationFrame(() => {
-          const slInitialFocus = this.emit("sl-initial-focus", { cancelable: true });
-          if (!slInitialFocus.defaultPrevented) {
-            if (autoFocusTarget) {
-              autoFocusTarget.focus({ preventScroll: true });
-            } else {
-              this.panel.focus({ preventScroll: true });
-            }
-          }
-          if (autoFocusTarget) {
-            autoFocusTarget.setAttribute("autofocus", "");
-          }
-        });
-        const panelAnimation = getAnimation(this, `drawer.show${uppercaseFirstLetter(this.placement)}`, {
-          dir: this.localize.dir()
-        });
-        const overlayAnimation = getAnimation(this, "drawer.overlay.show", { dir: this.localize.dir() });
-        await Promise.all([
-          animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options),
-          animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options)
-        ]);
-        this.emit("sl-after-show");
-      } else {
-        blurActiveElement(this);
-        this.emit("sl-hide");
-        this.removeOpenListeners();
-        if (!this.contained) {
-          this.modal.deactivate();
-          unlockBodyScrolling(this);
-        }
-        await Promise.all([stopAnimations(this.drawer), stopAnimations(this.overlay)]);
-        const panelAnimation = getAnimation(this, `drawer.hide${uppercaseFirstLetter(this.placement)}`, {
-          dir: this.localize.dir()
-        });
-        const overlayAnimation = getAnimation(this, "drawer.overlay.hide", { dir: this.localize.dir() });
-        await Promise.all([
-          animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options).then(() => {
-            this.overlay.hidden = true;
-          }),
-          animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options).then(() => {
-            this.panel.hidden = true;
-          })
-        ]);
-        this.drawer.hidden = true;
-        this.overlay.hidden = false;
-        this.panel.hidden = false;
-        const trigger = this.originalTrigger;
-        if (typeof (trigger == null ? void 0 : trigger.focus) === "function") {
-          setTimeout(() => trigger.focus());
-        }
-        this.emit("sl-after-hide");
-      }
-    }
-    handleNoModalChange() {
-      if (this.open && !this.contained) {
-        this.modal.activate();
-        lockBodyScrolling(this);
-      }
-      if (this.open && this.contained) {
-        this.modal.deactivate();
-        unlockBodyScrolling(this);
-      }
-    }
-    /** Shows the drawer. */
-    async show() {
-      if (this.open) {
-        return void 0;
-      }
-      this.open = true;
-      return waitForEvent(this, "sl-after-show");
-    }
-    /** Hides the drawer */
-    async hide() {
-      if (!this.open) {
-        return void 0;
-      }
-      this.open = false;
-      return waitForEvent(this, "sl-after-hide");
-    }
-    render() {
-      return x2`
-      <div
-        part="base"
-        class=${e14({
-        drawer: true,
-        "drawer--open": this.open,
-        "drawer--top": this.placement === "top",
-        "drawer--end": this.placement === "end",
-        "drawer--bottom": this.placement === "bottom",
-        "drawer--start": this.placement === "start",
-        "drawer--contained": this.contained,
-        "drawer--fixed": !this.contained,
-        "drawer--rtl": this.localize.dir() === "rtl",
-        "drawer--has-footer": this.hasSlotController.test("footer")
-      })}
-      >
-        <div part="overlay" class="drawer__overlay" @click=${() => this.requestClose("overlay")} tabindex="-1"></div>
-
-        <div
-          part="panel"
-          class="drawer__panel"
-          role="dialog"
-          aria-modal="true"
-          aria-hidden=${this.open ? "false" : "true"}
-          aria-label=${o12(this.noHeader ? this.label : void 0)}
-          aria-labelledby=${o12(!this.noHeader ? "title" : void 0)}
-          tabindex="0"
-        >
-          ${!this.noHeader ? x2`
-                <header part="header" class="drawer__header">
-                  <h2 part="title" class="drawer__title" id="title">
-                    <!-- If there's no label, use an invisible character to prevent the header from collapsing -->
-                    <slot name="label"> ${this.label.length > 0 ? this.label : String.fromCharCode(65279)} </slot>
-                  </h2>
-                  <div part="header-actions" class="drawer__header-actions">
-                    <slot name="header-actions"></slot>
-                    <sl-icon-button
-                      part="close-button"
-                      exportparts="base:close-button__base"
-                      class="drawer__close"
-                      name="x-lg"
-                      label=${this.localize.term("close")}
-                      library="system"
-                      @click=${() => this.requestClose("close-button")}
-                    ></sl-icon-button>
-                  </div>
-                </header>
-              ` : ""}
-
-          <slot part="body" class="drawer__body"></slot>
-
-          <footer part="footer" class="drawer__footer">
-            <slot name="footer"></slot>
-          </footer>
-        </div>
-      </div>
-    `;
-    }
-  };
-  SlDrawer.styles = [component_styles_default, drawer_styles_default];
-  SlDrawer.dependencies = { "sl-icon-button": SlIconButton };
-  __decorateClass2([
-    e11(".drawer")
-  ], SlDrawer.prototype, "drawer", 2);
-  __decorateClass2([
-    e11(".drawer__panel")
-  ], SlDrawer.prototype, "panel", 2);
-  __decorateClass2([
-    e11(".drawer__overlay")
-  ], SlDrawer.prototype, "overlay", 2);
-  __decorateClass2([
-    n8({ type: Boolean, reflect: true })
-  ], SlDrawer.prototype, "open", 2);
-  __decorateClass2([
-    n8({ reflect: true })
-  ], SlDrawer.prototype, "label", 2);
-  __decorateClass2([
-    n8({ reflect: true })
-  ], SlDrawer.prototype, "placement", 2);
-  __decorateClass2([
-    n8({ type: Boolean, reflect: true })
-  ], SlDrawer.prototype, "contained", 2);
-  __decorateClass2([
-    n8({ attribute: "no-header", type: Boolean, reflect: true })
-  ], SlDrawer.prototype, "noHeader", 2);
-  __decorateClass2([
-    watch("open", { waitUntilFirstUpdate: true })
-  ], SlDrawer.prototype, "handleOpenChange", 1);
-  __decorateClass2([
-    watch("contained", { waitUntilFirstUpdate: true })
-  ], SlDrawer.prototype, "handleNoModalChange", 1);
-  setDefaultAnimation("drawer.showTop", {
-    keyframes: [
-      { opacity: 0, translate: "0 -100%" },
-      { opacity: 1, translate: "0 0" }
-    ],
-    options: { duration: 250, easing: "ease" }
-  });
-  setDefaultAnimation("drawer.hideTop", {
-    keyframes: [
-      { opacity: 1, translate: "0 0" },
-      { opacity: 0, translate: "0 -100%" }
-    ],
-    options: { duration: 250, easing: "ease" }
-  });
-  setDefaultAnimation("drawer.showEnd", {
-    keyframes: [
-      { opacity: 0, translate: "100%" },
-      { opacity: 1, translate: "0" }
-    ],
-    rtlKeyframes: [
-      { opacity: 0, translate: "-100%" },
-      { opacity: 1, translate: "0" }
-    ],
-    options: { duration: 250, easing: "ease" }
-  });
-  setDefaultAnimation("drawer.hideEnd", {
-    keyframes: [
-      { opacity: 1, translate: "0" },
-      { opacity: 0, translate: "100%" }
-    ],
-    rtlKeyframes: [
-      { opacity: 1, translate: "0" },
-      { opacity: 0, translate: "-100%" }
-    ],
-    options: { duration: 250, easing: "ease" }
-  });
-  setDefaultAnimation("drawer.showBottom", {
-    keyframes: [
-      { opacity: 0, translate: "0 100%" },
-      { opacity: 1, translate: "0 0" }
-    ],
-    options: { duration: 250, easing: "ease" }
-  });
-  setDefaultAnimation("drawer.hideBottom", {
-    keyframes: [
-      { opacity: 1, translate: "0 0" },
-      { opacity: 0, translate: "0 100%" }
-    ],
-    options: { duration: 250, easing: "ease" }
-  });
-  setDefaultAnimation("drawer.showStart", {
-    keyframes: [
-      { opacity: 0, translate: "-100%" },
-      { opacity: 1, translate: "0" }
-    ],
-    rtlKeyframes: [
-      { opacity: 0, translate: "100%" },
-      { opacity: 1, translate: "0" }
-    ],
-    options: { duration: 250, easing: "ease" }
-  });
-  setDefaultAnimation("drawer.hideStart", {
-    keyframes: [
-      { opacity: 1, translate: "0" },
-      { opacity: 0, translate: "-100%" }
-    ],
-    rtlKeyframes: [
-      { opacity: 1, translate: "0" },
-      { opacity: 0, translate: "100%" }
-    ],
-    options: { duration: 250, easing: "ease" }
-  });
-  setDefaultAnimation("drawer.denyClose", {
-    keyframes: [{ scale: 1 }, { scale: 1.01 }, { scale: 1 }],
-    options: { duration: 250 }
-  });
-  setDefaultAnimation("drawer.overlay.show", {
-    keyframes: [{ opacity: 0 }, { opacity: 1 }],
-    options: { duration: 250 }
-  });
-  setDefaultAnimation("drawer.overlay.hide", {
-    keyframes: [{ opacity: 1 }, { opacity: 0 }],
-    options: { duration: 250 }
-  });
-
-  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.SAPQLUO4.js
-  SlDrawer.define("sl-drawer");
-
-  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.VVA35HTY.js
-  var menu_styles_default = i6`
+  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.FW7UWQXB.js
+  var tooltip_styles_default = i6`
   :host {
+    --max-width: 20rem;
+    --hide-delay: 0ms;
+    --show-delay: 150ms;
+
+    display: contents;
+  }
+
+  .tooltip {
+    --arrow-size: var(--sl-tooltip-arrow-size);
+    --arrow-color: var(--sl-tooltip-background-color);
+  }
+
+  .tooltip::part(popup) {
+    z-index: var(--sl-z-index-tooltip);
+  }
+
+  .tooltip[placement^='top']::part(popup) {
+    transform-origin: bottom;
+  }
+
+  .tooltip[placement^='bottom']::part(popup) {
+    transform-origin: top;
+  }
+
+  .tooltip[placement^='left']::part(popup) {
+    transform-origin: right;
+  }
+
+  .tooltip[placement^='right']::part(popup) {
+    transform-origin: left;
+  }
+
+  .tooltip__body {
     display: block;
-    position: relative;
-    background: var(--sl-panel-background-color);
-    border: solid var(--sl-panel-border-width) var(--sl-panel-border-color);
-    border-radius: var(--sl-border-radius-medium);
-    padding: var(--sl-spacing-x-small) 0;
-    overflow: auto;
-    overscroll-behavior: none;
-  }
-
-  ::slotted(sl-divider) {
-    --spacing: var(--sl-spacing-x-small);
-  }
-`;
-
-  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.Q6CVTR7F.js
-  var SlMenu = class extends ShoelaceElement {
-    connectedCallback() {
-      super.connectedCallback();
-      this.setAttribute("role", "menu");
-    }
-    handleClick(event) {
-      const menuItemTypes = ["menuitem", "menuitemcheckbox"];
-      const composedPath = event.composedPath();
-      const target = composedPath.find((el) => {
-        var _a;
-        return menuItemTypes.includes(((_a = el == null ? void 0 : el.getAttribute) == null ? void 0 : _a.call(el, "role")) || "");
-      });
-      if (!target) return;
-      const closestMenu = composedPath.find((el) => {
-        var _a;
-        return ((_a = el == null ? void 0 : el.getAttribute) == null ? void 0 : _a.call(el, "role")) === "menu";
-      });
-      const clickHasSubmenu = closestMenu !== this;
-      if (clickHasSubmenu) return;
-      const item = target;
-      if (item.type === "checkbox") {
-        item.checked = !item.checked;
-      }
-      this.emit("sl-select", { detail: { item } });
-    }
-    handleKeyDown(event) {
-      if (event.key === "Enter" || event.key === " ") {
-        const item = this.getCurrentItem();
-        event.preventDefault();
-        event.stopPropagation();
-        item == null ? void 0 : item.click();
-      } else if (["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) {
-        const items = this.getAllItems();
-        const activeItem = this.getCurrentItem();
-        let index = activeItem ? items.indexOf(activeItem) : 0;
-        if (items.length > 0) {
-          event.preventDefault();
-          event.stopPropagation();
-          if (event.key === "ArrowDown") {
-            index++;
-          } else if (event.key === "ArrowUp") {
-            index--;
-          } else if (event.key === "Home") {
-            index = 0;
-          } else if (event.key === "End") {
-            index = items.length - 1;
-          }
-          if (index < 0) {
-            index = items.length - 1;
-          }
-          if (index > items.length - 1) {
-            index = 0;
-          }
-          this.setCurrentItem(items[index]);
-          items[index].focus();
-        }
-      }
-    }
-    handleMouseDown(event) {
-      const target = event.target;
-      if (this.isMenuItem(target)) {
-        this.setCurrentItem(target);
-      }
-    }
-    handleSlotChange() {
-      const items = this.getAllItems();
-      if (items.length > 0) {
-        this.setCurrentItem(items[0]);
-      }
-    }
-    isMenuItem(item) {
-      var _a;
-      return item.tagName.toLowerCase() === "sl-menu-item" || ["menuitem", "menuitemcheckbox", "menuitemradio"].includes((_a = item.getAttribute("role")) != null ? _a : "");
-    }
-    /** @internal Gets all slotted menu items, ignoring dividers, headers, and other elements. */
-    getAllItems() {
-      return [...this.defaultSlot.assignedElements({ flatten: true })].filter((el) => {
-        if (el.inert || !this.isMenuItem(el)) {
-          return false;
-        }
-        return true;
-      });
-    }
-    /**
-     * @internal Gets the current menu item, which is the menu item that has `tabindex="0"` within the roving tab index.
-     * The menu item may or may not have focus, but for keyboard interaction purposes it's considered the "active" item.
-     */
-    getCurrentItem() {
-      return this.getAllItems().find((i13) => i13.getAttribute("tabindex") === "0");
-    }
-    /**
-     * @internal Sets the current menu item to the specified element. This sets `tabindex="0"` on the target element and
-     * `tabindex="-1"` to all other items. This method must be called prior to setting focus on a menu item.
-     */
-    setCurrentItem(item) {
-      const items = this.getAllItems();
-      items.forEach((i13) => {
-        i13.setAttribute("tabindex", i13 === item ? "0" : "-1");
-      });
-    }
-    render() {
-      return x2`
-      <slot
-        @slotchange=${this.handleSlotChange}
-        @click=${this.handleClick}
-        @keydown=${this.handleKeyDown}
-        @mousedown=${this.handleMouseDown}
-      ></slot>
-    `;
-    }
-  };
-  SlMenu.styles = [component_styles_default, menu_styles_default];
-  __decorateClass2([
-    e11("slot")
-  ], SlMenu.prototype, "defaultSlot", 2);
-
-  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.JHOXTQXA.js
-  SlMenu.define("sl-menu");
-
-  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.KZJNDGFO.js
-  var menu_item_styles_default = i6`
-  :host {
-    --submenu-offset: -2px;
-
-    display: block;
-  }
-
-  :host([inert]) {
-    display: none;
-  }
-
-  .menu-item {
-    position: relative;
-    display: flex;
-    align-items: stretch;
-    font-family: var(--sl-font-sans);
-    font-size: var(--sl-font-size-medium);
-    font-weight: var(--sl-font-weight-normal);
-    line-height: var(--sl-line-height-normal);
-    letter-spacing: var(--sl-letter-spacing-normal);
-    color: var(--sl-color-neutral-700);
-    padding: var(--sl-spacing-2x-small) var(--sl-spacing-2x-small);
-    transition: var(--sl-transition-fast) fill;
+    width: max-content;
+    max-width: var(--max-width);
+    border-radius: var(--sl-tooltip-border-radius);
+    background-color: var(--sl-tooltip-background-color);
+    font-family: var(--sl-tooltip-font-family);
+    font-size: var(--sl-tooltip-font-size);
+    font-weight: var(--sl-tooltip-font-weight);
+    line-height: var(--sl-tooltip-line-height);
+    text-align: start;
+    white-space: normal;
+    color: var(--sl-tooltip-color);
+    padding: var(--sl-tooltip-padding);
+    pointer-events: none;
     user-select: none;
     -webkit-user-select: none;
-    white-space: nowrap;
-    cursor: pointer;
-  }
-
-  .menu-item.menu-item--disabled {
-    outline: none;
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-
-  .menu-item.menu-item--loading {
-    outline: none;
-    cursor: wait;
-  }
-
-  .menu-item.menu-item--loading *:not(sl-spinner) {
-    opacity: 0.5;
-  }
-
-  .menu-item--loading sl-spinner {
-    --indicator-color: currentColor;
-    --track-width: 1px;
-    position: absolute;
-    font-size: 0.75em;
-    top: calc(50% - 0.5em);
-    left: 0.65rem;
-    opacity: 1;
-  }
-
-  .menu-item .menu-item__label {
-    flex: 1 1 auto;
-    display: inline-block;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
-
-  .menu-item .menu-item__prefix {
-    flex: 0 0 auto;
-    display: flex;
-    align-items: center;
-  }
-
-  .menu-item .menu-item__prefix::slotted(*) {
-    margin-inline-end: var(--sl-spacing-x-small);
-  }
-
-  .menu-item .menu-item__suffix {
-    flex: 0 0 auto;
-    display: flex;
-    align-items: center;
-  }
-
-  .menu-item .menu-item__suffix::slotted(*) {
-    margin-inline-start: var(--sl-spacing-x-small);
-  }
-
-  /* Safe triangle */
-  .menu-item--submenu-expanded::after {
-    content: '';
-    position: fixed;
-    z-index: calc(var(--sl-z-index-dropdown) - 1);
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    clip-path: polygon(
-      var(--safe-triangle-cursor-x, 0) var(--safe-triangle-cursor-y, 0),
-      var(--safe-triangle-submenu-start-x, 0) var(--safe-triangle-submenu-start-y, 0),
-      var(--safe-triangle-submenu-end-x, 0) var(--safe-triangle-submenu-end-y, 0)
-    );
-  }
-
-  :host(:focus-visible) {
-    outline: none;
-  }
-
-  :host(:hover:not([aria-disabled='true'], :focus-visible)) .menu-item,
-  .menu-item--submenu-expanded {
-    background-color: var(--sl-color-neutral-100);
-    color: var(--sl-color-neutral-1000);
-  }
-
-  :host(:focus-visible) .menu-item {
-    outline: none;
-    background-color: var(--sl-color-primary-600);
-    color: var(--sl-color-neutral-0);
-    opacity: 1;
-  }
-
-  .menu-item .menu-item__check,
-  .menu-item .menu-item__chevron {
-    flex: 0 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 1.5em;
-    visibility: hidden;
-  }
-
-  .menu-item--checked .menu-item__check,
-  .menu-item--has-submenu .menu-item__chevron {
-    visibility: visible;
-  }
-
-  /* Add elevation and z-index to submenus */
-  sl-popup::part(popup) {
-    box-shadow: var(--sl-shadow-large);
-    z-index: var(--sl-z-index-dropdown);
-    margin-left: var(--submenu-offset);
-  }
-
-  .menu-item--rtl sl-popup::part(popup) {
-    margin-left: calc(-1 * var(--submenu-offset));
-  }
-
-  @media (forced-colors: active) {
-    :host(:hover:not([aria-disabled='true'])) .menu-item,
-    :host(:focus-visible) .menu-item {
-      outline: dashed 1px SelectedItem;
-      outline-offset: -1px;
-    }
-  }
-
-  ::slotted(sl-menu) {
-    max-width: var(--auto-size-available-width) !important;
-    max-height: var(--auto-size-available-height) !important;
   }
 `;
-
-  // node_modules/.deno/lit-html@3.2.1/node_modules/lit-html/async-directive.js
-  var s6 = (i13, t8) => {
-    const e17 = i13._$AN;
-    if (void 0 === e17) return false;
-    for (const i14 of e17) i14._$AO?.(t8, false), s6(i14, t8);
-    return true;
-  };
-  var o13 = (i13) => {
-    let t8, e17;
-    do {
-      if (void 0 === (t8 = i13._$AM)) break;
-      e17 = t8._$AN, e17.delete(i13), i13 = t8;
-    } while (0 === e17?.size);
-  };
-  var r12 = (i13) => {
-    for (let t8; t8 = i13._$AM; i13 = t8) {
-      let e17 = t8._$AN;
-      if (void 0 === e17) t8._$AN = e17 = /* @__PURE__ */ new Set();
-      else if (e17.has(i13)) break;
-      e17.add(i13), c8(t8);
-    }
-  };
-  function h5(i13) {
-    void 0 !== this._$AN ? (o13(this), this._$AM = i13, r12(this)) : this._$AM = i13;
-  }
-  function n10(i13, t8 = false, e17 = 0) {
-    const r14 = this._$AH, h7 = this._$AN;
-    if (void 0 !== h7 && 0 !== h7.size) if (t8) if (Array.isArray(r14)) for (let i14 = e17; i14 < r14.length; i14++) s6(r14[i14], false), o13(r14[i14]);
-    else null != r14 && (s6(r14, false), o13(r14));
-    else s6(this, i13);
-  }
-  var c8 = (i13) => {
-    i13.type == t7.CHILD && (i13._$AP ??= n10, i13._$AQ ??= h5);
-  };
-  var f6 = class extends i10 {
-    constructor() {
-      super(...arguments), this._$AN = void 0;
-    }
-    _$AT(i13, t8, e17) {
-      super._$AT(i13, t8, e17), r12(this), this.isConnected = i13._$AU;
-    }
-    _$AO(i13, t8 = true) {
-      i13 !== this.isConnected && (this.isConnected = i13, i13 ? this.reconnected?.() : this.disconnected?.()), t8 && (s6(this, i13), o13(this));
-    }
-    setValue(t8) {
-      if (f5(this._$Ct)) this._$Ct._$AI(t8, this);
-      else {
-        const i13 = [...this._$Ct._$AH];
-        i13[this._$Ci] = t8, this._$Ct._$AI(i13, this, 0);
-      }
-    }
-    disconnected() {
-    }
-    reconnected() {
-    }
-  };
-
-  // node_modules/.deno/lit-html@3.2.1/node_modules/lit-html/directives/ref.js
-  var e15 = () => new h6();
-  var h6 = class {
-  };
-  var o14 = /* @__PURE__ */ new WeakMap();
-  var n11 = e13(class extends f6 {
-    render(i13) {
-      return E2;
-    }
-    update(i13, [s7]) {
-      const e17 = s7 !== this.Y;
-      return e17 && void 0 !== this.Y && this.rt(void 0), (e17 || this.lt !== this.ct) && (this.Y = s7, this.ht = i13.options?.host, this.rt(this.ct = i13.element)), E2;
-    }
-    rt(t8) {
-      if (this.isConnected || (t8 = void 0), "function" == typeof this.Y) {
-        const i13 = this.ht ?? globalThis;
-        let s7 = o14.get(i13);
-        void 0 === s7 && (s7 = /* @__PURE__ */ new WeakMap(), o14.set(i13, s7)), void 0 !== s7.get(this.Y) && this.Y.call(this.ht, void 0), s7.set(this.Y, t8), void 0 !== t8 && this.Y.call(this.ht, t8);
-      } else this.Y.value = t8;
-    }
-    get lt() {
-      return "function" == typeof this.Y ? o14.get(this.ht ?? globalThis)?.get(this.Y) : this.Y?.value;
-    }
-    disconnected() {
-      this.lt === this.ct && this.rt(void 0);
-    }
-    reconnected() {
-      this.rt(this.ct);
-    }
-  });
-
-  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.ZLIGP6HZ.js
-  var SubmenuController = class {
-    constructor(host, hasSlotController) {
-      this.popupRef = e15();
-      this.enableSubmenuTimer = -1;
-      this.isConnected = false;
-      this.isPopupConnected = false;
-      this.skidding = 0;
-      this.submenuOpenDelay = 100;
-      this.handleMouseMove = (event) => {
-        this.host.style.setProperty("--safe-triangle-cursor-x", `${event.clientX}px`);
-        this.host.style.setProperty("--safe-triangle-cursor-y", `${event.clientY}px`);
-      };
-      this.handleMouseOver = () => {
-        if (this.hasSlotController.test("submenu")) {
-          this.enableSubmenu();
-        }
-      };
-      this.handleKeyDown = (event) => {
-        switch (event.key) {
-          case "Escape":
-          case "Tab":
-            this.disableSubmenu();
-            break;
-          case "ArrowLeft":
-            if (event.target !== this.host) {
-              event.preventDefault();
-              event.stopPropagation();
-              this.host.focus();
-              this.disableSubmenu();
-            }
-            break;
-          case "ArrowRight":
-          case "Enter":
-          case " ":
-            this.handleSubmenuEntry(event);
-            break;
-          default:
-            break;
-        }
-      };
-      this.handleClick = (event) => {
-        var _a;
-        if (event.target === this.host) {
-          event.preventDefault();
-          event.stopPropagation();
-        } else if (event.target instanceof Element && (event.target.tagName === "sl-menu-item" || ((_a = event.target.role) == null ? void 0 : _a.startsWith("menuitem")))) {
-          this.disableSubmenu();
-        }
-      };
-      this.handleFocusOut = (event) => {
-        if (event.relatedTarget && event.relatedTarget instanceof Element && this.host.contains(event.relatedTarget)) {
-          return;
-        }
-        this.disableSubmenu();
-      };
-      this.handlePopupMouseover = (event) => {
-        event.stopPropagation();
-      };
-      this.handlePopupReposition = () => {
-        const submenuSlot = this.host.renderRoot.querySelector("slot[name='submenu']");
-        const menu = submenuSlot == null ? void 0 : submenuSlot.assignedElements({ flatten: true }).filter((el) => el.localName === "sl-menu")[0];
-        const isRtl = getComputedStyle(this.host).direction === "rtl";
-        if (!menu) {
-          return;
-        }
-        const { left, top, width, height } = menu.getBoundingClientRect();
-        this.host.style.setProperty("--safe-triangle-submenu-start-x", `${isRtl ? left + width : left}px`);
-        this.host.style.setProperty("--safe-triangle-submenu-start-y", `${top}px`);
-        this.host.style.setProperty("--safe-triangle-submenu-end-x", `${isRtl ? left + width : left}px`);
-        this.host.style.setProperty("--safe-triangle-submenu-end-y", `${top + height}px`);
-      };
-      (this.host = host).addController(this);
-      this.hasSlotController = hasSlotController;
-    }
-    hostConnected() {
-      if (this.hasSlotController.test("submenu") && !this.host.disabled) {
-        this.addListeners();
-      }
-    }
-    hostDisconnected() {
-      this.removeListeners();
-    }
-    hostUpdated() {
-      if (this.hasSlotController.test("submenu") && !this.host.disabled) {
-        this.addListeners();
-        this.updateSkidding();
-      } else {
-        this.removeListeners();
-      }
-    }
-    addListeners() {
-      if (!this.isConnected) {
-        this.host.addEventListener("mousemove", this.handleMouseMove);
-        this.host.addEventListener("mouseover", this.handleMouseOver);
-        this.host.addEventListener("keydown", this.handleKeyDown);
-        this.host.addEventListener("click", this.handleClick);
-        this.host.addEventListener("focusout", this.handleFocusOut);
-        this.isConnected = true;
-      }
-      if (!this.isPopupConnected) {
-        if (this.popupRef.value) {
-          this.popupRef.value.addEventListener("mouseover", this.handlePopupMouseover);
-          this.popupRef.value.addEventListener("sl-reposition", this.handlePopupReposition);
-          this.isPopupConnected = true;
-        }
-      }
-    }
-    removeListeners() {
-      if (this.isConnected) {
-        this.host.removeEventListener("mousemove", this.handleMouseMove);
-        this.host.removeEventListener("mouseover", this.handleMouseOver);
-        this.host.removeEventListener("keydown", this.handleKeyDown);
-        this.host.removeEventListener("click", this.handleClick);
-        this.host.removeEventListener("focusout", this.handleFocusOut);
-        this.isConnected = false;
-      }
-      if (this.isPopupConnected) {
-        if (this.popupRef.value) {
-          this.popupRef.value.removeEventListener("mouseover", this.handlePopupMouseover);
-          this.popupRef.value.removeEventListener("sl-reposition", this.handlePopupReposition);
-          this.isPopupConnected = false;
-        }
-      }
-    }
-    handleSubmenuEntry(event) {
-      const submenuSlot = this.host.renderRoot.querySelector("slot[name='submenu']");
-      if (!submenuSlot) {
-        console.error("Cannot activate a submenu if no corresponding menuitem can be found.", this);
-        return;
-      }
-      let menuItems = null;
-      for (const elt of submenuSlot.assignedElements()) {
-        menuItems = elt.querySelectorAll("sl-menu-item, [role^='menuitem']");
-        if (menuItems.length !== 0) {
-          break;
-        }
-      }
-      if (!menuItems || menuItems.length === 0) {
-        return;
-      }
-      menuItems[0].setAttribute("tabindex", "0");
-      for (let i13 = 1; i13 !== menuItems.length; ++i13) {
-        menuItems[i13].setAttribute("tabindex", "-1");
-      }
-      if (this.popupRef.value) {
-        event.preventDefault();
-        event.stopPropagation();
-        if (this.popupRef.value.active) {
-          if (menuItems[0] instanceof HTMLElement) {
-            menuItems[0].focus();
-          }
-        } else {
-          this.enableSubmenu(false);
-          this.host.updateComplete.then(() => {
-            if (menuItems[0] instanceof HTMLElement) {
-              menuItems[0].focus();
-            }
-          });
-          this.host.requestUpdate();
-        }
-      }
-    }
-    setSubmenuState(state) {
-      if (this.popupRef.value) {
-        if (this.popupRef.value.active !== state) {
-          this.popupRef.value.active = state;
-          this.host.requestUpdate();
-        }
-      }
-    }
-    // Shows the submenu. Supports disabling the opening delay, e.g. for keyboard events that want to set the focus to the
-    // newly opened menu.
-    enableSubmenu(delay = true) {
-      if (delay) {
-        window.clearTimeout(this.enableSubmenuTimer);
-        this.enableSubmenuTimer = window.setTimeout(() => {
-          this.setSubmenuState(true);
-        }, this.submenuOpenDelay);
-      } else {
-        this.setSubmenuState(true);
-      }
-    }
-    disableSubmenu() {
-      window.clearTimeout(this.enableSubmenuTimer);
-      this.setSubmenuState(false);
-    }
-    // Calculate the space the top of a menu takes-up, for aligning the popup menu-item with the activating element.
-    updateSkidding() {
-      var _a;
-      if (!((_a = this.host.parentElement) == null ? void 0 : _a.computedStyleMap)) {
-        return;
-      }
-      const styleMap = this.host.parentElement.computedStyleMap();
-      const attrs = ["padding-top", "border-top-width", "margin-top"];
-      const skidding = attrs.reduce((accumulator, attr) => {
-        var _a2;
-        const styleValue = (_a2 = styleMap.get(attr)) != null ? _a2 : new CSSUnitValue(0, "px");
-        const unitValue = styleValue instanceof CSSUnitValue ? styleValue : new CSSUnitValue(0, "px");
-        const pxValue = unitValue.to("px");
-        return accumulator - pxValue.value;
-      }, 0);
-      this.skidding = skidding;
-    }
-    isExpanded() {
-      return this.popupRef.value ? this.popupRef.value.active : false;
-    }
-    renderSubmenu() {
-      const isRtl = getComputedStyle(this.host).direction === "rtl";
-      if (!this.isConnected) {
-        return x2` <slot name="submenu" hidden></slot> `;
-      }
-      return x2`
-      <sl-popup
-        ${n11(this.popupRef)}
-        placement=${isRtl ? "left-start" : "right-start"}
-        anchor="anchor"
-        flip
-        flip-fallback-strategy="best-fit"
-        skidding="${this.skidding}"
-        strategy="fixed"
-        auto-size="vertical"
-        auto-size-padding="10"
-      >
-        <slot name="submenu"></slot>
-      </sl-popup>
-    `;
-    }
-  };
 
   // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.3KSWVBQ5.js
   var popup_styles_default = i6`
@@ -7402,15 +5018,15 @@
   };
 
   // node_modules/.deno/composed-offset-position@0.0.6/node_modules/composed-offset-position/dist/composed-offset-position.browser.min.mjs
-  function e16(t8) {
+  function e15(t8) {
     return i12(t8);
   }
-  function r13(t8) {
+  function r12(t8) {
     return t8.assignedSlot ? t8.assignedSlot : t8.parentNode instanceof ShadowRoot ? t8.parentNode.host : t8.parentNode;
   }
   function i12(e17) {
-    for (let t8 = e17; t8; t8 = r13(t8)) if (t8 instanceof Element && "none" === getComputedStyle(t8).display) return null;
-    for (let n12 = r13(e17); n12; n12 = r13(n12)) {
+    for (let t8 = e17; t8; t8 = r12(t8)) if (t8 instanceof Element && "none" === getComputedStyle(t8).display) return null;
+    for (let n12 = r12(e17); n12; n12 = r12(n12)) {
       if (!(n12 instanceof Element)) continue;
       const e18 = getComputedStyle(n12);
       if ("contents" !== e18.display) {
@@ -7649,7 +5265,7 @@
           })
         );
       }
-      const getOffsetParent2 = this.strategy === "absolute" ? (element) => platform.getOffsetParent(element, e16) : platform.getOffsetParent;
+      const getOffsetParent2 = this.strategy === "absolute" ? (element) => platform.getOffsetParent(element, e15) : platform.getOffsetParent;
       computePosition2(this.anchorEl, this.popup, {
         placement: this.placement,
         middleware,
@@ -7811,6 +5427,3114 @@
   __decorateClass2([
     n8({ attribute: "hover-bridge", type: Boolean })
   ], SlPopup.prototype, "hoverBridge", 2);
+
+  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.K7JGTRV7.js
+  var defaultAnimationRegistry = /* @__PURE__ */ new Map();
+  var customAnimationRegistry = /* @__PURE__ */ new WeakMap();
+  function ensureAnimation(animation) {
+    return animation != null ? animation : { keyframes: [], options: { duration: 0 } };
+  }
+  function getLogicalAnimation(animation, dir) {
+    if (dir.toLowerCase() === "rtl") {
+      return {
+        keyframes: animation.rtlKeyframes || animation.keyframes,
+        options: animation.options
+      };
+    }
+    return animation;
+  }
+  function setDefaultAnimation(animationName, animation) {
+    defaultAnimationRegistry.set(animationName, ensureAnimation(animation));
+  }
+  function getAnimation(el, animationName, options) {
+    const customAnimation = customAnimationRegistry.get(el);
+    if (customAnimation == null ? void 0 : customAnimation[animationName]) {
+      return getLogicalAnimation(customAnimation[animationName], options.dir);
+    }
+    const defaultAnimation = defaultAnimationRegistry.get(animationName);
+    if (defaultAnimation) {
+      return getLogicalAnimation(defaultAnimation, options.dir);
+    }
+    return {
+      keyframes: [],
+      options: { duration: 0 }
+    };
+  }
+
+  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.B4BZKR24.js
+  function waitForEvent(el, eventName) {
+    return new Promise((resolve) => {
+      function done(event) {
+        if (event.target === el) {
+          el.removeEventListener(eventName, done);
+          resolve();
+        }
+      }
+      el.addEventListener(eventName, done);
+    });
+  }
+
+  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.AJ3ENQ5C.js
+  function animateTo(el, keyframes, options) {
+    return new Promise((resolve) => {
+      if ((options == null ? void 0 : options.duration) === Infinity) {
+        throw new Error("Promise-based animations must be finite.");
+      }
+      const animation = el.animate(keyframes, __spreadProps(__spreadValues({}, options), {
+        duration: prefersReducedMotion() ? 0 : options.duration
+      }));
+      animation.addEventListener("cancel", resolve, { once: true });
+      animation.addEventListener("finish", resolve, { once: true });
+    });
+  }
+  function parseDuration(delay) {
+    delay = delay.toString().toLowerCase();
+    if (delay.indexOf("ms") > -1) {
+      return parseFloat(delay);
+    }
+    if (delay.indexOf("s") > -1) {
+      return parseFloat(delay) * 1e3;
+    }
+    return parseFloat(delay);
+  }
+  function prefersReducedMotion() {
+    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+    return query.matches;
+  }
+  function stopAnimations(el) {
+    return Promise.all(
+      el.getAnimations().map((animation) => {
+        return new Promise((resolve) => {
+          animation.cancel();
+          requestAnimationFrame(resolve);
+        });
+      })
+    );
+  }
+
+  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.NU24CZHH.js
+  var SlTooltip = class extends ShoelaceElement {
+    constructor() {
+      super();
+      this.localize = new LocalizeController2(this);
+      this.content = "";
+      this.placement = "top";
+      this.disabled = false;
+      this.distance = 8;
+      this.open = false;
+      this.skidding = 0;
+      this.trigger = "hover focus";
+      this.hoist = false;
+      this.handleBlur = () => {
+        if (this.hasTrigger("focus")) {
+          this.hide();
+        }
+      };
+      this.handleClick = () => {
+        if (this.hasTrigger("click")) {
+          if (this.open) {
+            this.hide();
+          } else {
+            this.show();
+          }
+        }
+      };
+      this.handleFocus = () => {
+        if (this.hasTrigger("focus")) {
+          this.show();
+        }
+      };
+      this.handleDocumentKeyDown = (event) => {
+        if (event.key === "Escape") {
+          event.stopPropagation();
+          this.hide();
+        }
+      };
+      this.handleMouseOver = () => {
+        if (this.hasTrigger("hover")) {
+          const delay = parseDuration(getComputedStyle(this).getPropertyValue("--show-delay"));
+          clearTimeout(this.hoverTimeout);
+          this.hoverTimeout = window.setTimeout(() => this.show(), delay);
+        }
+      };
+      this.handleMouseOut = () => {
+        if (this.hasTrigger("hover")) {
+          const delay = parseDuration(getComputedStyle(this).getPropertyValue("--hide-delay"));
+          clearTimeout(this.hoverTimeout);
+          this.hoverTimeout = window.setTimeout(() => this.hide(), delay);
+        }
+      };
+      this.addEventListener("blur", this.handleBlur, true);
+      this.addEventListener("focus", this.handleFocus, true);
+      this.addEventListener("click", this.handleClick);
+      this.addEventListener("mouseover", this.handleMouseOver);
+      this.addEventListener("mouseout", this.handleMouseOut);
+    }
+    disconnectedCallback() {
+      var _a;
+      super.disconnectedCallback();
+      (_a = this.closeWatcher) == null ? void 0 : _a.destroy();
+      document.removeEventListener("keydown", this.handleDocumentKeyDown);
+    }
+    firstUpdated() {
+      this.body.hidden = !this.open;
+      if (this.open) {
+        this.popup.active = true;
+        this.popup.reposition();
+      }
+    }
+    hasTrigger(triggerType) {
+      const triggers = this.trigger.split(" ");
+      return triggers.includes(triggerType);
+    }
+    async handleOpenChange() {
+      var _a, _b;
+      if (this.open) {
+        if (this.disabled) {
+          return;
+        }
+        this.emit("sl-show");
+        if ("CloseWatcher" in window) {
+          (_a = this.closeWatcher) == null ? void 0 : _a.destroy();
+          this.closeWatcher = new CloseWatcher();
+          this.closeWatcher.onclose = () => {
+            this.hide();
+          };
+        } else {
+          document.addEventListener("keydown", this.handleDocumentKeyDown);
+        }
+        await stopAnimations(this.body);
+        this.body.hidden = false;
+        this.popup.active = true;
+        const { keyframes, options } = getAnimation(this, "tooltip.show", { dir: this.localize.dir() });
+        await animateTo(this.popup.popup, keyframes, options);
+        this.popup.reposition();
+        this.emit("sl-after-show");
+      } else {
+        this.emit("sl-hide");
+        (_b = this.closeWatcher) == null ? void 0 : _b.destroy();
+        document.removeEventListener("keydown", this.handleDocumentKeyDown);
+        await stopAnimations(this.body);
+        const { keyframes, options } = getAnimation(this, "tooltip.hide", { dir: this.localize.dir() });
+        await animateTo(this.popup.popup, keyframes, options);
+        this.popup.active = false;
+        this.body.hidden = true;
+        this.emit("sl-after-hide");
+      }
+    }
+    async handleOptionsChange() {
+      if (this.hasUpdated) {
+        await this.updateComplete;
+        this.popup.reposition();
+      }
+    }
+    handleDisabledChange() {
+      if (this.disabled && this.open) {
+        this.hide();
+      }
+    }
+    /** Shows the tooltip. */
+    async show() {
+      if (this.open) {
+        return void 0;
+      }
+      this.open = true;
+      return waitForEvent(this, "sl-after-show");
+    }
+    /** Hides the tooltip */
+    async hide() {
+      if (!this.open) {
+        return void 0;
+      }
+      this.open = false;
+      return waitForEvent(this, "sl-after-hide");
+    }
+    //
+    // NOTE: Tooltip is a bit unique in that we're using aria-live instead of aria-labelledby to trick screen readers into
+    // announcing the content. It works really well, but it violates an accessibility rule. We're also adding the
+    // aria-describedby attribute to a slot, which is required by <sl-popup> to correctly locate the first assigned
+    // element, otherwise positioning is incorrect.
+    //
+    render() {
+      return x2`
+      <sl-popup
+        part="base"
+        exportparts="
+          popup:base__popup,
+          arrow:base__arrow
+        "
+        class=${e14({
+        tooltip: true,
+        "tooltip--open": this.open
+      })}
+        placement=${this.placement}
+        distance=${this.distance}
+        skidding=${this.skidding}
+        strategy=${this.hoist ? "fixed" : "absolute"}
+        flip
+        shift
+        arrow
+        hover-bridge
+      >
+        ${""}
+        <slot slot="anchor" aria-describedby="tooltip"></slot>
+
+        ${""}
+        <div part="body" id="tooltip" class="tooltip__body" role="tooltip" aria-live=${this.open ? "polite" : "off"}>
+          <slot name="content">${this.content}</slot>
+        </div>
+      </sl-popup>
+    `;
+    }
+  };
+  SlTooltip.styles = [component_styles_default, tooltip_styles_default];
+  SlTooltip.dependencies = { "sl-popup": SlPopup };
+  __decorateClass2([
+    e11("slot:not([name])")
+  ], SlTooltip.prototype, "defaultSlot", 2);
+  __decorateClass2([
+    e11(".tooltip__body")
+  ], SlTooltip.prototype, "body", 2);
+  __decorateClass2([
+    e11("sl-popup")
+  ], SlTooltip.prototype, "popup", 2);
+  __decorateClass2([
+    n8()
+  ], SlTooltip.prototype, "content", 2);
+  __decorateClass2([
+    n8()
+  ], SlTooltip.prototype, "placement", 2);
+  __decorateClass2([
+    n8({ type: Boolean, reflect: true })
+  ], SlTooltip.prototype, "disabled", 2);
+  __decorateClass2([
+    n8({ type: Number })
+  ], SlTooltip.prototype, "distance", 2);
+  __decorateClass2([
+    n8({ type: Boolean, reflect: true })
+  ], SlTooltip.prototype, "open", 2);
+  __decorateClass2([
+    n8({ type: Number })
+  ], SlTooltip.prototype, "skidding", 2);
+  __decorateClass2([
+    n8()
+  ], SlTooltip.prototype, "trigger", 2);
+  __decorateClass2([
+    n8({ type: Boolean })
+  ], SlTooltip.prototype, "hoist", 2);
+  __decorateClass2([
+    watch("open", { waitUntilFirstUpdate: true })
+  ], SlTooltip.prototype, "handleOpenChange", 1);
+  __decorateClass2([
+    watch(["content", "distance", "hoist", "placement", "skidding"])
+  ], SlTooltip.prototype, "handleOptionsChange", 1);
+  __decorateClass2([
+    watch("disabled")
+  ], SlTooltip.prototype, "handleDisabledChange", 1);
+  setDefaultAnimation("tooltip.show", {
+    keyframes: [
+      { opacity: 0, scale: 0.8 },
+      { opacity: 1, scale: 1 }
+    ],
+    options: { duration: 150, easing: "ease" }
+  });
+  setDefaultAnimation("tooltip.hide", {
+    keyframes: [
+      { opacity: 1, scale: 1 },
+      { opacity: 0, scale: 0.8 }
+    ],
+    options: { duration: 150, easing: "ease" }
+  });
+
+  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.URTPIBTY.js
+  SlTooltip.define("sl-tooltip");
+
+  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.LD4M4QGE.js
+  var blurActiveElement = (elm) => {
+    var _a;
+    const { activeElement } = document;
+    if (activeElement && elm.contains(activeElement)) {
+      (_a = document.activeElement) == null ? void 0 : _a.blur();
+    }
+  };
+
+  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.HPCLRZ2S.js
+  var alert_styles_default = i6`
+  :host {
+    display: contents;
+
+    /* For better DX, we'll reset the margin here so the base part can inherit it */
+    margin: 0;
+  }
+
+  .alert {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    background-color: var(--sl-panel-background-color);
+    border: solid var(--sl-panel-border-width) var(--sl-panel-border-color);
+    border-top-width: calc(var(--sl-panel-border-width) * 3);
+    border-radius: var(--sl-border-radius-medium);
+    font-family: var(--sl-font-sans);
+    font-size: var(--sl-font-size-small);
+    font-weight: var(--sl-font-weight-normal);
+    line-height: 1.6;
+    color: var(--sl-color-neutral-700);
+    margin: inherit;
+    overflow: hidden;
+  }
+
+  .alert:not(.alert--has-icon) .alert__icon,
+  .alert:not(.alert--closable) .alert__close-button {
+    display: none;
+  }
+
+  .alert__icon {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    font-size: var(--sl-font-size-large);
+    padding-inline-start: var(--sl-spacing-large);
+  }
+
+  .alert--has-countdown {
+    border-bottom: none;
+  }
+
+  .alert--primary {
+    border-top-color: var(--sl-color-primary-600);
+  }
+
+  .alert--primary .alert__icon {
+    color: var(--sl-color-primary-600);
+  }
+
+  .alert--success {
+    border-top-color: var(--sl-color-success-600);
+  }
+
+  .alert--success .alert__icon {
+    color: var(--sl-color-success-600);
+  }
+
+  .alert--neutral {
+    border-top-color: var(--sl-color-neutral-600);
+  }
+
+  .alert--neutral .alert__icon {
+    color: var(--sl-color-neutral-600);
+  }
+
+  .alert--warning {
+    border-top-color: var(--sl-color-warning-600);
+  }
+
+  .alert--warning .alert__icon {
+    color: var(--sl-color-warning-600);
+  }
+
+  .alert--danger {
+    border-top-color: var(--sl-color-danger-600);
+  }
+
+  .alert--danger .alert__icon {
+    color: var(--sl-color-danger-600);
+  }
+
+  .alert__message {
+    flex: 1 1 auto;
+    display: block;
+    padding: var(--sl-spacing-large);
+    overflow: hidden;
+  }
+
+  .alert__close-button {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    font-size: var(--sl-font-size-medium);
+    margin-inline-end: var(--sl-spacing-medium);
+    align-self: center;
+  }
+
+  .alert__countdown {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: calc(var(--sl-panel-border-width) * 3);
+    background-color: var(--sl-panel-border-color);
+    display: flex;
+  }
+
+  .alert__countdown--ltr {
+    justify-content: flex-end;
+  }
+
+  .alert__countdown .alert__countdown-elapsed {
+    height: 100%;
+    width: 0;
+  }
+
+  .alert--primary .alert__countdown-elapsed {
+    background-color: var(--sl-color-primary-600);
+  }
+
+  .alert--success .alert__countdown-elapsed {
+    background-color: var(--sl-color-success-600);
+  }
+
+  .alert--neutral .alert__countdown-elapsed {
+    background-color: var(--sl-color-neutral-600);
+  }
+
+  .alert--warning .alert__countdown-elapsed {
+    background-color: var(--sl-color-warning-600);
+  }
+
+  .alert--danger .alert__countdown-elapsed {
+    background-color: var(--sl-color-danger-600);
+  }
+
+  .alert__timer {
+    display: none;
+  }
+`;
+
+  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.6UPB6RWT.js
+  var _SlAlert = class _SlAlert2 extends ShoelaceElement {
+    constructor() {
+      super(...arguments);
+      this.hasSlotController = new HasSlotController(this, "icon", "suffix");
+      this.localize = new LocalizeController2(this);
+      this.open = false;
+      this.closable = false;
+      this.variant = "primary";
+      this.duration = Infinity;
+      this.remainingTime = this.duration;
+    }
+    static get toastStack() {
+      if (!this.currentToastStack) {
+        this.currentToastStack = Object.assign(document.createElement("div"), {
+          className: "sl-toast-stack"
+        });
+      }
+      return this.currentToastStack;
+    }
+    firstUpdated() {
+      this.base.hidden = !this.open;
+    }
+    restartAutoHide() {
+      this.handleCountdownChange();
+      clearTimeout(this.autoHideTimeout);
+      clearInterval(this.remainingTimeInterval);
+      if (this.open && this.duration < Infinity) {
+        this.autoHideTimeout = window.setTimeout(() => this.hide(), this.duration);
+        this.remainingTime = this.duration;
+        this.remainingTimeInterval = window.setInterval(() => {
+          this.remainingTime -= 100;
+        }, 100);
+      }
+    }
+    pauseAutoHide() {
+      var _a;
+      (_a = this.countdownAnimation) == null ? void 0 : _a.pause();
+      clearTimeout(this.autoHideTimeout);
+      clearInterval(this.remainingTimeInterval);
+    }
+    resumeAutoHide() {
+      var _a;
+      if (this.duration < Infinity) {
+        this.autoHideTimeout = window.setTimeout(() => this.hide(), this.remainingTime);
+        this.remainingTimeInterval = window.setInterval(() => {
+          this.remainingTime -= 100;
+        }, 100);
+        (_a = this.countdownAnimation) == null ? void 0 : _a.play();
+      }
+    }
+    handleCountdownChange() {
+      if (this.open && this.duration < Infinity && this.countdown) {
+        const { countdownElement } = this;
+        const start = "100%";
+        const end = "0";
+        this.countdownAnimation = countdownElement.animate([{ width: start }, { width: end }], {
+          duration: this.duration,
+          easing: "linear"
+        });
+      }
+    }
+    handleCloseClick() {
+      this.hide();
+    }
+    async handleOpenChange() {
+      if (this.open) {
+        this.emit("sl-show");
+        if (this.duration < Infinity) {
+          this.restartAutoHide();
+        }
+        await stopAnimations(this.base);
+        this.base.hidden = false;
+        const { keyframes, options } = getAnimation(this, "alert.show", { dir: this.localize.dir() });
+        await animateTo(this.base, keyframes, options);
+        this.emit("sl-after-show");
+      } else {
+        blurActiveElement(this);
+        this.emit("sl-hide");
+        clearTimeout(this.autoHideTimeout);
+        clearInterval(this.remainingTimeInterval);
+        await stopAnimations(this.base);
+        const { keyframes, options } = getAnimation(this, "alert.hide", { dir: this.localize.dir() });
+        await animateTo(this.base, keyframes, options);
+        this.base.hidden = true;
+        this.emit("sl-after-hide");
+      }
+    }
+    handleDurationChange() {
+      this.restartAutoHide();
+    }
+    /** Shows the alert. */
+    async show() {
+      if (this.open) {
+        return void 0;
+      }
+      this.open = true;
+      return waitForEvent(this, "sl-after-show");
+    }
+    /** Hides the alert */
+    async hide() {
+      if (!this.open) {
+        return void 0;
+      }
+      this.open = false;
+      return waitForEvent(this, "sl-after-hide");
+    }
+    /**
+     * Displays the alert as a toast notification. This will move the alert out of its position in the DOM and, when
+     * dismissed, it will be removed from the DOM completely. By storing a reference to the alert, you can reuse it by
+     * calling this method again. The returned promise will resolve after the alert is hidden.
+     */
+    async toast() {
+      return new Promise((resolve) => {
+        this.handleCountdownChange();
+        if (_SlAlert2.toastStack.parentElement === null) {
+          document.body.append(_SlAlert2.toastStack);
+        }
+        _SlAlert2.toastStack.appendChild(this);
+        requestAnimationFrame(() => {
+          this.clientWidth;
+          this.show();
+        });
+        this.addEventListener(
+          "sl-after-hide",
+          () => {
+            _SlAlert2.toastStack.removeChild(this);
+            resolve();
+            if (_SlAlert2.toastStack.querySelector("sl-alert") === null) {
+              _SlAlert2.toastStack.remove();
+            }
+          },
+          { once: true }
+        );
+      });
+    }
+    render() {
+      return x2`
+      <div
+        part="base"
+        class=${e14({
+        alert: true,
+        "alert--open": this.open,
+        "alert--closable": this.closable,
+        "alert--has-countdown": !!this.countdown,
+        "alert--has-icon": this.hasSlotController.test("icon"),
+        "alert--primary": this.variant === "primary",
+        "alert--success": this.variant === "success",
+        "alert--neutral": this.variant === "neutral",
+        "alert--warning": this.variant === "warning",
+        "alert--danger": this.variant === "danger"
+      })}
+        role="alert"
+        aria-hidden=${this.open ? "false" : "true"}
+        @mouseenter=${this.pauseAutoHide}
+        @mouseleave=${this.resumeAutoHide}
+      >
+        <div part="icon" class="alert__icon">
+          <slot name="icon"></slot>
+        </div>
+
+        <div part="message" class="alert__message" aria-live="polite">
+          <slot></slot>
+        </div>
+
+        ${this.closable ? x2`
+              <sl-icon-button
+                part="close-button"
+                exportparts="base:close-button__base"
+                class="alert__close-button"
+                name="x-lg"
+                library="system"
+                label=${this.localize.term("close")}
+                @click=${this.handleCloseClick}
+              ></sl-icon-button>
+            ` : ""}
+
+        <div role="timer" class="alert__timer">${this.remainingTime}</div>
+
+        ${this.countdown ? x2`
+              <div
+                class=${e14({
+        alert__countdown: true,
+        "alert__countdown--ltr": this.countdown === "ltr"
+      })}
+              >
+                <div class="alert__countdown-elapsed"></div>
+              </div>
+            ` : ""}
+      </div>
+    `;
+    }
+  };
+  _SlAlert.styles = [component_styles_default, alert_styles_default];
+  _SlAlert.dependencies = { "sl-icon-button": SlIconButton };
+  __decorateClass2([
+    e11('[part~="base"]')
+  ], _SlAlert.prototype, "base", 2);
+  __decorateClass2([
+    e11(".alert__countdown-elapsed")
+  ], _SlAlert.prototype, "countdownElement", 2);
+  __decorateClass2([
+    n8({ type: Boolean, reflect: true })
+  ], _SlAlert.prototype, "open", 2);
+  __decorateClass2([
+    n8({ type: Boolean, reflect: true })
+  ], _SlAlert.prototype, "closable", 2);
+  __decorateClass2([
+    n8({ reflect: true })
+  ], _SlAlert.prototype, "variant", 2);
+  __decorateClass2([
+    n8({ type: Number })
+  ], _SlAlert.prototype, "duration", 2);
+  __decorateClass2([
+    n8({ type: String, reflect: true })
+  ], _SlAlert.prototype, "countdown", 2);
+  __decorateClass2([
+    r11()
+  ], _SlAlert.prototype, "remainingTime", 2);
+  __decorateClass2([
+    watch("open", { waitUntilFirstUpdate: true })
+  ], _SlAlert.prototype, "handleOpenChange", 1);
+  __decorateClass2([
+    watch("duration")
+  ], _SlAlert.prototype, "handleDurationChange", 1);
+  var SlAlert = _SlAlert;
+  setDefaultAnimation("alert.show", {
+    keyframes: [
+      { opacity: 0, scale: 0.8 },
+      { opacity: 1, scale: 1 }
+    ],
+    options: { duration: 250, easing: "ease" }
+  });
+  setDefaultAnimation("alert.hide", {
+    keyframes: [
+      { opacity: 1, scale: 1 },
+      { opacity: 0, scale: 0.8 }
+    ],
+    options: { duration: 250, easing: "ease" }
+  });
+
+  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.R45OWEVP.js
+  SlAlert.define("sl-alert");
+
+  // cabinet/functions.ts
+  var FunctionsView = class extends i4 {
+    constructor() {
+      super(...arguments);
+      this.functions = [];
+    }
+    static {
+      this.styles = i`
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background: #f5f5f5;
+    }
+    .sl-toast-stack {
+      left: auto
+      right: 0;
+      top: 0;
+      bottom: auto;
+}
+  `;
+    }
+    copyToClipboard(token) {
+      console.log("Copying token to clipboard:", token);
+      navigator.clipboard.writeText(token).then(() => {
+        const toast = Object.assign(document.createElement("sl-alert"), {
+          variant: "success",
+          duration: 1500,
+          closable: true,
+          innerHTML: `<sl-icon slot="icon" name="check2-circle"></sl-icon>\u0422\u043E\u043A\u0435\u043D \u0441\u043A\u043E\u043F\u0456\u0439\u043E\u0432\u0430\u043D\u043E \u0432 \u0431\u0443\u0444\u0435\u0440 \u043E\u0431\u043C\u0456\u043D\u0443!`
+        });
+        document.body.appendChild(toast);
+        toast.toast();
+      });
+    }
+    connectedCallback() {
+      super.connectedCallback();
+      this.fetchFunctions();
+    }
+    async fetchFunctions() {
+      try {
+        const response = await fetch("/api/services/functions");
+        const data = await response.json();
+        this.functions = data;
+        data.forEach((func) => {
+          func.token = "ERTND-FSDFS-FGLKDSF034-434343";
+        });
+        ;
+      } catch (error) {
+        console.error("Error fetching functions:", error);
+      }
+    }
+    render() {
+      return x`
+      <div>
+        <h1 style="text-align:center">This is functions content</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>name</th>
+              <th>description</th>
+              <th>token</th>
+              <th>  </th>
+            </tr>
+          </thead>
+          <tbody>
+            ${this.functions.map(
+        (func) => x`
+                <tr>
+                  <td>${func.id}</td>
+                  <td>${func.name}</td>
+                  <td>${func.description}</td>
+                  <td>${func.token ?? ""}</td>
+                  <td>
+                    <sl-tooltip content="Копіювати токен до буферу обміну">
+                      <sl-icon-button name="files" @click=${() => this.copyToClipboard(func.token ?? "")}></sl-icon-button>
+                    </sl-tooltip>
+                  </td>
+                </tr>
+              `
+      )}
+          </tbody>
+        </table>
+      </div>
+    `;
+    }
+  };
+  __decorateClass([
+    r5()
+  ], FunctionsView.prototype, "functions", 2);
+  customElements.define("functions-view", FunctionsView);
+
+  // cabinet/bots.ts
+  var BotsView = class extends i4 {
+    static {
+      this.styles = i`
+    h1 {
+      text-align: center;
+    }
+  `;
+    }
+    render() {
+      return x`
+      <div>
+        <h1>Bots page</h1>
+      </div>
+    `;
+    }
+  };
+  customElements.define("bots-view", BotsView);
+
+  // cabinet/welcome.ts
+  var WelcomeView = class extends i4 {
+    static {
+      this.styles = i`
+    h1 {
+      text-align: center;
+    }
+  `;
+    }
+    render() {
+      return x`
+      <div>
+          <h1>Welcome robot people!</h1>
+      </div>
+    `;
+    }
+  };
+  customElements.define("welcome-view", WelcomeView);
+
+  // cabinet/settings.ts
+  var SettingView = class extends i4 {
+    static {
+      this.styles = i`
+    h1 {
+      text-align: center;
+    }
+  `;
+    }
+    render() {
+      return x`
+      <div>
+          <h1 align="center">Settings page</h1>
+      </div>
+    `;
+    }
+  };
+  customElements.define("setting-view", SettingView);
+
+  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.GGT72J62.js
+  var input_styles_default = i6`
+  :host {
+    display: block;
+  }
+
+  .input {
+    flex: 1 1 auto;
+    display: inline-flex;
+    align-items: stretch;
+    justify-content: start;
+    position: relative;
+    width: 100%;
+    font-family: var(--sl-input-font-family);
+    font-weight: var(--sl-input-font-weight);
+    letter-spacing: var(--sl-input-letter-spacing);
+    vertical-align: middle;
+    overflow: hidden;
+    cursor: text;
+    transition:
+      var(--sl-transition-fast) color,
+      var(--sl-transition-fast) border,
+      var(--sl-transition-fast) box-shadow,
+      var(--sl-transition-fast) background-color;
+  }
+
+  /* Standard inputs */
+  .input--standard {
+    background-color: var(--sl-input-background-color);
+    border: solid var(--sl-input-border-width) var(--sl-input-border-color);
+  }
+
+  .input--standard:hover:not(.input--disabled) {
+    background-color: var(--sl-input-background-color-hover);
+    border-color: var(--sl-input-border-color-hover);
+  }
+
+  .input--standard.input--focused:not(.input--disabled) {
+    background-color: var(--sl-input-background-color-focus);
+    border-color: var(--sl-input-border-color-focus);
+    box-shadow: 0 0 0 var(--sl-focus-ring-width) var(--sl-input-focus-ring-color);
+  }
+
+  .input--standard.input--focused:not(.input--disabled) .input__control {
+    color: var(--sl-input-color-focus);
+  }
+
+  .input--standard.input--disabled {
+    background-color: var(--sl-input-background-color-disabled);
+    border-color: var(--sl-input-border-color-disabled);
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .input--standard.input--disabled .input__control {
+    color: var(--sl-input-color-disabled);
+  }
+
+  .input--standard.input--disabled .input__control::placeholder {
+    color: var(--sl-input-placeholder-color-disabled);
+  }
+
+  /* Filled inputs */
+  .input--filled {
+    border: none;
+    background-color: var(--sl-input-filled-background-color);
+    color: var(--sl-input-color);
+  }
+
+  .input--filled:hover:not(.input--disabled) {
+    background-color: var(--sl-input-filled-background-color-hover);
+  }
+
+  .input--filled.input--focused:not(.input--disabled) {
+    background-color: var(--sl-input-filled-background-color-focus);
+    outline: var(--sl-focus-ring);
+    outline-offset: var(--sl-focus-ring-offset);
+  }
+
+  .input--filled.input--disabled {
+    background-color: var(--sl-input-filled-background-color-disabled);
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .input__control {
+    flex: 1 1 auto;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    min-width: 0;
+    height: 100%;
+    color: var(--sl-input-color);
+    border: none;
+    background: inherit;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    cursor: inherit;
+    -webkit-appearance: none;
+  }
+
+  .input__control::-webkit-search-decoration,
+  .input__control::-webkit-search-cancel-button,
+  .input__control::-webkit-search-results-button,
+  .input__control::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+  }
+
+  .input__control:-webkit-autofill,
+  .input__control:-webkit-autofill:hover,
+  .input__control:-webkit-autofill:focus,
+  .input__control:-webkit-autofill:active {
+    box-shadow: 0 0 0 var(--sl-input-height-large) var(--sl-input-background-color-hover) inset !important;
+    -webkit-text-fill-color: var(--sl-color-primary-500);
+    caret-color: var(--sl-input-color);
+  }
+
+  .input--filled .input__control:-webkit-autofill,
+  .input--filled .input__control:-webkit-autofill:hover,
+  .input--filled .input__control:-webkit-autofill:focus,
+  .input--filled .input__control:-webkit-autofill:active {
+    box-shadow: 0 0 0 var(--sl-input-height-large) var(--sl-input-filled-background-color) inset !important;
+  }
+
+  .input__control::placeholder {
+    color: var(--sl-input-placeholder-color);
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .input:hover:not(.input--disabled) .input__control {
+    color: var(--sl-input-color-hover);
+  }
+
+  .input__control:focus {
+    outline: none;
+  }
+
+  .input__prefix,
+  .input__suffix {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    cursor: default;
+  }
+
+  .input__prefix ::slotted(sl-icon),
+  .input__suffix ::slotted(sl-icon) {
+    color: var(--sl-input-icon-color);
+  }
+
+  /*
+   * Size modifiers
+   */
+
+  .input--small {
+    border-radius: var(--sl-input-border-radius-small);
+    font-size: var(--sl-input-font-size-small);
+    height: var(--sl-input-height-small);
+  }
+
+  .input--small .input__control {
+    height: calc(var(--sl-input-height-small) - var(--sl-input-border-width) * 2);
+    padding: 0 var(--sl-input-spacing-small);
+  }
+
+  .input--small .input__clear,
+  .input--small .input__password-toggle {
+    width: calc(1em + var(--sl-input-spacing-small) * 2);
+  }
+
+  .input--small .input__prefix ::slotted(*) {
+    margin-inline-start: var(--sl-input-spacing-small);
+  }
+
+  .input--small .input__suffix ::slotted(*) {
+    margin-inline-end: var(--sl-input-spacing-small);
+  }
+
+  .input--medium {
+    border-radius: var(--sl-input-border-radius-medium);
+    font-size: var(--sl-input-font-size-medium);
+    height: var(--sl-input-height-medium);
+  }
+
+  .input--medium .input__control {
+    height: calc(var(--sl-input-height-medium) - var(--sl-input-border-width) * 2);
+    padding: 0 var(--sl-input-spacing-medium);
+  }
+
+  .input--medium .input__clear,
+  .input--medium .input__password-toggle {
+    width: calc(1em + var(--sl-input-spacing-medium) * 2);
+  }
+
+  .input--medium .input__prefix ::slotted(*) {
+    margin-inline-start: var(--sl-input-spacing-medium);
+  }
+
+  .input--medium .input__suffix ::slotted(*) {
+    margin-inline-end: var(--sl-input-spacing-medium);
+  }
+
+  .input--large {
+    border-radius: var(--sl-input-border-radius-large);
+    font-size: var(--sl-input-font-size-large);
+    height: var(--sl-input-height-large);
+  }
+
+  .input--large .input__control {
+    height: calc(var(--sl-input-height-large) - var(--sl-input-border-width) * 2);
+    padding: 0 var(--sl-input-spacing-large);
+  }
+
+  .input--large .input__clear,
+  .input--large .input__password-toggle {
+    width: calc(1em + var(--sl-input-spacing-large) * 2);
+  }
+
+  .input--large .input__prefix ::slotted(*) {
+    margin-inline-start: var(--sl-input-spacing-large);
+  }
+
+  .input--large .input__suffix ::slotted(*) {
+    margin-inline-end: var(--sl-input-spacing-large);
+  }
+
+  /*
+   * Pill modifier
+   */
+
+  .input--pill.input--small {
+    border-radius: var(--sl-input-height-small);
+  }
+
+  .input--pill.input--medium {
+    border-radius: var(--sl-input-height-medium);
+  }
+
+  .input--pill.input--large {
+    border-radius: var(--sl-input-height-large);
+  }
+
+  /*
+   * Clearable + Password Toggle
+   */
+
+  .input__clear,
+  .input__password-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: inherit;
+    color: var(--sl-input-icon-color);
+    border: none;
+    background: none;
+    padding: 0;
+    transition: var(--sl-transition-fast) color;
+    cursor: pointer;
+  }
+
+  .input__clear:hover,
+  .input__password-toggle:hover {
+    color: var(--sl-input-icon-color-hover);
+  }
+
+  .input__clear:focus,
+  .input__password-toggle:focus {
+    outline: none;
+  }
+
+  /* Don't show the browser's password toggle in Edge */
+  ::-ms-reveal {
+    display: none;
+  }
+
+  /* Hide the built-in number spinner */
+  .input--no-spin-buttons input[type='number']::-webkit-outer-spin-button,
+  .input--no-spin-buttons input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
+  }
+
+  .input--no-spin-buttons input[type='number'] {
+    -moz-appearance: textfield;
+  }
+`;
+
+  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.GI7VDIWX.js
+  var defaultValue = (propertyName = "value") => (proto, key) => {
+    const ctor = proto.constructor;
+    const attributeChangedCallback = ctor.prototype.attributeChangedCallback;
+    ctor.prototype.attributeChangedCallback = function(name, old, value) {
+      var _a;
+      const options = ctor.getPropertyOptions(propertyName);
+      const attributeName = typeof options.attribute === "string" ? options.attribute : propertyName;
+      if (name === attributeName) {
+        const converter = options.converter || u3;
+        const fromAttribute = typeof converter === "function" ? converter : (_a = converter == null ? void 0 : converter.fromAttribute) != null ? _a : u3.fromAttribute;
+        const newValue = fromAttribute(value, options.type);
+        if (this[propertyName] !== newValue) {
+          this[key] = newValue;
+        }
+      }
+      attributeChangedCallback.call(this, name, old, value);
+    };
+  };
+
+  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.SI4ACBFK.js
+  var form_control_styles_default = i6`
+  .form-control .form-control__label {
+    display: none;
+  }
+
+  .form-control .form-control__help-text {
+    display: none;
+  }
+
+  /* Label */
+  .form-control--has-label .form-control__label {
+    display: inline-block;
+    color: var(--sl-input-label-color);
+    margin-bottom: var(--sl-spacing-3x-small);
+  }
+
+  .form-control--has-label.form-control--small .form-control__label {
+    font-size: var(--sl-input-label-font-size-small);
+  }
+
+  .form-control--has-label.form-control--medium .form-control__label {
+    font-size: var(--sl-input-label-font-size-medium);
+  }
+
+  .form-control--has-label.form-control--large .form-control__label {
+    font-size: var(--sl-input-label-font-size-large);
+  }
+
+  :host([required]) .form-control--has-label .form-control__label::after {
+    content: var(--sl-input-required-content);
+    margin-inline-start: var(--sl-input-required-content-offset);
+    color: var(--sl-input-required-content-color);
+  }
+
+  /* Help text */
+  .form-control--has-help-text .form-control__help-text {
+    display: block;
+    color: var(--sl-input-help-text-color);
+    margin-top: var(--sl-spacing-3x-small);
+  }
+
+  .form-control--has-help-text.form-control--small .form-control__help-text {
+    font-size: var(--sl-input-help-text-font-size-small);
+  }
+
+  .form-control--has-help-text.form-control--medium .form-control__help-text {
+    font-size: var(--sl-input-help-text-font-size-medium);
+  }
+
+  .form-control--has-help-text.form-control--large .form-control__help-text {
+    font-size: var(--sl-input-help-text-font-size-large);
+  }
+
+  .form-control--has-help-text.form-control--radio-group .form-control__help-text {
+    margin-top: var(--sl-spacing-2x-small);
+  }
+`;
+
+  // node_modules/.deno/lit-html@3.2.1/node_modules/lit-html/directives/live.js
+  var l6 = e13(class extends i10 {
+    constructor(r14) {
+      if (super(r14), r14.type !== t7.PROPERTY && r14.type !== t7.ATTRIBUTE && r14.type !== t7.BOOLEAN_ATTRIBUTE) throw Error("The `live` directive is not allowed on child or event bindings");
+      if (!f5(r14)) throw Error("`live` bindings can only contain a single expression");
+    }
+    render(r14) {
+      return r14;
+    }
+    update(i13, [t8]) {
+      if (t8 === T2 || t8 === E2) return t8;
+      const o15 = i13.element, l7 = i13.name;
+      if (i13.type === t7.PROPERTY) {
+        if (t8 === o15[l7]) return T2;
+      } else if (i13.type === t7.BOOLEAN_ATTRIBUTE) {
+        if (!!t8 === o15.hasAttribute(l7)) return T2;
+      } else if (i13.type === t7.ATTRIBUTE && o15.getAttribute(l7) === t8 + "") return T2;
+      return m3(i13), t8;
+    }
+  });
+
+  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.VM65NPGC.js
+  var SlInput = class extends ShoelaceElement {
+    constructor() {
+      super(...arguments);
+      this.formControlController = new FormControlController(this, {
+        assumeInteractionOn: ["sl-blur", "sl-input"]
+      });
+      this.hasSlotController = new HasSlotController(this, "help-text", "label");
+      this.localize = new LocalizeController2(this);
+      this.hasFocus = false;
+      this.title = "";
+      this.__numberInput = Object.assign(document.createElement("input"), { type: "number" });
+      this.__dateInput = Object.assign(document.createElement("input"), { type: "date" });
+      this.type = "text";
+      this.name = "";
+      this.value = "";
+      this.defaultValue = "";
+      this.size = "medium";
+      this.filled = false;
+      this.pill = false;
+      this.label = "";
+      this.helpText = "";
+      this.clearable = false;
+      this.disabled = false;
+      this.placeholder = "";
+      this.readonly = false;
+      this.passwordToggle = false;
+      this.passwordVisible = false;
+      this.noSpinButtons = false;
+      this.form = "";
+      this.required = false;
+      this.spellcheck = true;
+    }
+    //
+    // NOTE: We use an in-memory input for these getters/setters instead of the one in the template because the properties
+    // can be set before the component is rendered.
+    //
+    /**
+     * Gets or sets the current value as a `Date` object. Returns `null` if the value can't be converted. This will use the native `<input type="{{type}}">` implementation and may result in an error.
+     */
+    get valueAsDate() {
+      var _a;
+      this.__dateInput.type = this.type;
+      this.__dateInput.value = this.value;
+      return ((_a = this.input) == null ? void 0 : _a.valueAsDate) || this.__dateInput.valueAsDate;
+    }
+    set valueAsDate(newValue) {
+      this.__dateInput.type = this.type;
+      this.__dateInput.valueAsDate = newValue;
+      this.value = this.__dateInput.value;
+    }
+    /** Gets or sets the current value as a number. Returns `NaN` if the value can't be converted. */
+    get valueAsNumber() {
+      var _a;
+      this.__numberInput.value = this.value;
+      return ((_a = this.input) == null ? void 0 : _a.valueAsNumber) || this.__numberInput.valueAsNumber;
+    }
+    set valueAsNumber(newValue) {
+      this.__numberInput.valueAsNumber = newValue;
+      this.value = this.__numberInput.value;
+    }
+    /** Gets the validity state object */
+    get validity() {
+      return this.input.validity;
+    }
+    /** Gets the validation message */
+    get validationMessage() {
+      return this.input.validationMessage;
+    }
+    firstUpdated() {
+      this.formControlController.updateValidity();
+    }
+    handleBlur() {
+      this.hasFocus = false;
+      this.emit("sl-blur");
+    }
+    handleChange() {
+      this.value = this.input.value;
+      this.emit("sl-change");
+    }
+    handleClearClick(event) {
+      event.preventDefault();
+      if (this.value !== "") {
+        this.value = "";
+        this.emit("sl-clear");
+        this.emit("sl-input");
+        this.emit("sl-change");
+      }
+      this.input.focus();
+    }
+    handleFocus() {
+      this.hasFocus = true;
+      this.emit("sl-focus");
+    }
+    handleInput() {
+      this.value = this.input.value;
+      this.formControlController.updateValidity();
+      this.emit("sl-input");
+    }
+    handleInvalid(event) {
+      this.formControlController.setValidity(false);
+      this.formControlController.emitInvalidEvent(event);
+    }
+    handleKeyDown(event) {
+      const hasModifier = event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
+      if (event.key === "Enter" && !hasModifier) {
+        setTimeout(() => {
+          if (!event.defaultPrevented && !event.isComposing) {
+            this.formControlController.submit();
+          }
+        });
+      }
+    }
+    handlePasswordToggle() {
+      this.passwordVisible = !this.passwordVisible;
+    }
+    handleDisabledChange() {
+      this.formControlController.setValidity(this.disabled);
+    }
+    handleStepChange() {
+      this.input.step = String(this.step);
+      this.formControlController.updateValidity();
+    }
+    async handleValueChange() {
+      await this.updateComplete;
+      this.formControlController.updateValidity();
+    }
+    /** Sets focus on the input. */
+    focus(options) {
+      this.input.focus(options);
+    }
+    /** Removes focus from the input. */
+    blur() {
+      this.input.blur();
+    }
+    /** Selects all the text in the input. */
+    select() {
+      this.input.select();
+    }
+    /** Sets the start and end positions of the text selection (0-based). */
+    setSelectionRange(selectionStart, selectionEnd, selectionDirection = "none") {
+      this.input.setSelectionRange(selectionStart, selectionEnd, selectionDirection);
+    }
+    /** Replaces a range of text with a new string. */
+    setRangeText(replacement, start, end, selectMode = "preserve") {
+      const selectionStart = start != null ? start : this.input.selectionStart;
+      const selectionEnd = end != null ? end : this.input.selectionEnd;
+      this.input.setRangeText(replacement, selectionStart, selectionEnd, selectMode);
+      if (this.value !== this.input.value) {
+        this.value = this.input.value;
+      }
+    }
+    /** Displays the browser picker for an input element (only works if the browser supports it for the input type). */
+    showPicker() {
+      if ("showPicker" in HTMLInputElement.prototype) {
+        this.input.showPicker();
+      }
+    }
+    /** Increments the value of a numeric input type by the value of the step attribute. */
+    stepUp() {
+      this.input.stepUp();
+      if (this.value !== this.input.value) {
+        this.value = this.input.value;
+      }
+    }
+    /** Decrements the value of a numeric input type by the value of the step attribute. */
+    stepDown() {
+      this.input.stepDown();
+      if (this.value !== this.input.value) {
+        this.value = this.input.value;
+      }
+    }
+    /** Checks for validity but does not show a validation message. Returns `true` when valid and `false` when invalid. */
+    checkValidity() {
+      return this.input.checkValidity();
+    }
+    /** Gets the associated form, if one exists. */
+    getForm() {
+      return this.formControlController.getForm();
+    }
+    /** Checks for validity and shows the browser's validation message if the control is invalid. */
+    reportValidity() {
+      return this.input.reportValidity();
+    }
+    /** Sets a custom validation message. Pass an empty string to restore validity. */
+    setCustomValidity(message) {
+      this.input.setCustomValidity(message);
+      this.formControlController.updateValidity();
+    }
+    render() {
+      const hasLabelSlot = this.hasSlotController.test("label");
+      const hasHelpTextSlot = this.hasSlotController.test("help-text");
+      const hasLabel = this.label ? true : !!hasLabelSlot;
+      const hasHelpText = this.helpText ? true : !!hasHelpTextSlot;
+      const hasClearIcon = this.clearable && !this.disabled && !this.readonly;
+      const isClearIconVisible = hasClearIcon && (typeof this.value === "number" || this.value.length > 0);
+      return x2`
+      <div
+        part="form-control"
+        class=${e14({
+        "form-control": true,
+        "form-control--small": this.size === "small",
+        "form-control--medium": this.size === "medium",
+        "form-control--large": this.size === "large",
+        "form-control--has-label": hasLabel,
+        "form-control--has-help-text": hasHelpText
+      })}
+      >
+        <label
+          part="form-control-label"
+          class="form-control__label"
+          for="input"
+          aria-hidden=${hasLabel ? "false" : "true"}
+        >
+          <slot name="label">${this.label}</slot>
+        </label>
+
+        <div part="form-control-input" class="form-control-input">
+          <div
+            part="base"
+            class=${e14({
+        input: true,
+        // Sizes
+        "input--small": this.size === "small",
+        "input--medium": this.size === "medium",
+        "input--large": this.size === "large",
+        // States
+        "input--pill": this.pill,
+        "input--standard": !this.filled,
+        "input--filled": this.filled,
+        "input--disabled": this.disabled,
+        "input--focused": this.hasFocus,
+        "input--empty": !this.value,
+        "input--no-spin-buttons": this.noSpinButtons
+      })}
+          >
+            <span part="prefix" class="input__prefix">
+              <slot name="prefix"></slot>
+            </span>
+
+            <input
+              part="input"
+              id="input"
+              class="input__control"
+              type=${this.type === "password" && this.passwordVisible ? "text" : this.type}
+              title=${this.title}
+              name=${o12(this.name)}
+              ?disabled=${this.disabled}
+              ?readonly=${this.readonly}
+              ?required=${this.required}
+              placeholder=${o12(this.placeholder)}
+              minlength=${o12(this.minlength)}
+              maxlength=${o12(this.maxlength)}
+              min=${o12(this.min)}
+              max=${o12(this.max)}
+              step=${o12(this.step)}
+              .value=${l6(this.value)}
+              autocapitalize=${o12(this.autocapitalize)}
+              autocomplete=${o12(this.autocomplete)}
+              autocorrect=${o12(this.autocorrect)}
+              ?autofocus=${this.autofocus}
+              spellcheck=${this.spellcheck}
+              pattern=${o12(this.pattern)}
+              enterkeyhint=${o12(this.enterkeyhint)}
+              inputmode=${o12(this.inputmode)}
+              aria-describedby="help-text"
+              @change=${this.handleChange}
+              @input=${this.handleInput}
+              @invalid=${this.handleInvalid}
+              @keydown=${this.handleKeyDown}
+              @focus=${this.handleFocus}
+              @blur=${this.handleBlur}
+            />
+
+            ${isClearIconVisible ? x2`
+                  <button
+                    part="clear-button"
+                    class="input__clear"
+                    type="button"
+                    aria-label=${this.localize.term("clearEntry")}
+                    @click=${this.handleClearClick}
+                    tabindex="-1"
+                  >
+                    <slot name="clear-icon">
+                      <sl-icon name="x-circle-fill" library="system"></sl-icon>
+                    </slot>
+                  </button>
+                ` : ""}
+            ${this.passwordToggle && !this.disabled ? x2`
+                  <button
+                    part="password-toggle-button"
+                    class="input__password-toggle"
+                    type="button"
+                    aria-label=${this.localize.term(this.passwordVisible ? "hidePassword" : "showPassword")}
+                    @click=${this.handlePasswordToggle}
+                    tabindex="-1"
+                  >
+                    ${this.passwordVisible ? x2`
+                          <slot name="show-password-icon">
+                            <sl-icon name="eye-slash" library="system"></sl-icon>
+                          </slot>
+                        ` : x2`
+                          <slot name="hide-password-icon">
+                            <sl-icon name="eye" library="system"></sl-icon>
+                          </slot>
+                        `}
+                  </button>
+                ` : ""}
+
+            <span part="suffix" class="input__suffix">
+              <slot name="suffix"></slot>
+            </span>
+          </div>
+        </div>
+
+        <div
+          part="form-control-help-text"
+          id="help-text"
+          class="form-control__help-text"
+          aria-hidden=${hasHelpText ? "false" : "true"}
+        >
+          <slot name="help-text">${this.helpText}</slot>
+        </div>
+      </div>
+    `;
+    }
+  };
+  SlInput.styles = [component_styles_default, form_control_styles_default, input_styles_default];
+  SlInput.dependencies = { "sl-icon": SlIcon };
+  __decorateClass2([
+    e11(".input__control")
+  ], SlInput.prototype, "input", 2);
+  __decorateClass2([
+    r11()
+  ], SlInput.prototype, "hasFocus", 2);
+  __decorateClass2([
+    n8()
+  ], SlInput.prototype, "title", 2);
+  __decorateClass2([
+    n8({ reflect: true })
+  ], SlInput.prototype, "type", 2);
+  __decorateClass2([
+    n8()
+  ], SlInput.prototype, "name", 2);
+  __decorateClass2([
+    n8()
+  ], SlInput.prototype, "value", 2);
+  __decorateClass2([
+    defaultValue()
+  ], SlInput.prototype, "defaultValue", 2);
+  __decorateClass2([
+    n8({ reflect: true })
+  ], SlInput.prototype, "size", 2);
+  __decorateClass2([
+    n8({ type: Boolean, reflect: true })
+  ], SlInput.prototype, "filled", 2);
+  __decorateClass2([
+    n8({ type: Boolean, reflect: true })
+  ], SlInput.prototype, "pill", 2);
+  __decorateClass2([
+    n8()
+  ], SlInput.prototype, "label", 2);
+  __decorateClass2([
+    n8({ attribute: "help-text" })
+  ], SlInput.prototype, "helpText", 2);
+  __decorateClass2([
+    n8({ type: Boolean })
+  ], SlInput.prototype, "clearable", 2);
+  __decorateClass2([
+    n8({ type: Boolean, reflect: true })
+  ], SlInput.prototype, "disabled", 2);
+  __decorateClass2([
+    n8()
+  ], SlInput.prototype, "placeholder", 2);
+  __decorateClass2([
+    n8({ type: Boolean, reflect: true })
+  ], SlInput.prototype, "readonly", 2);
+  __decorateClass2([
+    n8({ attribute: "password-toggle", type: Boolean })
+  ], SlInput.prototype, "passwordToggle", 2);
+  __decorateClass2([
+    n8({ attribute: "password-visible", type: Boolean })
+  ], SlInput.prototype, "passwordVisible", 2);
+  __decorateClass2([
+    n8({ attribute: "no-spin-buttons", type: Boolean })
+  ], SlInput.prototype, "noSpinButtons", 2);
+  __decorateClass2([
+    n8({ reflect: true })
+  ], SlInput.prototype, "form", 2);
+  __decorateClass2([
+    n8({ type: Boolean, reflect: true })
+  ], SlInput.prototype, "required", 2);
+  __decorateClass2([
+    n8()
+  ], SlInput.prototype, "pattern", 2);
+  __decorateClass2([
+    n8({ type: Number })
+  ], SlInput.prototype, "minlength", 2);
+  __decorateClass2([
+    n8({ type: Number })
+  ], SlInput.prototype, "maxlength", 2);
+  __decorateClass2([
+    n8()
+  ], SlInput.prototype, "min", 2);
+  __decorateClass2([
+    n8()
+  ], SlInput.prototype, "max", 2);
+  __decorateClass2([
+    n8()
+  ], SlInput.prototype, "step", 2);
+  __decorateClass2([
+    n8()
+  ], SlInput.prototype, "autocapitalize", 2);
+  __decorateClass2([
+    n8()
+  ], SlInput.prototype, "autocorrect", 2);
+  __decorateClass2([
+    n8()
+  ], SlInput.prototype, "autocomplete", 2);
+  __decorateClass2([
+    n8({ type: Boolean })
+  ], SlInput.prototype, "autofocus", 2);
+  __decorateClass2([
+    n8()
+  ], SlInput.prototype, "enterkeyhint", 2);
+  __decorateClass2([
+    n8({
+      type: Boolean,
+      converter: {
+        // Allow "true|false" attribute values but keep the property boolean
+        fromAttribute: (value) => !value || value === "false" ? false : true,
+        toAttribute: (value) => value ? "true" : "false"
+      }
+    })
+  ], SlInput.prototype, "spellcheck", 2);
+  __decorateClass2([
+    n8()
+  ], SlInput.prototype, "inputmode", 2);
+  __decorateClass2([
+    watch("disabled", { waitUntilFirstUpdate: true })
+  ], SlInput.prototype, "handleDisabledChange", 1);
+  __decorateClass2([
+    watch("step", { waitUntilFirstUpdate: true })
+  ], SlInput.prototype, "handleStepChange", 1);
+  __decorateClass2([
+    watch("value", { waitUntilFirstUpdate: true })
+  ], SlInput.prototype, "handleValueChange", 1);
+
+  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.XA43ZQPC.js
+  SlInput.define("sl-input");
+
+  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.BRQKZQRB.js
+  var drawer_styles_default = i6`
+  :host {
+    --size: 25rem;
+    --header-spacing: var(--sl-spacing-large);
+    --body-spacing: var(--sl-spacing-large);
+    --footer-spacing: var(--sl-spacing-large);
+
+    display: contents;
+  }
+
+  .drawer {
+    top: 0;
+    inset-inline-start: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .drawer--contained {
+    position: absolute;
+    z-index: initial;
+  }
+
+  .drawer--fixed {
+    position: fixed;
+    z-index: var(--sl-z-index-drawer);
+  }
+
+  .drawer__panel {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+    max-width: 100%;
+    max-height: 100%;
+    background-color: var(--sl-panel-background-color);
+    box-shadow: var(--sl-shadow-x-large);
+    overflow: auto;
+    pointer-events: all;
+  }
+
+  .drawer__panel:focus {
+    outline: none;
+  }
+
+  .drawer--top .drawer__panel {
+    top: 0;
+    inset-inline-end: auto;
+    bottom: auto;
+    inset-inline-start: 0;
+    width: 100%;
+    height: var(--size);
+  }
+
+  .drawer--end .drawer__panel {
+    top: 0;
+    inset-inline-end: 0;
+    bottom: auto;
+    inset-inline-start: auto;
+    width: var(--size);
+    height: 100%;
+  }
+
+  .drawer--bottom .drawer__panel {
+    top: auto;
+    inset-inline-end: auto;
+    bottom: 0;
+    inset-inline-start: 0;
+    width: 100%;
+    height: var(--size);
+  }
+
+  .drawer--start .drawer__panel {
+    top: 0;
+    inset-inline-end: auto;
+    bottom: auto;
+    inset-inline-start: 0;
+    width: var(--size);
+    height: 100%;
+  }
+
+  .drawer__header {
+    display: flex;
+  }
+
+  .drawer__title {
+    flex: 1 1 auto;
+    font: inherit;
+    font-size: var(--sl-font-size-large);
+    line-height: var(--sl-line-height-dense);
+    padding: var(--header-spacing);
+    margin: 0;
+  }
+
+  .drawer__header-actions {
+    flex-shrink: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: end;
+    gap: var(--sl-spacing-2x-small);
+    padding: 0 var(--header-spacing);
+  }
+
+  .drawer__header-actions sl-icon-button,
+  .drawer__header-actions ::slotted(sl-icon-button) {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    font-size: var(--sl-font-size-medium);
+  }
+
+  .drawer__body {
+    flex: 1 1 auto;
+    display: block;
+    padding: var(--body-spacing);
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .drawer__footer {
+    text-align: right;
+    padding: var(--footer-spacing);
+  }
+
+  .drawer__footer ::slotted(sl-button:not(:last-of-type)) {
+    margin-inline-end: var(--sl-spacing-x-small);
+  }
+
+  .drawer:not(.drawer--has-footer) .drawer__footer {
+    display: none;
+  }
+
+  .drawer__overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: var(--sl-overlay-background-color);
+    pointer-events: all;
+  }
+
+  .drawer--contained .drawer__overlay {
+    display: none;
+  }
+
+  @media (forced-colors: active) {
+    .drawer__panel {
+      border: solid 1px var(--sl-color-neutral-0);
+    }
+  }
+`;
+
+  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.VESXC477.js
+  function* activeElements(activeElement = document.activeElement) {
+    if (activeElement === null || activeElement === void 0) return;
+    yield activeElement;
+    if ("shadowRoot" in activeElement && activeElement.shadowRoot && activeElement.shadowRoot.mode !== "closed") {
+      yield* __yieldStar(activeElements(activeElement.shadowRoot.activeElement));
+    }
+  }
+  function getDeepestActiveElement() {
+    return [...activeElements()].pop();
+  }
+  var computedStyleMap = /* @__PURE__ */ new WeakMap();
+  function getCachedComputedStyle(el) {
+    let computedStyle = computedStyleMap.get(el);
+    if (!computedStyle) {
+      computedStyle = window.getComputedStyle(el, null);
+      computedStyleMap.set(el, computedStyle);
+    }
+    return computedStyle;
+  }
+  function isVisible(el) {
+    if (typeof el.checkVisibility === "function") {
+      return el.checkVisibility({ checkOpacity: false, checkVisibilityCSS: true });
+    }
+    const computedStyle = getCachedComputedStyle(el);
+    return computedStyle.visibility !== "hidden" && computedStyle.display !== "none";
+  }
+  function isOverflowingAndTabbable(el) {
+    const computedStyle = getCachedComputedStyle(el);
+    const { overflowY, overflowX } = computedStyle;
+    if (overflowY === "scroll" || overflowX === "scroll") {
+      return true;
+    }
+    if (overflowY !== "auto" || overflowX !== "auto") {
+      return false;
+    }
+    const isOverflowingY = el.scrollHeight > el.clientHeight;
+    if (isOverflowingY && overflowY === "auto") {
+      return true;
+    }
+    const isOverflowingX = el.scrollWidth > el.clientWidth;
+    if (isOverflowingX && overflowX === "auto") {
+      return true;
+    }
+    return false;
+  }
+  function isTabbable(el) {
+    const tag = el.tagName.toLowerCase();
+    const tabindex = Number(el.getAttribute("tabindex"));
+    const hasTabindex = el.hasAttribute("tabindex");
+    if (hasTabindex && (isNaN(tabindex) || tabindex <= -1)) {
+      return false;
+    }
+    if (el.hasAttribute("disabled")) {
+      return false;
+    }
+    if (el.closest("[inert]")) {
+      return false;
+    }
+    if (tag === "input" && el.getAttribute("type") === "radio") {
+      const rootNode = el.getRootNode();
+      const findRadios = `input[type='radio'][name="${el.getAttribute("name")}"]`;
+      const firstChecked = rootNode.querySelector(`${findRadios}:checked`);
+      if (firstChecked) {
+        return firstChecked === el;
+      }
+      const firstRadio = rootNode.querySelector(findRadios);
+      return firstRadio === el;
+    }
+    if (!isVisible(el)) {
+      return false;
+    }
+    if ((tag === "audio" || tag === "video") && el.hasAttribute("controls")) {
+      return true;
+    }
+    if (el.hasAttribute("tabindex")) {
+      return true;
+    }
+    if (el.hasAttribute("contenteditable") && el.getAttribute("contenteditable") !== "false") {
+      return true;
+    }
+    const isNativelyTabbable = [
+      "button",
+      "input",
+      "select",
+      "textarea",
+      "a",
+      "audio",
+      "video",
+      "summary",
+      "iframe"
+    ].includes(tag);
+    if (isNativelyTabbable) {
+      return true;
+    }
+    return isOverflowingAndTabbable(el);
+  }
+  function getSlottedChildrenOutsideRootElement(slotElement, root2) {
+    var _a;
+    return ((_a = slotElement.getRootNode({ composed: true })) == null ? void 0 : _a.host) !== root2;
+  }
+  function getTabbableElements(root2) {
+    const walkedEls = /* @__PURE__ */ new WeakMap();
+    const tabbableElements = [];
+    function walk(el) {
+      if (el instanceof Element) {
+        if (el.hasAttribute("inert") || el.closest("[inert]")) {
+          return;
+        }
+        if (walkedEls.has(el)) {
+          return;
+        }
+        walkedEls.set(el, true);
+        if (!tabbableElements.includes(el) && isTabbable(el)) {
+          tabbableElements.push(el);
+        }
+        if (el instanceof HTMLSlotElement && getSlottedChildrenOutsideRootElement(el, root2)) {
+          el.assignedElements({ flatten: true }).forEach((assignedEl) => {
+            walk(assignedEl);
+          });
+        }
+        if (el.shadowRoot !== null && el.shadowRoot.mode === "open") {
+          walk(el.shadowRoot);
+        }
+      }
+      for (const e17 of el.children) {
+        walk(e17);
+      }
+    }
+    walk(root2);
+    return tabbableElements.sort((a6, b5) => {
+      const aTabindex = Number(a6.getAttribute("tabindex")) || 0;
+      const bTabindex = Number(b5.getAttribute("tabindex")) || 0;
+      return bTabindex - aTabindex;
+    });
+  }
+
+  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.EMN3H5QW.js
+  var activeModals = [];
+  var Modal = class {
+    constructor(element) {
+      this.tabDirection = "forward";
+      this.handleFocusIn = () => {
+        if (!this.isActive()) return;
+        this.checkFocus();
+      };
+      this.handleKeyDown = (event) => {
+        var _a;
+        if (event.key !== "Tab" || this.isExternalActivated) return;
+        if (!this.isActive()) return;
+        const currentActiveElement = getDeepestActiveElement();
+        this.previousFocus = currentActiveElement;
+        if (this.previousFocus && this.possiblyHasTabbableChildren(this.previousFocus)) {
+          return;
+        }
+        if (event.shiftKey) {
+          this.tabDirection = "backward";
+        } else {
+          this.tabDirection = "forward";
+        }
+        const tabbableElements = getTabbableElements(this.element);
+        let currentFocusIndex = tabbableElements.findIndex((el) => el === currentActiveElement);
+        this.previousFocus = this.currentFocus;
+        const addition = this.tabDirection === "forward" ? 1 : -1;
+        while (true) {
+          if (currentFocusIndex + addition >= tabbableElements.length) {
+            currentFocusIndex = 0;
+          } else if (currentFocusIndex + addition < 0) {
+            currentFocusIndex = tabbableElements.length - 1;
+          } else {
+            currentFocusIndex += addition;
+          }
+          this.previousFocus = this.currentFocus;
+          const nextFocus = (
+            /** @type {HTMLElement} */
+            tabbableElements[currentFocusIndex]
+          );
+          if (this.tabDirection === "backward") {
+            if (this.previousFocus && this.possiblyHasTabbableChildren(this.previousFocus)) {
+              return;
+            }
+          }
+          if (nextFocus && this.possiblyHasTabbableChildren(nextFocus)) {
+            return;
+          }
+          event.preventDefault();
+          this.currentFocus = nextFocus;
+          (_a = this.currentFocus) == null ? void 0 : _a.focus({ preventScroll: false });
+          const allActiveElements = [...activeElements()];
+          if (allActiveElements.includes(this.currentFocus) || !allActiveElements.includes(this.previousFocus)) {
+            break;
+          }
+        }
+        setTimeout(() => this.checkFocus());
+      };
+      this.handleKeyUp = () => {
+        this.tabDirection = "forward";
+      };
+      this.element = element;
+      this.elementsWithTabbableControls = ["iframe"];
+    }
+    /** Activates focus trapping. */
+    activate() {
+      activeModals.push(this.element);
+      document.addEventListener("focusin", this.handleFocusIn);
+      document.addEventListener("keydown", this.handleKeyDown);
+      document.addEventListener("keyup", this.handleKeyUp);
+    }
+    /** Deactivates focus trapping. */
+    deactivate() {
+      activeModals = activeModals.filter((modal) => modal !== this.element);
+      this.currentFocus = null;
+      document.removeEventListener("focusin", this.handleFocusIn);
+      document.removeEventListener("keydown", this.handleKeyDown);
+      document.removeEventListener("keyup", this.handleKeyUp);
+    }
+    /** Determines if this modal element is currently active or not. */
+    isActive() {
+      return activeModals[activeModals.length - 1] === this.element;
+    }
+    /** Activates external modal behavior and temporarily disables focus trapping. */
+    activateExternal() {
+      this.isExternalActivated = true;
+    }
+    /** Deactivates external modal behavior and re-enables focus trapping. */
+    deactivateExternal() {
+      this.isExternalActivated = false;
+    }
+    checkFocus() {
+      if (this.isActive() && !this.isExternalActivated) {
+        const tabbableElements = getTabbableElements(this.element);
+        if (!this.element.matches(":focus-within")) {
+          const start = tabbableElements[0];
+          const end = tabbableElements[tabbableElements.length - 1];
+          const target = this.tabDirection === "forward" ? start : end;
+          if (typeof (target == null ? void 0 : target.focus) === "function") {
+            this.currentFocus = target;
+            target.focus({ preventScroll: false });
+          }
+        }
+      }
+    }
+    possiblyHasTabbableChildren(element) {
+      return this.elementsWithTabbableControls.includes(element.tagName.toLowerCase()) || element.hasAttribute("controls");
+    }
+  };
+
+  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.RWUUFNUL.js
+  var locks = /* @__PURE__ */ new Set();
+  function getScrollbarWidth() {
+    const documentWidth = document.documentElement.clientWidth;
+    return Math.abs(window.innerWidth - documentWidth);
+  }
+  function getExistingBodyPadding() {
+    const padding = Number(getComputedStyle(document.body).paddingRight.replace(/px/, ""));
+    if (isNaN(padding) || !padding) {
+      return 0;
+    }
+    return padding;
+  }
+  function lockBodyScrolling(lockingEl) {
+    locks.add(lockingEl);
+    if (!document.documentElement.classList.contains("sl-scroll-lock")) {
+      const scrollbarWidth = getScrollbarWidth() + getExistingBodyPadding();
+      let scrollbarGutterProperty = getComputedStyle(document.documentElement).scrollbarGutter;
+      if (!scrollbarGutterProperty || scrollbarGutterProperty === "auto") {
+        scrollbarGutterProperty = "stable";
+      }
+      if (scrollbarWidth < 2) {
+        scrollbarGutterProperty = "";
+      }
+      document.documentElement.style.setProperty("--sl-scroll-lock-gutter", scrollbarGutterProperty);
+      document.documentElement.classList.add("sl-scroll-lock");
+      document.documentElement.style.setProperty("--sl-scroll-lock-size", `${scrollbarWidth}px`);
+    }
+  }
+  function unlockBodyScrolling(lockingEl) {
+    locks.delete(lockingEl);
+    if (locks.size === 0) {
+      document.documentElement.classList.remove("sl-scroll-lock");
+      document.documentElement.style.removeProperty("--sl-scroll-lock-size");
+    }
+  }
+
+  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.C5MXLBOG.js
+  function uppercaseFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+  var SlDrawer = class extends ShoelaceElement {
+    constructor() {
+      super(...arguments);
+      this.hasSlotController = new HasSlotController(this, "footer");
+      this.localize = new LocalizeController2(this);
+      this.modal = new Modal(this);
+      this.open = false;
+      this.label = "";
+      this.placement = "end";
+      this.contained = false;
+      this.noHeader = false;
+      this.handleDocumentKeyDown = (event) => {
+        if (this.contained) {
+          return;
+        }
+        if (event.key === "Escape" && this.modal.isActive() && this.open) {
+          event.stopImmediatePropagation();
+          this.requestClose("keyboard");
+        }
+      };
+    }
+    firstUpdated() {
+      this.drawer.hidden = !this.open;
+      if (this.open) {
+        this.addOpenListeners();
+        if (!this.contained) {
+          this.modal.activate();
+          lockBodyScrolling(this);
+        }
+      }
+    }
+    disconnectedCallback() {
+      super.disconnectedCallback();
+      unlockBodyScrolling(this);
+      this.removeOpenListeners();
+    }
+    requestClose(source) {
+      const slRequestClose = this.emit("sl-request-close", {
+        cancelable: true,
+        detail: { source }
+      });
+      if (slRequestClose.defaultPrevented) {
+        const animation = getAnimation(this, "drawer.denyClose", { dir: this.localize.dir() });
+        animateTo(this.panel, animation.keyframes, animation.options);
+        return;
+      }
+      this.hide();
+    }
+    addOpenListeners() {
+      var _a;
+      if ("CloseWatcher" in window) {
+        (_a = this.closeWatcher) == null ? void 0 : _a.destroy();
+        if (!this.contained) {
+          this.closeWatcher = new CloseWatcher();
+          this.closeWatcher.onclose = () => this.requestClose("keyboard");
+        }
+      } else {
+        document.addEventListener("keydown", this.handleDocumentKeyDown);
+      }
+    }
+    removeOpenListeners() {
+      var _a;
+      document.removeEventListener("keydown", this.handleDocumentKeyDown);
+      (_a = this.closeWatcher) == null ? void 0 : _a.destroy();
+    }
+    async handleOpenChange() {
+      if (this.open) {
+        this.emit("sl-show");
+        this.addOpenListeners();
+        this.originalTrigger = document.activeElement;
+        if (!this.contained) {
+          this.modal.activate();
+          lockBodyScrolling(this);
+        }
+        const autoFocusTarget = this.querySelector("[autofocus]");
+        if (autoFocusTarget) {
+          autoFocusTarget.removeAttribute("autofocus");
+        }
+        await Promise.all([stopAnimations(this.drawer), stopAnimations(this.overlay)]);
+        this.drawer.hidden = false;
+        requestAnimationFrame(() => {
+          const slInitialFocus = this.emit("sl-initial-focus", { cancelable: true });
+          if (!slInitialFocus.defaultPrevented) {
+            if (autoFocusTarget) {
+              autoFocusTarget.focus({ preventScroll: true });
+            } else {
+              this.panel.focus({ preventScroll: true });
+            }
+          }
+          if (autoFocusTarget) {
+            autoFocusTarget.setAttribute("autofocus", "");
+          }
+        });
+        const panelAnimation = getAnimation(this, `drawer.show${uppercaseFirstLetter(this.placement)}`, {
+          dir: this.localize.dir()
+        });
+        const overlayAnimation = getAnimation(this, "drawer.overlay.show", { dir: this.localize.dir() });
+        await Promise.all([
+          animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options),
+          animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options)
+        ]);
+        this.emit("sl-after-show");
+      } else {
+        blurActiveElement(this);
+        this.emit("sl-hide");
+        this.removeOpenListeners();
+        if (!this.contained) {
+          this.modal.deactivate();
+          unlockBodyScrolling(this);
+        }
+        await Promise.all([stopAnimations(this.drawer), stopAnimations(this.overlay)]);
+        const panelAnimation = getAnimation(this, `drawer.hide${uppercaseFirstLetter(this.placement)}`, {
+          dir: this.localize.dir()
+        });
+        const overlayAnimation = getAnimation(this, "drawer.overlay.hide", { dir: this.localize.dir() });
+        await Promise.all([
+          animateTo(this.overlay, overlayAnimation.keyframes, overlayAnimation.options).then(() => {
+            this.overlay.hidden = true;
+          }),
+          animateTo(this.panel, panelAnimation.keyframes, panelAnimation.options).then(() => {
+            this.panel.hidden = true;
+          })
+        ]);
+        this.drawer.hidden = true;
+        this.overlay.hidden = false;
+        this.panel.hidden = false;
+        const trigger = this.originalTrigger;
+        if (typeof (trigger == null ? void 0 : trigger.focus) === "function") {
+          setTimeout(() => trigger.focus());
+        }
+        this.emit("sl-after-hide");
+      }
+    }
+    handleNoModalChange() {
+      if (this.open && !this.contained) {
+        this.modal.activate();
+        lockBodyScrolling(this);
+      }
+      if (this.open && this.contained) {
+        this.modal.deactivate();
+        unlockBodyScrolling(this);
+      }
+    }
+    /** Shows the drawer. */
+    async show() {
+      if (this.open) {
+        return void 0;
+      }
+      this.open = true;
+      return waitForEvent(this, "sl-after-show");
+    }
+    /** Hides the drawer */
+    async hide() {
+      if (!this.open) {
+        return void 0;
+      }
+      this.open = false;
+      return waitForEvent(this, "sl-after-hide");
+    }
+    render() {
+      return x2`
+      <div
+        part="base"
+        class=${e14({
+        drawer: true,
+        "drawer--open": this.open,
+        "drawer--top": this.placement === "top",
+        "drawer--end": this.placement === "end",
+        "drawer--bottom": this.placement === "bottom",
+        "drawer--start": this.placement === "start",
+        "drawer--contained": this.contained,
+        "drawer--fixed": !this.contained,
+        "drawer--rtl": this.localize.dir() === "rtl",
+        "drawer--has-footer": this.hasSlotController.test("footer")
+      })}
+      >
+        <div part="overlay" class="drawer__overlay" @click=${() => this.requestClose("overlay")} tabindex="-1"></div>
+
+        <div
+          part="panel"
+          class="drawer__panel"
+          role="dialog"
+          aria-modal="true"
+          aria-hidden=${this.open ? "false" : "true"}
+          aria-label=${o12(this.noHeader ? this.label : void 0)}
+          aria-labelledby=${o12(!this.noHeader ? "title" : void 0)}
+          tabindex="0"
+        >
+          ${!this.noHeader ? x2`
+                <header part="header" class="drawer__header">
+                  <h2 part="title" class="drawer__title" id="title">
+                    <!-- If there's no label, use an invisible character to prevent the header from collapsing -->
+                    <slot name="label"> ${this.label.length > 0 ? this.label : String.fromCharCode(65279)} </slot>
+                  </h2>
+                  <div part="header-actions" class="drawer__header-actions">
+                    <slot name="header-actions"></slot>
+                    <sl-icon-button
+                      part="close-button"
+                      exportparts="base:close-button__base"
+                      class="drawer__close"
+                      name="x-lg"
+                      label=${this.localize.term("close")}
+                      library="system"
+                      @click=${() => this.requestClose("close-button")}
+                    ></sl-icon-button>
+                  </div>
+                </header>
+              ` : ""}
+
+          <slot part="body" class="drawer__body"></slot>
+
+          <footer part="footer" class="drawer__footer">
+            <slot name="footer"></slot>
+          </footer>
+        </div>
+      </div>
+    `;
+    }
+  };
+  SlDrawer.styles = [component_styles_default, drawer_styles_default];
+  SlDrawer.dependencies = { "sl-icon-button": SlIconButton };
+  __decorateClass2([
+    e11(".drawer")
+  ], SlDrawer.prototype, "drawer", 2);
+  __decorateClass2([
+    e11(".drawer__panel")
+  ], SlDrawer.prototype, "panel", 2);
+  __decorateClass2([
+    e11(".drawer__overlay")
+  ], SlDrawer.prototype, "overlay", 2);
+  __decorateClass2([
+    n8({ type: Boolean, reflect: true })
+  ], SlDrawer.prototype, "open", 2);
+  __decorateClass2([
+    n8({ reflect: true })
+  ], SlDrawer.prototype, "label", 2);
+  __decorateClass2([
+    n8({ reflect: true })
+  ], SlDrawer.prototype, "placement", 2);
+  __decorateClass2([
+    n8({ type: Boolean, reflect: true })
+  ], SlDrawer.prototype, "contained", 2);
+  __decorateClass2([
+    n8({ attribute: "no-header", type: Boolean, reflect: true })
+  ], SlDrawer.prototype, "noHeader", 2);
+  __decorateClass2([
+    watch("open", { waitUntilFirstUpdate: true })
+  ], SlDrawer.prototype, "handleOpenChange", 1);
+  __decorateClass2([
+    watch("contained", { waitUntilFirstUpdate: true })
+  ], SlDrawer.prototype, "handleNoModalChange", 1);
+  setDefaultAnimation("drawer.showTop", {
+    keyframes: [
+      { opacity: 0, translate: "0 -100%" },
+      { opacity: 1, translate: "0 0" }
+    ],
+    options: { duration: 250, easing: "ease" }
+  });
+  setDefaultAnimation("drawer.hideTop", {
+    keyframes: [
+      { opacity: 1, translate: "0 0" },
+      { opacity: 0, translate: "0 -100%" }
+    ],
+    options: { duration: 250, easing: "ease" }
+  });
+  setDefaultAnimation("drawer.showEnd", {
+    keyframes: [
+      { opacity: 0, translate: "100%" },
+      { opacity: 1, translate: "0" }
+    ],
+    rtlKeyframes: [
+      { opacity: 0, translate: "-100%" },
+      { opacity: 1, translate: "0" }
+    ],
+    options: { duration: 250, easing: "ease" }
+  });
+  setDefaultAnimation("drawer.hideEnd", {
+    keyframes: [
+      { opacity: 1, translate: "0" },
+      { opacity: 0, translate: "100%" }
+    ],
+    rtlKeyframes: [
+      { opacity: 1, translate: "0" },
+      { opacity: 0, translate: "-100%" }
+    ],
+    options: { duration: 250, easing: "ease" }
+  });
+  setDefaultAnimation("drawer.showBottom", {
+    keyframes: [
+      { opacity: 0, translate: "0 100%" },
+      { opacity: 1, translate: "0 0" }
+    ],
+    options: { duration: 250, easing: "ease" }
+  });
+  setDefaultAnimation("drawer.hideBottom", {
+    keyframes: [
+      { opacity: 1, translate: "0 0" },
+      { opacity: 0, translate: "0 100%" }
+    ],
+    options: { duration: 250, easing: "ease" }
+  });
+  setDefaultAnimation("drawer.showStart", {
+    keyframes: [
+      { opacity: 0, translate: "-100%" },
+      { opacity: 1, translate: "0" }
+    ],
+    rtlKeyframes: [
+      { opacity: 0, translate: "100%" },
+      { opacity: 1, translate: "0" }
+    ],
+    options: { duration: 250, easing: "ease" }
+  });
+  setDefaultAnimation("drawer.hideStart", {
+    keyframes: [
+      { opacity: 1, translate: "0" },
+      { opacity: 0, translate: "-100%" }
+    ],
+    rtlKeyframes: [
+      { opacity: 1, translate: "0" },
+      { opacity: 0, translate: "100%" }
+    ],
+    options: { duration: 250, easing: "ease" }
+  });
+  setDefaultAnimation("drawer.denyClose", {
+    keyframes: [{ scale: 1 }, { scale: 1.01 }, { scale: 1 }],
+    options: { duration: 250 }
+  });
+  setDefaultAnimation("drawer.overlay.show", {
+    keyframes: [{ opacity: 0 }, { opacity: 1 }],
+    options: { duration: 250 }
+  });
+  setDefaultAnimation("drawer.overlay.hide", {
+    keyframes: [{ opacity: 1 }, { opacity: 0 }],
+    options: { duration: 250 }
+  });
+
+  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.SAPQLUO4.js
+  SlDrawer.define("sl-drawer");
+
+  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.VVA35HTY.js
+  var menu_styles_default = i6`
+  :host {
+    display: block;
+    position: relative;
+    background: var(--sl-panel-background-color);
+    border: solid var(--sl-panel-border-width) var(--sl-panel-border-color);
+    border-radius: var(--sl-border-radius-medium);
+    padding: var(--sl-spacing-x-small) 0;
+    overflow: auto;
+    overscroll-behavior: none;
+  }
+
+  ::slotted(sl-divider) {
+    --spacing: var(--sl-spacing-x-small);
+  }
+`;
+
+  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.Q6CVTR7F.js
+  var SlMenu = class extends ShoelaceElement {
+    connectedCallback() {
+      super.connectedCallback();
+      this.setAttribute("role", "menu");
+    }
+    handleClick(event) {
+      const menuItemTypes = ["menuitem", "menuitemcheckbox"];
+      const composedPath = event.composedPath();
+      const target = composedPath.find((el) => {
+        var _a;
+        return menuItemTypes.includes(((_a = el == null ? void 0 : el.getAttribute) == null ? void 0 : _a.call(el, "role")) || "");
+      });
+      if (!target) return;
+      const closestMenu = composedPath.find((el) => {
+        var _a;
+        return ((_a = el == null ? void 0 : el.getAttribute) == null ? void 0 : _a.call(el, "role")) === "menu";
+      });
+      const clickHasSubmenu = closestMenu !== this;
+      if (clickHasSubmenu) return;
+      const item = target;
+      if (item.type === "checkbox") {
+        item.checked = !item.checked;
+      }
+      this.emit("sl-select", { detail: { item } });
+    }
+    handleKeyDown(event) {
+      if (event.key === "Enter" || event.key === " ") {
+        const item = this.getCurrentItem();
+        event.preventDefault();
+        event.stopPropagation();
+        item == null ? void 0 : item.click();
+      } else if (["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) {
+        const items = this.getAllItems();
+        const activeItem = this.getCurrentItem();
+        let index = activeItem ? items.indexOf(activeItem) : 0;
+        if (items.length > 0) {
+          event.preventDefault();
+          event.stopPropagation();
+          if (event.key === "ArrowDown") {
+            index++;
+          } else if (event.key === "ArrowUp") {
+            index--;
+          } else if (event.key === "Home") {
+            index = 0;
+          } else if (event.key === "End") {
+            index = items.length - 1;
+          }
+          if (index < 0) {
+            index = items.length - 1;
+          }
+          if (index > items.length - 1) {
+            index = 0;
+          }
+          this.setCurrentItem(items[index]);
+          items[index].focus();
+        }
+      }
+    }
+    handleMouseDown(event) {
+      const target = event.target;
+      if (this.isMenuItem(target)) {
+        this.setCurrentItem(target);
+      }
+    }
+    handleSlotChange() {
+      const items = this.getAllItems();
+      if (items.length > 0) {
+        this.setCurrentItem(items[0]);
+      }
+    }
+    isMenuItem(item) {
+      var _a;
+      return item.tagName.toLowerCase() === "sl-menu-item" || ["menuitem", "menuitemcheckbox", "menuitemradio"].includes((_a = item.getAttribute("role")) != null ? _a : "");
+    }
+    /** @internal Gets all slotted menu items, ignoring dividers, headers, and other elements. */
+    getAllItems() {
+      return [...this.defaultSlot.assignedElements({ flatten: true })].filter((el) => {
+        if (el.inert || !this.isMenuItem(el)) {
+          return false;
+        }
+        return true;
+      });
+    }
+    /**
+     * @internal Gets the current menu item, which is the menu item that has `tabindex="0"` within the roving tab index.
+     * The menu item may or may not have focus, but for keyboard interaction purposes it's considered the "active" item.
+     */
+    getCurrentItem() {
+      return this.getAllItems().find((i13) => i13.getAttribute("tabindex") === "0");
+    }
+    /**
+     * @internal Sets the current menu item to the specified element. This sets `tabindex="0"` on the target element and
+     * `tabindex="-1"` to all other items. This method must be called prior to setting focus on a menu item.
+     */
+    setCurrentItem(item) {
+      const items = this.getAllItems();
+      items.forEach((i13) => {
+        i13.setAttribute("tabindex", i13 === item ? "0" : "-1");
+      });
+    }
+    render() {
+      return x2`
+      <slot
+        @slotchange=${this.handleSlotChange}
+        @click=${this.handleClick}
+        @keydown=${this.handleKeyDown}
+        @mousedown=${this.handleMouseDown}
+      ></slot>
+    `;
+    }
+  };
+  SlMenu.styles = [component_styles_default, menu_styles_default];
+  __decorateClass2([
+    e11("slot")
+  ], SlMenu.prototype, "defaultSlot", 2);
+
+  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.JHOXTQXA.js
+  SlMenu.define("sl-menu");
+
+  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.KZJNDGFO.js
+  var menu_item_styles_default = i6`
+  :host {
+    --submenu-offset: -2px;
+
+    display: block;
+  }
+
+  :host([inert]) {
+    display: none;
+  }
+
+  .menu-item {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    font-family: var(--sl-font-sans);
+    font-size: var(--sl-font-size-medium);
+    font-weight: var(--sl-font-weight-normal);
+    line-height: var(--sl-line-height-normal);
+    letter-spacing: var(--sl-letter-spacing-normal);
+    color: var(--sl-color-neutral-700);
+    padding: var(--sl-spacing-2x-small) var(--sl-spacing-2x-small);
+    transition: var(--sl-transition-fast) fill;
+    user-select: none;
+    -webkit-user-select: none;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  .menu-item.menu-item--disabled {
+    outline: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .menu-item.menu-item--loading {
+    outline: none;
+    cursor: wait;
+  }
+
+  .menu-item.menu-item--loading *:not(sl-spinner) {
+    opacity: 0.5;
+  }
+
+  .menu-item--loading sl-spinner {
+    --indicator-color: currentColor;
+    --track-width: 1px;
+    position: absolute;
+    font-size: 0.75em;
+    top: calc(50% - 0.5em);
+    left: 0.65rem;
+    opacity: 1;
+  }
+
+  .menu-item .menu-item__label {
+    flex: 1 1 auto;
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .menu-item .menu-item__prefix {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+  }
+
+  .menu-item .menu-item__prefix::slotted(*) {
+    margin-inline-end: var(--sl-spacing-x-small);
+  }
+
+  .menu-item .menu-item__suffix {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+  }
+
+  .menu-item .menu-item__suffix::slotted(*) {
+    margin-inline-start: var(--sl-spacing-x-small);
+  }
+
+  /* Safe triangle */
+  .menu-item--submenu-expanded::after {
+    content: '';
+    position: fixed;
+    z-index: calc(var(--sl-z-index-dropdown) - 1);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    clip-path: polygon(
+      var(--safe-triangle-cursor-x, 0) var(--safe-triangle-cursor-y, 0),
+      var(--safe-triangle-submenu-start-x, 0) var(--safe-triangle-submenu-start-y, 0),
+      var(--safe-triangle-submenu-end-x, 0) var(--safe-triangle-submenu-end-y, 0)
+    );
+  }
+
+  :host(:focus-visible) {
+    outline: none;
+  }
+
+  :host(:hover:not([aria-disabled='true'], :focus-visible)) .menu-item,
+  .menu-item--submenu-expanded {
+    background-color: var(--sl-color-neutral-100);
+    color: var(--sl-color-neutral-1000);
+  }
+
+  :host(:focus-visible) .menu-item {
+    outline: none;
+    background-color: var(--sl-color-primary-600);
+    color: var(--sl-color-neutral-0);
+    opacity: 1;
+  }
+
+  .menu-item .menu-item__check,
+  .menu-item .menu-item__chevron {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5em;
+    visibility: hidden;
+  }
+
+  .menu-item--checked .menu-item__check,
+  .menu-item--has-submenu .menu-item__chevron {
+    visibility: visible;
+  }
+
+  /* Add elevation and z-index to submenus */
+  sl-popup::part(popup) {
+    box-shadow: var(--sl-shadow-large);
+    z-index: var(--sl-z-index-dropdown);
+    margin-left: var(--submenu-offset);
+  }
+
+  .menu-item--rtl sl-popup::part(popup) {
+    margin-left: calc(-1 * var(--submenu-offset));
+  }
+
+  @media (forced-colors: active) {
+    :host(:hover:not([aria-disabled='true'])) .menu-item,
+    :host(:focus-visible) .menu-item {
+      outline: dashed 1px SelectedItem;
+      outline-offset: -1px;
+    }
+  }
+
+  ::slotted(sl-menu) {
+    max-width: var(--auto-size-available-width) !important;
+    max-height: var(--auto-size-available-height) !important;
+  }
+`;
+
+  // node_modules/.deno/lit-html@3.2.1/node_modules/lit-html/async-directive.js
+  var s6 = (i13, t8) => {
+    const e17 = i13._$AN;
+    if (void 0 === e17) return false;
+    for (const i14 of e17) i14._$AO?.(t8, false), s6(i14, t8);
+    return true;
+  };
+  var o13 = (i13) => {
+    let t8, e17;
+    do {
+      if (void 0 === (t8 = i13._$AM)) break;
+      e17 = t8._$AN, e17.delete(i13), i13 = t8;
+    } while (0 === e17?.size);
+  };
+  var r13 = (i13) => {
+    for (let t8; t8 = i13._$AM; i13 = t8) {
+      let e17 = t8._$AN;
+      if (void 0 === e17) t8._$AN = e17 = /* @__PURE__ */ new Set();
+      else if (e17.has(i13)) break;
+      e17.add(i13), c8(t8);
+    }
+  };
+  function h5(i13) {
+    void 0 !== this._$AN ? (o13(this), this._$AM = i13, r13(this)) : this._$AM = i13;
+  }
+  function n10(i13, t8 = false, e17 = 0) {
+    const r14 = this._$AH, h7 = this._$AN;
+    if (void 0 !== h7 && 0 !== h7.size) if (t8) if (Array.isArray(r14)) for (let i14 = e17; i14 < r14.length; i14++) s6(r14[i14], false), o13(r14[i14]);
+    else null != r14 && (s6(r14, false), o13(r14));
+    else s6(this, i13);
+  }
+  var c8 = (i13) => {
+    i13.type == t7.CHILD && (i13._$AP ??= n10, i13._$AQ ??= h5);
+  };
+  var f6 = class extends i10 {
+    constructor() {
+      super(...arguments), this._$AN = void 0;
+    }
+    _$AT(i13, t8, e17) {
+      super._$AT(i13, t8, e17), r13(this), this.isConnected = i13._$AU;
+    }
+    _$AO(i13, t8 = true) {
+      i13 !== this.isConnected && (this.isConnected = i13, i13 ? this.reconnected?.() : this.disconnected?.()), t8 && (s6(this, i13), o13(this));
+    }
+    setValue(t8) {
+      if (f5(this._$Ct)) this._$Ct._$AI(t8, this);
+      else {
+        const i13 = [...this._$Ct._$AH];
+        i13[this._$Ci] = t8, this._$Ct._$AI(i13, this, 0);
+      }
+    }
+    disconnected() {
+    }
+    reconnected() {
+    }
+  };
+
+  // node_modules/.deno/lit-html@3.2.1/node_modules/lit-html/directives/ref.js
+  var e16 = () => new h6();
+  var h6 = class {
+  };
+  var o14 = /* @__PURE__ */ new WeakMap();
+  var n11 = e13(class extends f6 {
+    render(i13) {
+      return E2;
+    }
+    update(i13, [s7]) {
+      const e17 = s7 !== this.Y;
+      return e17 && void 0 !== this.Y && this.rt(void 0), (e17 || this.lt !== this.ct) && (this.Y = s7, this.ht = i13.options?.host, this.rt(this.ct = i13.element)), E2;
+    }
+    rt(t8) {
+      if (this.isConnected || (t8 = void 0), "function" == typeof this.Y) {
+        const i13 = this.ht ?? globalThis;
+        let s7 = o14.get(i13);
+        void 0 === s7 && (s7 = /* @__PURE__ */ new WeakMap(), o14.set(i13, s7)), void 0 !== s7.get(this.Y) && this.Y.call(this.ht, void 0), s7.set(this.Y, t8), void 0 !== t8 && this.Y.call(this.ht, t8);
+      } else this.Y.value = t8;
+    }
+    get lt() {
+      return "function" == typeof this.Y ? o14.get(this.ht ?? globalThis)?.get(this.Y) : this.Y?.value;
+    }
+    disconnected() {
+      this.lt === this.ct && this.rt(void 0);
+    }
+    reconnected() {
+      this.rt(this.ct);
+    }
+  });
+
+  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.ZLIGP6HZ.js
+  var SubmenuController = class {
+    constructor(host, hasSlotController) {
+      this.popupRef = e16();
+      this.enableSubmenuTimer = -1;
+      this.isConnected = false;
+      this.isPopupConnected = false;
+      this.skidding = 0;
+      this.submenuOpenDelay = 100;
+      this.handleMouseMove = (event) => {
+        this.host.style.setProperty("--safe-triangle-cursor-x", `${event.clientX}px`);
+        this.host.style.setProperty("--safe-triangle-cursor-y", `${event.clientY}px`);
+      };
+      this.handleMouseOver = () => {
+        if (this.hasSlotController.test("submenu")) {
+          this.enableSubmenu();
+        }
+      };
+      this.handleKeyDown = (event) => {
+        switch (event.key) {
+          case "Escape":
+          case "Tab":
+            this.disableSubmenu();
+            break;
+          case "ArrowLeft":
+            if (event.target !== this.host) {
+              event.preventDefault();
+              event.stopPropagation();
+              this.host.focus();
+              this.disableSubmenu();
+            }
+            break;
+          case "ArrowRight":
+          case "Enter":
+          case " ":
+            this.handleSubmenuEntry(event);
+            break;
+          default:
+            break;
+        }
+      };
+      this.handleClick = (event) => {
+        var _a;
+        if (event.target === this.host) {
+          event.preventDefault();
+          event.stopPropagation();
+        } else if (event.target instanceof Element && (event.target.tagName === "sl-menu-item" || ((_a = event.target.role) == null ? void 0 : _a.startsWith("menuitem")))) {
+          this.disableSubmenu();
+        }
+      };
+      this.handleFocusOut = (event) => {
+        if (event.relatedTarget && event.relatedTarget instanceof Element && this.host.contains(event.relatedTarget)) {
+          return;
+        }
+        this.disableSubmenu();
+      };
+      this.handlePopupMouseover = (event) => {
+        event.stopPropagation();
+      };
+      this.handlePopupReposition = () => {
+        const submenuSlot = this.host.renderRoot.querySelector("slot[name='submenu']");
+        const menu = submenuSlot == null ? void 0 : submenuSlot.assignedElements({ flatten: true }).filter((el) => el.localName === "sl-menu")[0];
+        const isRtl = getComputedStyle(this.host).direction === "rtl";
+        if (!menu) {
+          return;
+        }
+        const { left, top, width, height } = menu.getBoundingClientRect();
+        this.host.style.setProperty("--safe-triangle-submenu-start-x", `${isRtl ? left + width : left}px`);
+        this.host.style.setProperty("--safe-triangle-submenu-start-y", `${top}px`);
+        this.host.style.setProperty("--safe-triangle-submenu-end-x", `${isRtl ? left + width : left}px`);
+        this.host.style.setProperty("--safe-triangle-submenu-end-y", `${top + height}px`);
+      };
+      (this.host = host).addController(this);
+      this.hasSlotController = hasSlotController;
+    }
+    hostConnected() {
+      if (this.hasSlotController.test("submenu") && !this.host.disabled) {
+        this.addListeners();
+      }
+    }
+    hostDisconnected() {
+      this.removeListeners();
+    }
+    hostUpdated() {
+      if (this.hasSlotController.test("submenu") && !this.host.disabled) {
+        this.addListeners();
+        this.updateSkidding();
+      } else {
+        this.removeListeners();
+      }
+    }
+    addListeners() {
+      if (!this.isConnected) {
+        this.host.addEventListener("mousemove", this.handleMouseMove);
+        this.host.addEventListener("mouseover", this.handleMouseOver);
+        this.host.addEventListener("keydown", this.handleKeyDown);
+        this.host.addEventListener("click", this.handleClick);
+        this.host.addEventListener("focusout", this.handleFocusOut);
+        this.isConnected = true;
+      }
+      if (!this.isPopupConnected) {
+        if (this.popupRef.value) {
+          this.popupRef.value.addEventListener("mouseover", this.handlePopupMouseover);
+          this.popupRef.value.addEventListener("sl-reposition", this.handlePopupReposition);
+          this.isPopupConnected = true;
+        }
+      }
+    }
+    removeListeners() {
+      if (this.isConnected) {
+        this.host.removeEventListener("mousemove", this.handleMouseMove);
+        this.host.removeEventListener("mouseover", this.handleMouseOver);
+        this.host.removeEventListener("keydown", this.handleKeyDown);
+        this.host.removeEventListener("click", this.handleClick);
+        this.host.removeEventListener("focusout", this.handleFocusOut);
+        this.isConnected = false;
+      }
+      if (this.isPopupConnected) {
+        if (this.popupRef.value) {
+          this.popupRef.value.removeEventListener("mouseover", this.handlePopupMouseover);
+          this.popupRef.value.removeEventListener("sl-reposition", this.handlePopupReposition);
+          this.isPopupConnected = false;
+        }
+      }
+    }
+    handleSubmenuEntry(event) {
+      const submenuSlot = this.host.renderRoot.querySelector("slot[name='submenu']");
+      if (!submenuSlot) {
+        console.error("Cannot activate a submenu if no corresponding menuitem can be found.", this);
+        return;
+      }
+      let menuItems = null;
+      for (const elt of submenuSlot.assignedElements()) {
+        menuItems = elt.querySelectorAll("sl-menu-item, [role^='menuitem']");
+        if (menuItems.length !== 0) {
+          break;
+        }
+      }
+      if (!menuItems || menuItems.length === 0) {
+        return;
+      }
+      menuItems[0].setAttribute("tabindex", "0");
+      for (let i13 = 1; i13 !== menuItems.length; ++i13) {
+        menuItems[i13].setAttribute("tabindex", "-1");
+      }
+      if (this.popupRef.value) {
+        event.preventDefault();
+        event.stopPropagation();
+        if (this.popupRef.value.active) {
+          if (menuItems[0] instanceof HTMLElement) {
+            menuItems[0].focus();
+          }
+        } else {
+          this.enableSubmenu(false);
+          this.host.updateComplete.then(() => {
+            if (menuItems[0] instanceof HTMLElement) {
+              menuItems[0].focus();
+            }
+          });
+          this.host.requestUpdate();
+        }
+      }
+    }
+    setSubmenuState(state) {
+      if (this.popupRef.value) {
+        if (this.popupRef.value.active !== state) {
+          this.popupRef.value.active = state;
+          this.host.requestUpdate();
+        }
+      }
+    }
+    // Shows the submenu. Supports disabling the opening delay, e.g. for keyboard events that want to set the focus to the
+    // newly opened menu.
+    enableSubmenu(delay = true) {
+      if (delay) {
+        window.clearTimeout(this.enableSubmenuTimer);
+        this.enableSubmenuTimer = window.setTimeout(() => {
+          this.setSubmenuState(true);
+        }, this.submenuOpenDelay);
+      } else {
+        this.setSubmenuState(true);
+      }
+    }
+    disableSubmenu() {
+      window.clearTimeout(this.enableSubmenuTimer);
+      this.setSubmenuState(false);
+    }
+    // Calculate the space the top of a menu takes-up, for aligning the popup menu-item with the activating element.
+    updateSkidding() {
+      var _a;
+      if (!((_a = this.host.parentElement) == null ? void 0 : _a.computedStyleMap)) {
+        return;
+      }
+      const styleMap = this.host.parentElement.computedStyleMap();
+      const attrs = ["padding-top", "border-top-width", "margin-top"];
+      const skidding = attrs.reduce((accumulator, attr) => {
+        var _a2;
+        const styleValue = (_a2 = styleMap.get(attr)) != null ? _a2 : new CSSUnitValue(0, "px");
+        const unitValue = styleValue instanceof CSSUnitValue ? styleValue : new CSSUnitValue(0, "px");
+        const pxValue = unitValue.to("px");
+        return accumulator - pxValue.value;
+      }, 0);
+      this.skidding = skidding;
+    }
+    isExpanded() {
+      return this.popupRef.value ? this.popupRef.value.active : false;
+    }
+    renderSubmenu() {
+      const isRtl = getComputedStyle(this.host).direction === "rtl";
+      if (!this.isConnected) {
+        return x2` <slot name="submenu" hidden></slot> `;
+      }
+      return x2`
+      <sl-popup
+        ${n11(this.popupRef)}
+        placement=${isRtl ? "left-start" : "right-start"}
+        anchor="anchor"
+        flip
+        flip-fallback-strategy="best-fit"
+        skidding="${this.skidding}"
+        strategy="fixed"
+        auto-size="vertical"
+        auto-size-padding="10"
+      >
+        <slot name="submenu"></slot>
+      </sl-popup>
+    `;
+    }
+  };
 
   // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.WGYPSPL3.js
   var SlMenuItem = class extends ShoelaceElement {
@@ -8012,9 +8736,6 @@
 
   // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.IVVHNXMC.js
   SlDivider.define("sl-divider");
-
-  // node_modules/.deno/@shoelace-style+shoelace@2.20.1/node_modules/@shoelace-style/shoelace/dist/chunks/chunk.ZGGPD2XJ.js
-  SlIcon.define("sl-icon");
 
   // cabinet/cabinetLayout.ts
   var CabinetLayout = class extends i4 {
