@@ -50,7 +50,7 @@ app.post('/sendcontacts', async (c) => {
         `?chat_id=${encodeURIComponent(chatId)}` +
         `&parse_mode=HTML`+
          `&text=${encodeURIComponent(tgMessage)}`;
-      console.log('Sending message to Telegram:', url);
+      //console.log('Sending message to Telegram:', url);
       await fetch(url);
     } else {
       console.warn('TELEGRAM_BOT_TOKEN or CHAT_ID is not set in environment');
