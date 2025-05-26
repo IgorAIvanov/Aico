@@ -109,7 +109,7 @@
   <section class="hero">
     <h1>Посилення бізнесу через інтелект</h1>
     <p> Ми розкриваємо потенціал вашого бізнесу за допомогою штучного інтелекту. Там, де ви бачите процес — ми бачимо можливість для прориву.</p>
-    <button class="cta-button">Зв'язатися з нами</button>
+    <button class="cta-button" onclick="openContactDialog()">Зв'язатися з нами</button>
   </section>
 
   <section class="features">
@@ -138,6 +138,48 @@
     function loginNavigate() {
       console.log("Navigating to login page...");
       window.location.href = "/auth";
+    }
+
+    function openContactDialog() {
+      // Создаем диалоговое окно
+      const dialog = document.createElement('dialog');
+      dialog.style.padding = '24px';
+      dialog.style.borderRadius = '12px';
+      dialog.style.border = '1px solid #bbb'; // Тонка светлая рамка
+      dialog.innerHTML = `
+        <form id="contactForm" method="dialog" style="display:flex; flex-direction:column; gap:16px; min-width:320px;">
+          <h2 style="margin:0 0 8px 0;">Зв'язатися з нами</h2>
+          <input type="email" id="contactEmail" placeholder="Ваш Email" required style="padding:8px; font-size:1rem; border-radius:6px; border:1px solid #ccc;" />
+          <textarea id="contactMessage" placeholder="Ваше повідомлення" required style="padding:8px; font-size:1rem; border-radius:6px; border:1px solid #ccc; min-height:160px; resize:vertical;"></textarea>
+          <div style="display:flex; justify-content:flex-end; gap:8px;">
+            <button type="button" onclick="this.closest('dialog').close()" style="padding:8px 18px; border-radius:6px; border:none; background:#e9ecef; color:#333;">Скасувати</button>
+            <button type="submit" style="padding:8px 18px; border-radius:6px; border:none; background:#0a58ca; color:#fff;">Ок</button>
+          </div>
+        </form>
+      `;
+      document.body.appendChild(dialog);
+      dialog.showModal();
+      dialog.querySelector('#contactForm').onsubmit = async function(e) {
+        e.preventDefault();
+        const email = dialog.querySelector('#contactEmail').value;
+        const message = dialog.querySelector('#contactMessage').value;
+        try {
+          const resp = await fetch('/api/sendcontacts', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, message })
+          });
+          if (resp.ok) {
+            alert('Дякуємо! Ваше повідомлення надіслано.');
+            dialog.close();
+          } else {
+            alert('Сталася помилка. Спробуйте ще раз.');
+          }
+        } catch {
+          alert('Сталася помилка. Спробуйте ще раз.');
+        }
+      };
+      dialog.addEventListener('close', () => dialog.remove());
     }
   </script>
 </body>
