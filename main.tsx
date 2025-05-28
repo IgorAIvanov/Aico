@@ -3,11 +3,10 @@ import { serveStatic } from 'hono/deno';
 import auth from './route/auth.tsx';
 import cabinet  from './route/cabinet.tsx';
 import api from './route/api.ts';
-import {getSupabaseClient} from './sql/migration.ts';
+import mcp from './services/mcp/route_mcp.ts';
 
 
 console.log(Deno.env.get('APP_MODE'));
-await getSupabaseClient();
 
 const app = new Hono()
 
@@ -19,8 +18,9 @@ app.get('/', (c) => {
 });
 
 
-app.route('/auth', auth)
-app.route('/cabinet', cabinet)
-app.route('/api', api)
+app.route('/auth', auth);
+app.route('/cabinet', cabinet);
+app.route('/api', api);
+app.route('/mcp', mcp);
 
 Deno.serve(app.fetch)

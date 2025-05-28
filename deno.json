@@ -4,16 +4,23 @@
     "dev-client": "deno run --allow-run --allow-read --allow-write --allow-env --no-check build.ts",
     "dev":  {
       "dependencies": ["dev-client", "dev-server"]
-    }
+    },
+    "scrap_a2": "deno run --env-file=local.env --allow-net --allow-read --allow-env  ./utils/scrap_a2v10help.ts"
   },
   "imports": {
       "/": "./",
     "./": "./",
+      "@modelcontextprotocol/sdk": "npm:@modelcontextprotocol/sdk@^1.12.0",
     "@shoelace-style/shoelace": "npm:@shoelace-style/shoelace@^2.20.1",
+      "fetch-to-node": "npm:fetch-to-node@^2.1.0",
+      "langchain": "npm:langchain@^0.3.27",
       "lit": "npm:lit@^3.3.0",
+      "openai": "npm:openai@^4.103.0",
+      "puppeteer": "npm:puppeteer@^24.9.0",
     "supabase": "jsr:@supabase/supabase-js@^2.49.4",
     "esbuild": "npm:esbuild@^0.25.4",
-    "hono": "npm:hono@^4.7.9"
+    "hono": "npm:hono@^4.7.9",
+      "zod": "npm:zod@^3.25.32"
   },
    "compilerOptions": {
      "jsx": "react-jsx",
